@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<!--
+
+  @(#)package.html	1.0
+
+ Copyright (c) 2008 Computer Engineering and Communication Networks Lab (TIK)
+ Swiss Federal Institute of Technology (ETH) Zurich, Switzerland
+ All rights reserved.
+ Permission is hereby granted, without written agreement and without
+ license or royalty fees, to use, copy, modify, and distribute this
+ software and its documentation for any purpose, provided that the above
+ copyright notice and the following two paragraphs appear in all copies
+ of this software.
+ IN NO EVENT SHALL THE TIK OR THE ETH ZURICH BE LIABLE TO ANY PARTY
+ FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES
+ ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF
+ THE TIK OR THE ETH ZURICH HAVE BEEN ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+ THE TIK AND THE ETH ZURICH SPECIFICALLY DISCLAIM ANY WARRANTIES,
+ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE SOFTWARE
+ PROVIDED HEREUNDER IS ON AN "AS IS" BASIS, AND TIK AND THE ETH ZURICH
+ HAVE NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
+ ENHANCEMENTS, OR MODIFICATIONS.
+ Title: Variator
+ Description: Standard variator, can be adapted to generate user-defined variators
+ Copyright: Copyright (c) 2008
+ Company: ETH Zurich
+
+-->
+</head>
+<body bgcolor="white">
+
+Provides a template for implementing a PISA variator, including an example for a Lotz2 variator. The following section
+explains how the example Lotz2 (leading ones trailing zeros) variator can be run and how a user can adapt it to fit its own
+optimization problem.
+
+<h3>The leading ones trailing zeros optimization problem (LOTZ)</h3>
+
+The leading ones trailing zeros optimization problem is a very simple two-objective optimization problem without any practical relevance. It is solely used
+to demonstrate how an evolutionary algorithm (EA) is able to solve an optimization problem.
+<p>
+The decision space representation of an LOTZ-individual is a simple 0/1-bitstring. There are two objectives which
+have to be optimized: the number of leading ones (lo) and the number of trailing zeros (tz) in the bitstring.
+<p>
+Consider for example the following bitstring: "1 1 0 1 0 0 1". This bitstring has 2 leading ones and 0 trailing zeros.
+More examples:
+
+<p>
+
+</table>
+
+<table border=1 cellspacing=0 cellpadding=6>
+<tr>
+<td><b>bitstring</b>
+<td><b>lo</b>
+<td><b>tz</b>
+<tr>
+<td>
+1 1 1 1 <br>
+0 1 0 1<br>
+1 0 0 0<br>
+1 1 0 1<br>
+0 1 0 0<br>
+<td>
+4<br>
+0<br>
+1<br>
+2<br>
+0<br>
+<td>
+0<br>
+0<br>
+3<br>
+0<br>
+2<br>
+
+</table>
+
+<p>
+
+For a bitstring of length 4, the Pareto-optimal solutions are "1 1 1 1", "1 1 1 0", "1 1 0 0", "1 0 0 0" and "0 0 0 0". 
+
+
+<h3>How to run the example Lotz2 variator</h3>
+
+The example Lotz2 variator takes three arguments:
+
+<ul>
+<li>The path to the parameter file: e.g. "./param.txt". The parameter file contains the user-defined parameters. For the Lotz2 problem,
+the following parameters can be specified: maximum_generations, recombination_probability, mutation_probability, bitflip_probability, seed, debug_print
+and output_filename. These parameters all have default values, so it is ok to set the path to an empty file.
+<li>the path to the communication files: e.g. "./PISA_". PISA appends the necessary endings for all communication files
+to this name base.
+<li>the polling interval in seconds: e.g. "1". Specifies the interval in which the state file is polled.
+</ul>
+
+As an evolutionary algorithm also needs a selector, you have to choose a selector and run it as well. The arguments are similar to those 
+of the variator.
+
+<h4>Step by step instructions</h4>
+
+To be able to execute a PISA run, three things are needed: A variator, a selector and a communication directory. A good directory structure
+to use could look like:
+
+<p align="center">
+<img border="0" src="file_structure.gif" height="383" alt="directory structure"/></p>
+
+
+<ol>
+<li> Get or create the parameter file of the variator. The Lotz2 variator package comes with a standard parameter file "lotz2_param.txt".
+<li> Get or create the parameter file of the selector. Most selectors come with a default parameter file. Otherwise 
+refer to the documentation of the corresponding selector.
+<li> Create a directory where the communication files will be stored (e.g. "./PISACommunication/").
+<li> Put the PISA configuration file into that communication files directory. The name of the configuration file
+must comply with the chosen name base (e.g. "PISA_") and must end with "cfg". So in the example case, the file must be 
+called "PISA_cfg" (without a ".txt" or similar endings). The communication file must look like this:
+
+<code>
+<p>
+alpha 20
+<br>
+mu 20
+<br>
+lambda 20
+<br>
+dim 2
+<p>
+</code>
+
+where the number behind the <code>alpha</code> is the number of individuals in the initial population, 
+the number behind the <code>mu</code> is the number of parents which are selected by the selector,
+the number behind the <code>lambda</code> is the number of offspring which are generated by the variator,
+and the number behind  the <code> dim </code> is the number of objectives. For the Lotz2 problem, <code>mu</code> 
+must be equal to <code>lambda</code> and the number of objectives is 2.
+<li> Start the variator (this jar-file was compiled with java version 1.6.0_06):
+<ul> 
+<li> Windows/Linux: <code>java -jar lotz2.jar lotz2_param.txt ../PISACommunication/PISA_ 0.2</code>
+<li> On Windows/Linux, you can also execute the <code>runLOTZ2.bat</code>/<code>runLOTZ2.sh</code> file, which contains the above command.
+<li> To use a different version of java under Windows,
+use:
+<code>java -jar -version:1.6.0_06 lotz2.jar lotz2_param.txt ../PISACommunication/PISA_ 0.2</code>,
+on Linux, use <code>java-1.6.0 -jar lotz2.jar lotz2_param.txt ../PISACommunication/PISA_ 0.2</code>.
+Alternatively, you could recompile the jar-file from the source files.
+<li> Note: If you don't have a JRE installed, you can download it from <a href="http://java.sun.com/javase/downloads/index.jsp">here</a>. 
+</ul>
+<li> Start the selector. Make sure that the second argument
+(Communication file path) of both variator and selector point to the same directory:
+<ul>
+<li> Java: Similarily to the variator, use the command <code>java Selector ./param.txt ./PISACommunication/PISA_ 1</code>
+or execute <code>selector.bat</code> (Windows) or <code>selector.sh</code> (Linux):
+<li> C on Windows: <code>selector.exe selector_param.txt ../PISACommunication/PISA_ 0.2</code> or execute the corresponding <code>runSELECTOR.bat</code> file.
+<li> C on Linux: <code>./Selector ./selector_param.txt ./PISACommunication/PISA_ 0.2</code> or execute the <code>runSELECTOR.sh</code> file, if available.
+<li> Similaritly, you can use any other programming language that can read and write files.
+</ul>
+</ol>
+
+<h3>How to adapt the example variator to a user-defined optimization problem</h3>
+
+To adapt the variator to a user-defined problem, only the <code>Individual</code> and the <code>Population</code> classes have
+to be adapted:
+
+<h4>Individual.java</h4>
+According to the abstract class <code>IndividualAbstract</code> that the <code>Individual</code> class is extending, the user needs
+to implement two methods. The first method <code>eval</code> calculates the objective space values of the individual. To implement such a 
+method, the user probably also needs to define a suitable decision space representation. The second method <code>copy</code> is a
+simple method to generate a copy of the individual itself.
+
+<h4>Population.java</h4>
+According to the abstract class <code>PopulationAbstract</code> that the <code>Population</code> class is extending, the user needs to implement
+the following 5 methods:
+
+<ul>
+<li> <code>initialize()</code>: Initializes the population with <code>alpha</code> inidviduals
+<li> <code>performVariation(offspring)</code>: Variates the offspring (which at first are simple copies of the parents)
+<li> <code>isFinished()</code>: Termination criterion like reaching a user-defined maximum number of generations
+<li> <code>setNonfixedParam(paramName, paramValue)</code>: Sets the user-defined parameters which can be given in the parameter file
+<li> <code>testParam()</code>: Tests whether the given parameter have reasonable values.
+</ul>
+
+
+<!--<h2>Package Specification</h2>
+
+##### FILL IN ANY SPECS NEEDED BY JAVA COMPATIBILITY KIT #####
+<ul>
+  <li><a href="">##### REFER TO ANY FRAMEMAKER SPECIFICATION HERE #####</a>
+</ul> -->
+
+<h2>Related Documentation</h2>
+
+For PISA-related documentation and downloads, please see:
+<ul>
+  <li><a href="http://www.tik.ee.ethz.ch/sop/pisa/?page=selvar.php">Download page for PISA-compliant selectors</a>
+</ul>
+
+<!-- Put @see and @since tags down here. -->
+
+</body>
+</html>
