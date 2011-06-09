@@ -20,11 +20,13 @@ CXX = g++
 
 ##############
 
-PROGRAM 			:= test
+PROGRAM 			:= hazmat
 TARGET_DIR			:= ./bin
 SOURCE_DIR			:= ./src
 OUTPUT_DIR			:= ./obj
 INCL_DIR			:= ./include
+
+CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
 TARGET				:= $(TARGET_DIR)/$(PROGRAM)
 SOURCES				:= $(wildcard $(SOURCE_DIR)/*.cpp)
@@ -40,3 +42,4 @@ $(OUTPUT_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 	@ echo output for $<
 	$(CXX) -I$(INCL_DIR) -c $< -o $@
 
+all:	$(TARGET)
