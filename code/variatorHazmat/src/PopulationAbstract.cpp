@@ -188,7 +188,7 @@ using namespace std;
 		paramName = paramName.toLowerCase();
 		if (paramName == "seed"){
 			try {
-				Variator.population.seed = (int)paramValue;
+				Variator::population.seed = (int)paramValue;
 				return true;
 			}
 			catch (exception& e) {
@@ -198,7 +198,7 @@ using namespace std;
 		}
 		else if (paramName == "debug_print"){
 			try {
-				Variator.population.debugPrint = (bool)(paramValue);
+				Variator::population.debugPrint = (bool)(paramValue);
 				return true;
 			}
 			catch (exception& e) {
@@ -208,7 +208,7 @@ using namespace std;
 		}
 		else if (paramName == "alpha"){
 			try {
-				Variator.population.alpha = (int)(paramValue);
+				Variator::population.alpha = (int)(paramValue);
 				return true;
 			}
 			catch (exception& e) {
@@ -218,7 +218,7 @@ using namespace std;
 		}
 		else if (paramName == "mu"){
 			try {
-				Variator.population.mu = (int)(paramValue);
+				Variator::population.mu = (int)(paramValue);
 				return true;
 			}
 			catch (exception& e) {
@@ -228,7 +228,7 @@ using namespace std;
 		}
 		else if (paramName == "lambda"){
 			try {
-				Variator.population.lambda = (int)(paramValue);
+				Variator::population.lambda = (int)(paramValue);
 				return true;
 			}
 			catch (exception& e) {
@@ -238,7 +238,7 @@ using namespace std;
 		}
 		else if (paramName == "dim"){
 			try {
-				Variator.population.dim = (int)(paramValue);
+				Variator::population.dim = (int)(paramValue);
 				return true;
 			}
 			catch (exception& e) {
@@ -248,7 +248,7 @@ using namespace std;
 		}
 		else if (paramName  == "output_file_name"){
 			try {
-				Variator.population.outputFileName = paramValue;
+				Variator::population.outputFileName = paramValue;
 				return true;
 			}
 			catch (exception& e) {
@@ -286,9 +286,10 @@ using namespace std;
 	 */
 	int PopulationAbstract::addIndividual(Individual ind) {
 		int id = 0;
-		if (!freeIdentities.isEmpty()){
+		if (!freeIdentities.empty()){
 			// take the last of the free indices in globalPopulation and place the new individual there
-			id = freeIdentities.pop_back();
+			id = freeIdentities.back();
+			freeIdentities.pop_back();
 			globalPopulation[id] = ind;
 			return id;
 		}
@@ -323,7 +324,7 @@ using namespace std;
 	/** Returns true iff integer 'i' is included at least once in vectorOfInts
 	 *
 	 * */
-	static bool PopulationAbstract::contains(vector<int> vectorOfInts, int i) {
+	bool PopulationAbstract::contains(vector<int> vectorOfInts, int i) {
 		bool found = false;
 		for (vector<int>::iterator it = vectorOfInts.begin(); it != vectorOfInts.end(); it++) {
 		    if (*it == i) {
@@ -339,8 +340,8 @@ using namespace std;
 	 * the offspring to the global population. It then performs recombination and mutation on the offspring.
 	 */
 	void PopulationAbstract::variate() {
-		parents = Variator.fileManager.readArcSelFile(Variator.population.selectorFile);
-		if (parents.length != Variator.population.mu) {
+		parents = Variator:fileManager.readArcSelFile(Variator:population.selectorFile);
+		if (parents.length != Variator:population.mu) {
 			cerr << "Selector file does not contain mu individuals";
 			exit(1);
 		}
