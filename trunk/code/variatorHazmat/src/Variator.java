@@ -35,27 +35,11 @@ import java.util.Random;
  * @author Tamara Ulrich
  * @version 1.0
 */
-public class Variator {
-	
-	
-	static Population population;
-	
-	static FileManager fileManager;
-	
-	static StateMachine stateMachine;
-	
-	static Random randomGenerator;
-		
-	/** Simple constructor. Is never needed,
-	 * because the Variator class has only static
-	 * fields and methods.
-	 */
-	public Variator() {
-	}
+
 
 	/** Reads the command line arguments, initializes (state = 0)
 	 * and starts the state machine */
-	public static void main(String[] args) {
+	static void Variator::main(String[] args) {
 
 		population = new Population();
 		randomGenerator = new Random();
@@ -100,7 +84,7 @@ public class Variator {
 	 * if the wrong number of arguments is given
 	 * with the function call.
 	 */
-	private static void displayArgsHelp() {
+	static void Variator::displayArgsHelp() {
 		System.out.println(
 		"Please start the Variator using the following options:");
 		System.out.println("Variator paramFileName commFilePath poll");
@@ -118,10 +102,8 @@ public class Variator {
 	 * if the parameter <code>Population.debugPrint</code> is set to <code>true</code>.
 	 * @param text The text which will be printed to System.out
 	 */
-	static void debugPrint(String text) {
+	static void Variator::debugPrint(String text) {
 		if (population.debugPrint) {
 			System.out.println(text);
 		}
 	}
-
-}

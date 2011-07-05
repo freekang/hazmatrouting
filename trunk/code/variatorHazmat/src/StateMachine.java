@@ -56,7 +56,7 @@ class StateMachine {
 			if (state == 0) {
 				System.out.println("Initialisation sequence started.");
 				States.state0();				
-				Variator.fileManager.writeState(1);					
+				Variator.fileManager.writeState(1);	
 			}
 			else if (state == 2) {
 				if (Variator.population.isFinished()) {

@@ -114,7 +114,7 @@ class Population extends PopulationAbstract {
 		}
 		
 		globalPopulation.set(id1, ind1);
-		globalPopulation.set(id2, ind2);	
+		globalPopulation.set(id2, ind2);
 	}
 	
 	/** Performs independent bit mutation on the specified individual. This means that each bit
