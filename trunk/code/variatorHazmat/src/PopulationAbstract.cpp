@@ -20,6 +20,8 @@
 #include "Variator.h"
 #include "PopulationAbstract.h"
 
+using namespace std;
+
 
 /** Handles the PISA-specific behavior of the global population.
  * Contains all PISA-specific parameters and specifies an abstract method to set them and test them for consistency. 
@@ -70,21 +72,24 @@
 		vector<int> arcIdentitiesList;
 		vector<Individual> oldGlobalPopulation;
 		
-		int arcIdentities[] = Variator.fileManager.readArcSelFile(Variator.population.archiveFile);
+		int arcIdentities[] = Variator::fileManager.readArcSelFile(Variator::population.archiveFile);
 		// convert arcIdentities to a Vector
 		arcIdentitiesList = vector<int>(0);
 		int i;
-		for (i = 0; i < sizeof(arcIdentities); i++) {
+		for (i = 0; i < arcIdentities.size; i++) {
 			arcIdentitiesList.push_back(arcIdentities[i]);
 		}
-		Variator.debugPrint("All active gene IDs read.");
+		Variator::debugPrint("All active gene IDs read.");
 		
 		// store the globalPopulation in oldGlobalPopulation and reset the globalPopulation elements to null
 		oldGlobalPopulation = globalPopulation;
 		globalPopulation = std::vector<Individual>(0);
-		for (int i = 0; i < oldGlobalPopulation.size(); i++) {
-			globalPopulation.push_back(null);
-		}
+		//
+		// DO WE REALLY NEED THIS?
+		//
+		//for (int i = 0; i < oldGlobalPopulation.size(); i++) {
+		//	globalPopulation.push_back(NULL);
+		//}
 		// reset the free Identities List
 		freeIdentities = std::vector<int>(0);
 		// For all elements in the oldGlobalPopulation, add the individual to the globalPopulation
@@ -92,7 +97,7 @@
 		int arcIDCount = 0; // counts the number of different elements in the archive file
 
 		for (int i = 0; i < globalPopulation.size(); i++) {
-			if (PopulationAbsstract.contains(arcIdentitiesList, i)) {
+			if (PopulationAbstract::contains(arcIdentitiesList, i)) {
 				globalPopulation.at(i) = oldGlobalPopulation.at(i);
 				arcIDCount++;
 			}
@@ -115,17 +120,18 @@
 	 * @param filename the name of the file to be written (e.g. "./PISA_ini" or "./PISA_var")
 	 */
 	void PopulationAbstract::writePopulation(string filename) {
-		ofstream myfile (filename);
+		ofstream myfile (filename.c_str());
+
 
 		if (myfile.is_open()) {
-			myfile << sprintf("%s\n", (Variator.population.globalPopulation.size()-Variator.population.freeIdentities.size()) * (Variator.population.dim + 1));
+			myfile << sprintf("%s\n", (Variator::population::globalPopulation.size()-Variator::population::freeIdentities.size()) * (Variator::population.dim + 1));
 			Individual currentIndividual;
 
-			for (int i = 0; i < Variator.population.globalPopulation.size(); i++) {
-				if (!contains( Variator.population.freeIdentities, i) ){
+			for (int i = 0; i < Variator::population.globalPopulation.size(); i++) {
+				if (!contains( Variator::population.freeIdentities, i) ){
 					myfile << sprintf("%d ", i);
-					currentIndividual = Variator.population.globalPopulation.get(i);
-					for (int j = 0; j < Variator.population.dim; j++) {
+					currentIndividual = Variator::population.globalPopulation.get(i);
+					for (int j = 0; j < Variator::population.dim; j++) {
 						myfile << sprintf("%e ", currentIndividual.objectiveSpace[j]);
 					}
 					myfile << "\n";
@@ -134,7 +140,7 @@
 			myfile << "END\n";
 			myfile.close();
 		}
-		else cout << sprintf("Unable to open file %s", filename);
+		else cout << sprintf("Unable to open file %s", filename.c_str());
 	}
 	
 	/** writes the individuals with the given identities (with respect to the global population) to a file.
@@ -144,18 +150,18 @@
 	 * @param filename the name of the file to be written (e.g. "./PISA_ini" or "./PISA_var")
 	 * @param identities the indices of the individuals which have to be printed to the file
 	 */
-	void PopulationAbstract::(string filename, int identities[]) {
-		ofstream myfile (filename);
+	void PopulationAbstract::writePopulation(string filename, int identities[]) {
+		ofstream myfile (filename.c_str());
 
 		if (myfile.is_open()) {
-			myfile << sprintf("%s\n", identities.length * (Variator.population.dim + 1));
+			myfile << sprintf("%s\n", identities.length * (Variator::population.dim + 1));
 			Individual currentIndividual;
 
 			for (int i = 0; i < identities.length; i++) {
-				if (!contains( Variator.population.freeIdentities, i) ){
+				if (!contains( Variator::population.freeIdentities, i) ){
 					myfile << sprintf("%d ", identities[i]);
-					currentIndividual = Variator.population.globalPopulation.get(identities[i]);;
-					for (int j = 0; j < Variator.population.dim; j++) {
+					currentIndividual = Variator::population.globalPopulation.get(identities[i]);;
+					for (int j = 0; j < Variator::population.dim; j++) {
 						myfile << sprintf("%e ", currentIndividual.objectiveSpace[j]);
 					}
 					myfile << "\n";
@@ -164,7 +170,7 @@
 			myfile << "END\n";
 			myfile.close();
 		}
-		else cout << sprintf("Unable to open file %s", filename);
+		else cout << sprintf("Unable to open file %s", filename.c_str());
 
 	}
 	
@@ -178,9 +184,9 @@
 	 * @param paramValue the value of the parameter which has to be set
 	 * @return true if the parameter has been set successfully, else false
 	 */
-	bool PopulationAbstract::(string paramName, string paramValue){
+	bool PopulationAbstract::setFixedParam(string paramName, string paramValue){
 		paramName = paramName.toLowerCase();
-		if (paramName.equals("seed")){
+		if (paramName == "seed"){
 			try {
 				Variator.population.seed = (int)paramValue;
 				return true;
@@ -190,7 +196,7 @@
 				return false;
 			}
 		}
-		else if (paramName.equals("debug_print")){
+		else if (paramName == "debug_print"){
 			try {
 				Variator.population.debugPrint = (bool)(paramValue);
 				return true;
@@ -200,7 +206,7 @@
 				return false;
 			}
 		}
-		else if (paramName.equals("alpha")){
+		else if (paramName == "alpha"){
 			try {
 				Variator.population.alpha = (int)(paramValue);
 				return true;
@@ -210,7 +216,7 @@
 				return false;
 			}
 		}
-		else if (paramName.equals("mu")){
+		else if (paramName == "mu"){
 			try {
 				Variator.population.mu = (int)(paramValue);
 				return true;
@@ -220,7 +226,7 @@
 				return false;
 			}
 		}
-		else if (paramName.equals("lambda")){
+		else if (paramName == "lambda"){
 			try {
 				Variator.population.lambda = (int)(paramValue);
 				return true;
@@ -230,7 +236,7 @@
 				return false;
 			}
 		}
-		else if (paramName.equals("dim")){
+		else if (paramName == "dim"){
 			try {
 				Variator.population.dim = (int)(paramValue);
 				return true;
@@ -240,7 +246,7 @@
 				return false;
 			}
 		}
-		else if (paramName.equals("output_file_name")){
+		else if (paramName  == "output_file_name"){
 			try {
 				Variator.population.outputFileName = paramValue;
 				return true;
@@ -317,7 +323,7 @@
 	/** Returns true iff integer 'i' is included at least once in vectorOfInts
 	 *
 	 * */
-	bool PopulationAbstract::contains(vector<int> vectorOfInts, int i) {
+	static bool PopulationAbstract::contains(vector<int> vectorOfInts, int i) {
 		bool found = false;
 		for (vector<int>::iterator it = vectorOfInts.begin(); it != vectorOfInts.end(); it++) {
 		    if (*it == i) {

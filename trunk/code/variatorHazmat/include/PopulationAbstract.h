@@ -174,10 +174,10 @@ private:
 	int addIndividual(Individual ind);
 	void removeIndividual(int id);
 	void evalIndividual(int id);
-	bool contains(vector<int> vectorOfInts, int i);
 
 public:
 	void variate();
+	static bool contains(vector<int> vectorOfInts, int i);
 
 };
 
