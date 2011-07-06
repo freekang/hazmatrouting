@@ -18,8 +18,6 @@
 #include "Individual.h"
 #include "PopulationAbstract.h"
 
-class Individual;
-
 using namespace std;
 
 class PopulationAbstract {
