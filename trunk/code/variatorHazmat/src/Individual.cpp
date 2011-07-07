@@ -22,8 +22,6 @@
  * @version 1.0
  */
 
-	vector<int> decisionSpace;
-
 	/** Standard class constructor, initializes the decision space representation randomly. */
 	Individual::Individual(){
 		this->decisionSpace = new vector<int>(10,0);
