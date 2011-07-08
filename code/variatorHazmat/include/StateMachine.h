@@ -49,6 +49,6 @@ public:
 	 * 0 -Variator-> 1 -Selector-> 2 -Variator-> 3 -Selector-> 2 -Variator-> 3  -Selector-> 2  ... -Selector-> 4 -Variator-> 5 <p>
 	 */
 	void runStateMachine();
-}
+};
 
 #endif /* STATEMACHINE_H_ */

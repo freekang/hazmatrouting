@@ -47,6 +47,6 @@ private:
 	static void readParam(String filename);
 
 
-}
+};
 
 #endif /* STATES_H_ */
