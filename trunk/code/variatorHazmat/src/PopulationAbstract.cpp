@@ -13,7 +13,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <string>
 #include <exception>
 
 #include "Individual.h"
@@ -69,21 +68,15 @@ using namespace std;
 	 */
 	void PopulationAbstract::performClean() {
 
-		vector<int> arcIdentitiesList;
 		vector<Individual> oldGlobalPopulation;
 		
-		int arcIdentities[] = Variator::fileManager.readArcSelFile(Variator::population.archiveFile);
-		// convert arcIdentities to a Vector
-		arcIdentitiesList = vector<int>(0);
-		int i;
-		for (i = 0; i < arcIdentities.size; i++) {
-			arcIdentitiesList.push_back(arcIdentities[i]);
-		}
+		vector<int> arcIdentitiesList = Variator::fileManager.readArcSelFile(Variator::population.archiveFile);
+
 		Variator::debugPrint("All active gene IDs read.");
 		
 		// store the globalPopulation in oldGlobalPopulation and reset the globalPopulation elements to null
 		oldGlobalPopulation = globalPopulation;
-		globalPopulation = std::vector<Individual>(0);
+		globalPopulation.clear();
 		//
 		// DO WE REALLY NEED THIS?
 		//
@@ -91,7 +84,7 @@ using namespace std;
 		//	globalPopulation.push_back(NULL);
 		//}
 		// reset the free Identities List
-		freeIdentities = std::vector<int>(0);
+		freeIdentities.clear();
 		// For all elements in the oldGlobalPopulation, add the individual to the globalPopulation
 		// if its index is contained in arcIdentitiesList, otherwise add the index to freeIdentities
 		int arcIDCount = 0; // counts the number of different elements in the archive file
@@ -107,7 +100,7 @@ using namespace std;
 			}
 		}
 		if (freeIdentities.size() + arcIDCount != globalPopulation.size()){
-			cout << "Error: not all individuals specified in the arc file were copied to the globalPopulation.";
+			cerr << "Error: not all individuals specified in the arc file were copied to the globalPopulation.";
 			exit(1);
 		}
 	}
@@ -120,27 +113,31 @@ using namespace std;
 	 * @param filename the name of the file to be written (e.g. "./PISA_ini" or "./PISA_var")
 	 */
 	void PopulationAbstract::writePopulation(string filename) {
-		ofstream myfile (filename.c_str());
+		try {
+			ofstream myfile (filename.c_str());
 
+			if (myfile.is_open()) {
+				myfile << sprintf("%s\n", (Variator::population::globalPopulation.size()-Variator::population::freeIdentities.size()) * (Variator::population.dim + 1));
+				Individual currentIndividual;
 
-		if (myfile.is_open()) {
-			myfile << sprintf("%s\n", (Variator::population::globalPopulation.size()-Variator::population::freeIdentities.size()) * (Variator::population.dim + 1));
-			Individual currentIndividual;
-
-			for (int i = 0; i < Variator::population.globalPopulation.size(); i++) {
-				if (!contains( Variator::population.freeIdentities, i) ){
-					myfile << sprintf("%d ", i);
-					currentIndividual = Variator::population.globalPopulation.get(i);
-					for (int j = 0; j < Variator::population.dim; j++) {
-						myfile << sprintf("%e ", currentIndividual.objectiveSpace[j]);
+				for (int i = 0; i < Variator::population.globalPopulation.size(); i++) {
+					if (!contains( Variator::population.freeIdentities, i) ){
+						myfile << sprintf("%d ", i);
+						currentIndividual = Variator::population.globalPopulation.get(i);
+						for (int j = 0; j < Variator::population.dim; j++) {
+							myfile << sprintf("%e ", currentIndividual.objectiveSpace[j]);
+						}
+						myfile << "\n";
 					}
-					myfile << "\n";
 				}
+				myfile << "END\n";
+				myfile.close();
 			}
-			myfile << "END\n";
-			myfile.close();
 		}
-		else cout << sprintf("Unable to open file %s", filename.c_str());
+		catch (exception& e) {
+			cerr << sprintf("Unable to open file %s", filename.c_str()) << endl;
+			cerr << e.what() << endl;
+		}
 	}
 	
 	/** writes the individuals with the given identities (with respect to the global population) to a file.
@@ -170,7 +167,7 @@ using namespace std;
 			myfile << "END\n";
 			myfile.close();
 		}
-		else cout << sprintf("Unable to open file %s", filename.c_str());
+		else cerr << sprintf("Unable to open file %s", filename.c_str()) << endl;
 
 	}
 	
@@ -192,7 +189,7 @@ using namespace std;
 				return true;
 			}
 			catch (exception& e) {
-				cout << e.what() << endl;
+				cerr << e.what() << endl;
 				return false;
 			}
 		}
@@ -202,7 +199,7 @@ using namespace std;
 				return true;
 			}
 			catch (exception& e) {
-				cout << e.what() << endl;
+				cerr << e.what() << endl;
 				return false;
 			}
 		}
@@ -212,7 +209,7 @@ using namespace std;
 				return true;
 			}
 			catch (exception& e) {
-				cout << e.what() << endl;
+				cerr << e.what() << endl;
 				return false;
 			}
 		}
@@ -222,7 +219,7 @@ using namespace std;
 				return true;
 			}
 			catch (exception& e) {
-				cout << e.what() << endl;
+				cerr << e.what() << endl;
 				return false;
 			}
 		}
@@ -232,7 +229,7 @@ using namespace std;
 				return true;
 			}
 			catch (exception& e) {
-				cout << e.what() << endl;
+				cerr << e.what() << endl;
 				return false;
 			}
 		}
@@ -242,7 +239,7 @@ using namespace std;
 				return true;
 			}
 			catch (exception& e) {
-				cout << e.what() << endl;
+				cerr << e.what() << endl;
 				return false;
 			}
 		}
@@ -252,7 +249,7 @@ using namespace std;
 				return true;
 			}
 			catch (exception& e) {
-				cout << e.what() << endl;
+				cerr << e.what() << endl;
 				return false;
 			}
 		}
@@ -340,22 +337,22 @@ using namespace std;
 	 * the offspring to the global population. It then performs recombination and mutation on the offspring.
 	 */
 	void PopulationAbstract::variate() {
-		parents = Variator:fileManager.readArcSelFile(Variator:population.selectorFile);
-		if (parents.length != Variator:population.mu) {
+		parents = Variator::fileManager.readArcSelFile(Variator::population.selectorFile);
+		if (parents.length != Variator::population.mu) {
 			cerr << "Selector file does not contain mu individuals";
 			exit(1);
 		}
-		offspring = int(parents.length);
-		//System.arraycopy(parents, 0, offspring, 0, parents.length);
-		// add copy of parents (prospective offspring) to the globalPopulation and write their indices into offspring array
+		// clear offspring and make space for new entries:
+		offspring.assign(parents.length, 0);
+		// add copy of parents (prospective offspring) to the globalPopulation and write their indices into offspring vector
 		for (int i = 0; i < parents.length; i++){
-			offspring[i] = addIndividual(copyIndividual(getIndividual(parents[i])));
+			offspring.at(i) = addIndividual(copyIndividual(getIndividual(parents.at(i))));
 		}
 
 		performVariation(offspring);
 
 		for (int i = 0; i < offspring.length; i++) {
-			evalIndividual(offspring[i]);
+			evalIndividual(offspring.at(i));
 		}
 
 	}

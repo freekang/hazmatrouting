@@ -37,6 +37,6 @@ public:
 	 * @return copy of the this individual
 	 */
 	virtual IndividualAbstract copy();
-}
+};
 
 #endif /* INDIVIDUALABSTRACT_H_ */

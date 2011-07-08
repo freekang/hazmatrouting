@@ -9,6 +9,8 @@
  Authors (previous Java version): Tamara Ulrich, ETH Zurich, Switzerland
  */
 
+#include "StateMachine.h"
+
 /** Handles the transitions between the states and defines the behavior in each state.
  * When necessary, it calls methods of the <code>States</code> class.
  *
