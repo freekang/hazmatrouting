@@ -1,34 +1,4 @@
-#include "Arc.h"
 
-
-#include<math.h>
-#include<cstring>
-#include<cstdio>
-#include<cstdlib>
-#include<string>
-
-Arc::Arc(){
-
-}
-
-Arc::Arc(Sommet *v1, Sommet *v2, int n){
-  sommetOrigine = v1;
-  sommetDest = v2;
-  num = n;
-  
- 
-}
-Arc::~Arc(){
-
-}
-
-Sommet* Arc::retournerSommetOrigine(){
-  return sommetOrigine;
-}
-
-Sommet* Arc::retournerSommetDest(){
-  return sommetDest;
-}
 
 int Arc::retournerRisque(int c, int q) {
  
@@ -80,25 +50,7 @@ void Arc::affecterRisque(int c, int r, int risque) {
   }
 }
 
-int Arc::retournerNum() {
-  return num;
-}
 
-double Arc::retournerCoutReduit() {
-  return coutReduit;
-}
-
-void Arc::affecterCoutReduit(double cr) {
-  coutReduit = cr;
-}
-
-double Arc::retournerCout() {
-  return cout;
-}
-
-void Arc::affecterCout(double cou) {
-  cout = cou;
-}
 
 int Arc::retournerRisqueTot(int c) {
   
