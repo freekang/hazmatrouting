@@ -1,0 +1,7 @@
+seed 1
+maximum_generations 10
+output_file_name out.txt
+debug_print true
+recombination_probability 0.1
+mutation_probability 1
+bitflip_probability 0.1
