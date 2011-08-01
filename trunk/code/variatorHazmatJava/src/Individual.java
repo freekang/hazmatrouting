@@ -23,7 +23,7 @@
  Copyright: Copyright (c) 2008
  Company: ETH Zurich
  */
-package ch.ethz.ee.tik.sop.pisalib.variator;
+
 
 /** Specifies the problem-specific behavior of an individual.
  * Defines the decision space representation of the individuals,

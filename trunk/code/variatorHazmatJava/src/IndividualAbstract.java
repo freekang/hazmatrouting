@@ -23,7 +23,7 @@
  Copyright: Copyright (c) 2008
  Company: ETH Zurich
  */
-package ch.ethz.ee.tik.sop.pisalib.variator;
+
 
 /** Defines the individuals of the global Population.
  * Defines the objective space representation of the individuals

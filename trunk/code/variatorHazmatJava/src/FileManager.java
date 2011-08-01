@@ -23,7 +23,7 @@
  Copyright: Copyright (c) 2008
  Company: ETH Zurich
  */
-package ch.ethz.ee.tik.sop.pisalib.variator;
+
 
 import java.io.BufferedWriter;
 import java.io.File;
