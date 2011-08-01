@@ -45,7 +45,7 @@ import java.util.ArrayList;
 abstract class PopulationAbstract {
 	
 	/** The individuals generated during execution of the EA, which are considered for further use. */
-	ArrayList<Individual> globalPopulation;
+	ArrayList<IndividualHazmat> globalPopulation;
 			
 	/** The indices of the elements of the <code>globalPopulation</code> ArrayList
 	 * which contain <code>null</code>. The indices of the individuals in the global population
@@ -145,7 +145,7 @@ abstract class PopulationAbstract {
 	
 	/** Constructor which instantiates the global Population and the <code>freeIdentities</code> list. */
 	public PopulationAbstract() {
-		globalPopulation = new ArrayList<Individual>(0);
+		globalPopulation = new ArrayList<IndividualHazmat>(0);
 		freeIdentities = new ArrayList<Integer>(0);
 	}
 	
@@ -192,7 +192,7 @@ abstract class PopulationAbstract {
 
 		int[] arcIdentities;
 		ArrayList<Integer> arcIdentitiesList;
-		ArrayList<Individual> oldGlobalPopulation;
+		ArrayList<IndividualHazmat> oldGlobalPopulation;
 		
 		arcIdentities = Variator.fileManager.readArcSelFile(Variator.population.archiveFile);
 		// convert arcIdentities to an ArrayList
@@ -204,7 +204,7 @@ abstract class PopulationAbstract {
 		
 		// store the globalPopulation in oldGlobalPopulation and reset the globalPopulation elements to null
 		oldGlobalPopulation = globalPopulation;
-		globalPopulation = new ArrayList<Individual>(0);
+		globalPopulation = new ArrayList<IndividualHazmat>(0);
 		for (int i = 0; i < oldGlobalPopulation.size(); i++) {
 			globalPopulation.add(null);
 		}
@@ -264,7 +264,7 @@ abstract class PopulationAbstract {
 		try {
 			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filename)), true);
 			writer.println(Integer.toString((Variator.population.globalPopulation.size()-Variator.population.freeIdentities.size())* (Variator.population.dim + 1)));
-			Individual currentIndividual;
+			IndividualHazmat currentIndividual;
 
 			for (int i = 0; i < Variator.population.globalPopulation.size(); i++) {
 				if (!Variator.population.freeIdentities.contains(i)){
@@ -296,7 +296,7 @@ abstract class PopulationAbstract {
 		try {
 			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filename)), true);
 			writer.println(Integer.toString(identities.length * (Variator.population.dim + 1)));
-			Individual currentIndividual;
+			IndividualHazmat currentIndividual;
 			
 			for (int i = 0; i < identities.length; i++) {
 				writer.print(identities[i] + " ");
@@ -404,7 +404,7 @@ abstract class PopulationAbstract {
 	 * @param id index of the individual
 	 * @return the individual with the given index in the global population
 	 */
-	Individual getIndividual(int id) {
+	IndividualHazmat getIndividual(int id) {
 		return globalPopulation.get(id);
 	}
 	
@@ -413,8 +413,8 @@ abstract class PopulationAbstract {
 	 * @param ind individual to be copied
 	 * @return copy of the given individual
 	 */
-	Individual copyIndividual(Individual ind) {
-		Individual newInd = ind.copy();
+	IndividualHazmat copyIndividual(IndividualHazmat ind) {
+		IndividualHazmat newInd = ind.copy();
 		return newInd;
 	}
 	
@@ -424,7 +424,7 @@ abstract class PopulationAbstract {
 	 * @param ind individual which has to be added to the global population
 	 * @return index, where the individual has been placed in the global Population
 	 */
-	int addIndividual(Individual ind) {
+	int addIndividual(IndividualHazmat ind) {
 		int id = 0;
 		if (!freeIdentities.isEmpty()){
 			// take the first one of the free elements in globalPopulation and place the new individual there
@@ -456,7 +456,7 @@ abstract class PopulationAbstract {
 	 * @param id index of the individual whose objective space values have to be evaluated
 	 */
 	void evalIndividual(int id) {
-		Individual ind = getIndividual(id);
+		IndividualHazmat ind = getIndividual(id);
 		ind.eval();
 		globalPopulation.set(id, ind);
 	}

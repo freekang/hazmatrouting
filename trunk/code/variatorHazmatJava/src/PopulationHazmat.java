@@ -40,7 +40,7 @@ import java.io.PrintWriter;
  * @author Tamara Ulrich
  * @version 1.0
  */
-class Population extends PopulationAbstract {
+class PopulationHazmat extends PopulationAbstract {
 						
 	/** The number of generations of the EA, after which the variator and selector are stopped. */
 	int maximumGenerations = 10;
@@ -57,9 +57,9 @@ class Population extends PopulationAbstract {
 	/** Initializes the population with <code>alpha</code> individuals that have random decision space representations. */
 	void initialize() {
 		// Construct the initial population
-		Individual newIndividual;
+		IndividualHazmat newIndividual;
 		for (int i = 0; i < alpha; i++) {
-			newIndividual = new Individual();
+			newIndividual = new IndividualHazmat();
 			globalPopulation.add(newIndividual);
 		}
 		Variator.debugPrint("Initial population constructed.");
@@ -100,8 +100,8 @@ class Population extends PopulationAbstract {
 	 * @param id2 index of the second individual
 	 */
 	void recombination(int id1, int id2){
-		Individual ind1 = globalPopulation.get(id1);
-		Individual ind2 = globalPopulation.get(id2);
+		IndividualHazmat ind1 = globalPopulation.get(id1);
+		IndividualHazmat ind2 = globalPopulation.get(id2);
 		
 		int tmp;
 		
@@ -123,7 +123,7 @@ class Population extends PopulationAbstract {
 	 * @param id index of the individual
 	 */
 	void mutation(int id){
-		Individual ind = globalPopulation.get(id);
+		IndividualHazmat ind = globalPopulation.get(id);
 		
 		for (int i = 0; i < ind.decisionSpace.length; i++) {
 			if (Variator.randomGenerator.nextDouble() <= bitFlipProbability) {
@@ -213,7 +213,7 @@ class Population extends PopulationAbstract {
 		try {
 			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(Variator.population.outputFileName)), true);
 			writer.println(Integer.toString((Variator.population.globalPopulation.size()-Variator.population.freeIdentities.size())));
-			Individual currentIndividual;
+			IndividualHazmat currentIndividual;
 
 			for (int i = 0; i < Variator.population.globalPopulation.size(); i++) {
 				if (!Variator.population.freeIdentities.contains(i)){

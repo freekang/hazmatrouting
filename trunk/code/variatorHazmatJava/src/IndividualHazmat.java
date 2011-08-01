@@ -34,12 +34,12 @@
  * @author Tamara Ulrich
  * @version 1.0
  */
-class Individual extends IndividualAbstract {
+class IndividualHazmat extends IndividualAbstract {
 	
 	int[] decisionSpace;
 	
 	/** Standard class constructor, initializes the decision space representation randomly. */
-	public Individual(){
+	public IndividualHazmat(){
 		this.decisionSpace = new int[10];
 		for (int i = 0; i < 10; i++) {
 			this.decisionSpace[i] = (Variator.randomGenerator.nextBoolean())?1:0;
@@ -53,7 +53,7 @@ class Individual extends IndividualAbstract {
 	 * @param newDecisionSpace the decision space representation of the new individual
 	 * @param newObjectiveSpace the objective space representation of the new individual
 	 */
-	public Individual(int[] newDecisionSpace, double[] newObjectiveSpace) {
+	public IndividualHazmat(int[] newDecisionSpace, double[] newObjectiveSpace) {
 		this.decisionSpace = new int[newDecisionSpace.length];
 		this.objectiveSpace = new double[newObjectiveSpace.length];
 		System.arraycopy(newDecisionSpace, 0, this.decisionSpace, 0, newDecisionSpace.length);
@@ -84,8 +84,8 @@ class Individual extends IndividualAbstract {
 	 * 
 	 * @return copy of the this individual
 	 */
-	public Individual copy() {
-		Individual newInd = new Individual(this.decisionSpace, this.objectiveSpace);
+	public IndividualHazmat copy() {
+		IndividualHazmat newInd = new IndividualHazmat(this.decisionSpace, this.objectiveSpace);
 		return newInd;
 	}
 	
