@@ -102,10 +102,10 @@ public class Variator {
 	 */
 	private static void displayArgsHelp() {
 		System.out.println(
-		"Please start the Variator using the following options:");
-		System.out.println("Variator paramFileName commFilePath poll");
+		"Please start the hazmat variator using the following options:");
+		System.out.println("hazmat paramFileName commFilePath poll");
 		System.out.println("where:");
-		System.out.println("\t paramFileName \t \t the name of the file containing the parameters for the Variator");
+		System.out.println("\t paramFileName \t \t the name of the file containing the parameters for the variator");
 		System.out.println("\t\t\t\t (normally the value 'param.txt' should be used)");
 		System.out.println("\t\t\t\t but make sure that this file really exists.");
 		System.out.println("\t commFilePath \t \t the name base of the communication files");
