@@ -38,7 +38,7 @@ import java.util.Random;
 public class Variator {
 	
 	
-	static Population population;
+	static PopulationHazmat population;
 	
 	static FileManager fileManager;
 	
@@ -57,7 +57,7 @@ public class Variator {
 	 * and starts the state machine */
 	public static void main(String[] args) {
 
-		population = new Population();
+		population = new PopulationHazmat();
 		randomGenerator = new Random();
 		
 		if (args.length != 3) {
