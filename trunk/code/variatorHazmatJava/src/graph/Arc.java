@@ -2,60 +2,86 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import java.io.*;
 
 public class Arc {
+	
+	private int num; 				// id of the arc
+	private double cost; 			// cost of the arc
+	private double rCost; 			// reduced cost of the arc
+	private double totRisk; 		// The total risk on the arc (for all the regions)
+	private Node origNode; 			// origin node of the arc
+	private Node destNode; 			// destination node of the arc
+	private Vector comRegRisk;		// com --> Reg--> risk
+	private ArrayList<Node> succNodes;		// successor nodes of the arc
+	private ArrayList<Node> predNodes;		// predecessor nodes of the arc
+	
+	public Arc(){
+		this.succNodes = new ArrayList<Node>();
+		this.predNodes = new ArrayList<Node>();
+	}
 
-	private int num;
-	private double weight;
-	private double reducedWeight; // don't know what this is !?
-	private double totalRisk; // risk asssociated with this arc summed over all regions
-	private Vertex headVertex; // first vertex of arc (origin)
-	private Vertex tailVertex; // second vertex of arc (destination)
 	/**
-	 * TODO: translate:
-	 * chaque ligne represente une commodite
-	 * chaque element de la liste (vecteur) contient la regio et le risque.
-	 */
-	private ArrayList<ArrayList<Vector<Integer>>> com_reg_risque; 
-		  
-	/**
-	 * Constructor: sets head (=v1) and tail (=v2) vertex as well as id (=n)
+	 * Constructor: sets origin (=v1) and destination (=v2) node
 	 * @param v1
 	 * @param v2
-	 * @param n
 	 */
-	public Arc(Vertex v1, Vertex v2, int n) {
-		this.headVertex = v1;
-		this.tailVertex = v2;
-		this.num = n;
+	public Arc(Node v1, Node v2){
+	  this.origNode = v1;
+	  this.destNode = v2;
+	  this.succNodes = new ArrayList<Node>();
+	  this.predNodes = new ArrayList<Node>();
 	}
 	
-	public Vertex getHeadVertex() {
-		return this.headVertex;
+	public Node returnOrigNode(){
+	  return origNode;
+	}
+
+	public Node returnDestNode(){
+	  return destNode;
 	}
 	
-	public Vertex getTailVertex() {
-		return this.tailVertex;
+	public void addSuccNode(Node s) {
+		succNodes.add(s);
 	}
 	
-	public double getWeight() {
-		return this.weight;
+	public void addPredNode(Node s) {
+		predNodes.add(s);
 	}
-	
-	public void setWeight(double w) {
-		this.weight = w;
-	}
-	
+
 	/**
 	 * Returns the risk associated to a given commodity and region when this arc is used.
 	 * @param commodity
 	 * @param region
 	 * @return the risk associated to the specified commodity and region when this arc is used
 	 */
-	public int getRisk(int commodity, int region) {
-		// TODO: implement/translate
-		return 0;
-	}
+
+	/* public int returnRisk(int c, int q) {
+	 
+	  list<list<vector<int> > >::iterator it = com_reg_risque.begin();
+	  
+	  int i = 0;
+	  while (i != c && it != com_reg_risque.end()) {
+	    i++;
+	    it++;
+	  }
+	  if (it != com_reg_risque.end()) {
+	    list<vector<int> >::iterator itt = (*it).begin();
+	    while (itt != (*it).end()) {
+	      if ((*itt)[0] == q) {
+		return (*itt)[1];
+	      }
+	      itt++;
+	    }
+	  }
+	//   else {
+//	     cout << endl;
+	//   } 
+//	    cout<<"Erreur: la commodite "<<c<<" sur l'arc "<<num<< " n'impose pas de risque sur la region "<<q<<endl;
+	  // si la commodite sur l'arc n'impose pas de risuqe sur la region q, on renvoie 0
+	  return 0;
+	} 
+
 
 	/**
 	 * Sets the risk associated to this arc and the given commodity and region.
@@ -63,26 +89,69 @@ public class Arc {
 	 * @param region
 	 * @param risk
 	 */
-	public void setRisk(int commodity, int region, int risk) {
-		// TODO: implement/translate
-	}
-	
-	public int getNum() {
-		return this.num;
-	}
-	
-	public double getReducedWeight() {
-		return this.reducedWeight;
-	}
-	
-	public void setReducedWeight(double weight) {
-		this.reducedWeight = weight;
-	}
-	
-	public int getTotalRisk(int commodity) {
-		// TODO: implement/translate
-		return 0;
+	void Arc::affecterRisque(int c, int r, int risque) {
+	  
+	  list<list<vector<int> > >::iterator it = com_reg_risque.begin();  
+	  int i = 0;
+	  while (i != c && it != com_reg_risque.end()) {
+	    i++;
+	    it++;
+	  }
+	  vector<int> v(2);
+	  v[0] = r;
+	  v[1] = risque;
+	  // si la commodite existe, affecter le risque d'une nouvelle resgion
+	  if (it != com_reg_risque.end()) {
+	    (*it).push_back(v);
+	  }
+	  else {
+	    // cette commodite n'as pas encore ete inseree
+	    // la rajouter
+	    list<vector<int> > nouvListe;
+	    nouvListe.push_back(v);
+	    com_reg_risque.push_back(nouvListe);
+	  }
+	}*/
+
+	public int returnNum() {
+	  return num;
 	}
 
-	
+	public double returnReducedCost() {
+	  return rCost;
+	}
+
+	public void setReducedCost(double cr) {
+		this.rCost = cr;
+	}
+
+	public double returnCost() {
+	  return cost;
+	}
+
+	public void setCost(double cou) {
+	  this.cost = cou;
+	}
+
+	/*int Arc::retournerRisqueTot(int c) {
+	  
+	  list<list<vector<int> > >::iterator it = com_reg_risque.begin();
+	  int i = 0;
+	  while (i != c && it != com_reg_risque.end()) {
+	    i++;
+	    it++;
+	  }
+	  int risque = 0;
+	  if (it != com_reg_risque.end()) {
+	    // faire la somme des risques de toutes les regions
+	    list<vector<int> >::iterator itt = (*it).begin();
+	    while (itt != (*it).end()) {
+	      risque += (*itt)[1];
+	      itt++;
+	    }
+	  }	    
+	  return risque;
+	}*/
+
+
 }
