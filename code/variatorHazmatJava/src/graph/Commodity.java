@@ -1,7 +1,8 @@
+package graph;
 
 public class Commodity {
 	
-	private int num; 				// numero of the commodity
+	private int num; 				// id of the commodity
 	private int source;
 	private int dest;
 	private int demand;
