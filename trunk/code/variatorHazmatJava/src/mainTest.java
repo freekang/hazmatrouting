@@ -6,7 +6,7 @@ public class mainTest {
 		   System.out.println("Execution du programme");
 		   System.out.println("1. Lecture du fichier de donnee");
 		   Graph G = new Graph();
-		   G.lectureInstance(args[0]);
+		   G.readInstance(args[0]);
 	   }
 
 }
