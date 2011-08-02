@@ -56,7 +56,8 @@ public class Arc {
 	 * @return the risk associated to the specified commodity and region when this arc is used
 	 */
 
-	/* public int returnRisk(int c, int q) {
+	/*
+	public int returnRisk(int c, int q) {
 	 
 	  list<list<vector<int> > >::iterator it = com_reg_risque.begin();
 	  
@@ -80,8 +81,7 @@ public class Arc {
 //	    cout<<"Erreur: la commodite "<<c<<" sur l'arc "<<num<< " n'impose pas de risque sur la region "<<q<<endl;
 	  // si la commodite sur l'arc n'impose pas de risuqe sur la region q, on renvoie 0
 	  return 0;
-	} 
-
+	}*/
 
 	/**
 	 * Sets the risk associated to this arc and the given commodity and region.
@@ -89,6 +89,7 @@ public class Arc {
 	 * @param region
 	 * @param risk
 	 */
+	/*
 	void Arc::affecterRisque(int c, int r, int risque) {
 	  
 	  list<list<vector<int> > >::iterator it = com_reg_risque.begin();  
