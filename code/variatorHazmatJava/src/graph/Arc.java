@@ -33,11 +33,11 @@ public class Arc {
 	  this.predNodes = new ArrayList<Node>();
 	}
 	
-	public Node returnOrigNode(){
+	public Node getOrigNode(){
 	  return origNode;
 	}
 
-	public Node returnDestNode(){
+	public Node getDestNode(){
 	  return destNode;
 	}
 	
@@ -114,11 +114,11 @@ public class Arc {
 	  }
 	}*/
 
-	public int returnNum() {
+	public int getNum() {
 	  return num;
 	}
 
-	public double returnReducedCost() {
+	public double getReducedCost() {
 	  return rCost;
 	}
 
@@ -126,7 +126,7 @@ public class Arc {
 		this.rCost = cr;
 	}
 
-	public double returnCost() {
+	public double getCost() {
 	  return cost;
 	}
 

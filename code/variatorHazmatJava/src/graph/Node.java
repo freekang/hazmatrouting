@@ -19,8 +19,8 @@ public class Node
     	this.list_arcs_in = new ArrayList<Arc>();
     }
     
-    /** get the numero */
-    public int get_numero()
+    /** get the id */
+    public int getNum()
     {
     	return num ;
     }
@@ -33,11 +33,11 @@ public class Node
     	this.list_arcs_in.add(a);
     }
 
-    public ArrayList<Arc> returnList_out_arcs() {
+    public ArrayList<Arc> getList_out_arcs() {
     	return list_arcs_out;
     }
 
-    public int return_nb_out_arcs() {
+    public int get_nb_out_arcs() {
     	return list_arcs_out.size();
     }    
 }
