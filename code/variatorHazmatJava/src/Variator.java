@@ -37,7 +37,7 @@ import java.util.Random;
 */
 public class Variator {
 	
-	
+	 
 	static PopulationHazmat population;
 	
 	static FileManager fileManager;
