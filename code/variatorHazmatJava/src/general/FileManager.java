@@ -1,3 +1,4 @@
+package general;
 /*
  Copyright (c) 2008 Computer Engineering and Communication Networks Lab (TIK)
  Swiss Federal Institute of Technology (ETH) Zurich, Switzerland
@@ -24,7 +25,7 @@
  Company: ETH Zurich
  */
 
-package general;
+
 
 import java.io.BufferedWriter;
 import java.io.File;
