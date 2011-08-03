@@ -24,6 +24,7 @@
  Company: ETH Zurich
  */
 
+package general;
 
 import java.util.Random;
 
@@ -37,7 +38,7 @@ import java.util.Random;
 */
 public class Variator {
 	
-	 
+	
 	static PopulationHazmat population;
 	
 	static FileManager fileManager;
