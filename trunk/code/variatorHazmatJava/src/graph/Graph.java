@@ -37,7 +37,8 @@ public class Graph {
    				sc.useDelimiter(Pattern.compile("[\t\n]"));
    				
    				nbNodes = sc.nextInt();
-   				Variator.debugPrint("n = " + nbNodes);  
+   				
+   				System.out.println("n = " + nbNodes);  
    				
    				// Construct the nodes
    				for (int t = 0; t< nbNodes; t++) {
@@ -46,9 +47,9 @@ public class Graph {
    				}	
    				   				
    				nbCom = sc.nextInt();
-   				Variator.debugPrint("c = " + nbCom);
+   				System.out.println("c = " + nbCom);
    				nbReg = sc.nextInt();
-   				Variator.debugPrint("r = " + nbReg);
+   				System.out.println("r = " + nbReg);
    				
    				sc.next();
    				sc.next();
@@ -71,7 +72,7 @@ public class Graph {
    					vectArcs.add(arc);   					
    				}
    				nbArcs = nbA;
-   				Variator.debugPrint("number of arcs = "+nbA);
+   				System.out.println("number of arcs = "+nbA);
    				String s;
    				// Read: source	 dest	demand	tCap 
    				for (int k = 0; k < 6; k++){
@@ -92,7 +93,7 @@ public class Graph {
    				}
    				
    				this.nbCom = nbCommodities;
-   				Variator.debugPrint("Number of commodities = " + nbCom);
+   				System.out.println("Number of commodities = " + nbCom);
    				
    				// Set the risk
    				// Aprcourir les commodites
@@ -155,11 +156,11 @@ public class Graph {
 
 		 public void returnNodeOrigineDestCom(int c) {
 			 int a = 1+c;
-			 Variator.debugPrint("returnNodeOrigineDestCom");
+			 System.out.println("returnNodeOrigineDestCom");
 		 }
 
 		 public void returnArc() {
-			 Variator.debugPrint("returnNodeOrigineDestCom");
+			 System.out.println("returnNodeOrigineDestCom");
 		 }
 
 		 public ArrayList<Node> returnNodes(){
@@ -168,7 +169,7 @@ public class Graph {
 
 		 public void displayGraph() {
 		   
-			 Variator.debugPrint("Nodes:");
+			 System.out.println("Nodes:");
 		   
 		 }
 
@@ -188,10 +189,6 @@ public class Graph {
 			 arcc =  new Arc();
 			 return arcc;
 			 
-		 }
-		 
-		 public IndividualHazmat getInitialSolution() {
-			 return null;
 		 }
 			 
 }
