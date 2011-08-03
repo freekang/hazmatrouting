@@ -24,6 +24,7 @@
  Company: ETH Zurich
  */
 
+package general;
 
 import java.io.BufferedWriter;
 import java.io.File;

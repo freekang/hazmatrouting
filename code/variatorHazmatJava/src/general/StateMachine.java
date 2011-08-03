@@ -24,6 +24,7 @@
  Company: ETH Zurich
  */
 
+package general;
 
 /** Handles the transitions between the states and defines the behavior in each state.
  * When necessary, it calls methods of the <code>States</code> class.
