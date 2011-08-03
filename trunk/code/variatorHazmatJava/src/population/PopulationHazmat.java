@@ -24,6 +24,7 @@
  Company: ETH Zurich
  */
 
+package population;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

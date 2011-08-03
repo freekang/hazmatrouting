@@ -24,6 +24,8 @@
  Company: ETH Zurich
  */
 
+package population;
+
 
 /** Defines the individuals of the global Population.
  * Defines the objective space representation of the individuals
