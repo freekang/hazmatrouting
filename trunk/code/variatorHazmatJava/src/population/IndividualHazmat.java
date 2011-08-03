@@ -27,6 +27,11 @@
 package population;
 
 import general.*;
+import graph.*;
+import java.util.Vector;
+import java.util.LinkedList;
+import java.util.ArrayList;
+
 
 /** Specifies the problem-specific behavior of an individual.
  * Defines the decision space representation of the individuals,
@@ -39,57 +44,113 @@ import general.*;
  */
 public class IndividualHazmat extends IndividualAbstract {
 	
-	int[] decisionSpace;
+	Vector<LinkedList<Node>> truckPaths; // for each truck a list of nodes gives the path they travel
 	
-	/** Standard class constructor, initializes the decision space representation randomly. */
+	/** Standard class constructor, initializes the decision space representation randomly
+	 * based on the graph instance in PopulationHazmat.mygraph.
+	 * 
+	 * In a first implementation, a fixed number of trucks per commodity is send through
+	 * the network.
+	 * 
+	 */
 	public IndividualHazmat(){
-		this.decisionSpace = new int[10];
-		for (int i = 0; i < 10; i++) {
-			this.decisionSpace[i] = (Variator.randomGenerator.nextBoolean())?1:0;
+		this.truckPaths = new Vector<LinkedList<Node>>();
+		
+		for (Commodity commodity: PopulationHazmat.mygraph.listCom) {
+			/* create "empty" path, consisting of only the source node for this commodity */
+			LinkedList<Node> emptyPath = new LinkedList<Node>();
+			emptyPath.add(PopulationHazmat.mygraph.returnNode(commodity.getSource()));
+
+			for (int i=0; i < commodity.getNbTrucks(); i++) {
+				truckPaths.add(emptyPath);
+			}
 		}
-		this.objectiveSpace = new double[2];
+		
+		this.objectiveSpace = new double[3];
 		this.eval();
 	}
 	
 	/** Class constructor which initializes the decision and objective space representations with the given values.
 	 * 
-	 * @param newDecisionSpace the decision space representation of the new individual
-	 * @param newObjectiveSpace the objective space representation of the new individual
+	 * @param initialTruckPaths A vector of node lists which specifies the paths through the graph
+	 *                          for each truck
 	 */
-	public IndividualHazmat(int[] newDecisionSpace, double[] newObjectiveSpace) {
-		this.decisionSpace = new int[newDecisionSpace.length];
-		this.objectiveSpace = new double[newObjectiveSpace.length];
-		System.arraycopy(newDecisionSpace, 0, this.decisionSpace, 0, newDecisionSpace.length);
-		System.arraycopy(newObjectiveSpace, 0, this.objectiveSpace, 0, newObjectiveSpace.length);
+	public IndividualHazmat(Vector<LinkedList<Node>> initialTruckPaths) {
+		this.truckPaths = initialTruckPaths;
+		
+		this.objectiveSpace = new double[3];
+		this.eval();
 	}
 	
 	/** Calculates the objective space values of this individual. The two objectives are number of
 	 * leading ones and number of trailing zeros. Both objectives are converted such that they have to
 	 * be minimized (by subtracting them from the total number of decision variables). */
 	public void eval() {
-		int leadingOnes = 0;
-		int trailingZeros = decisionSpace.length - 1;
 		
-		while(leadingOnes < decisionSpace.length && decisionSpace[leadingOnes] == 1) {
-			leadingOnes++;
-		}
+		// TODO implement
 		
-		objectiveSpace[0] = decisionSpace.length - leadingOnes; 
+		int todo=1000;
+		int todoaswell=1000;
 		
-		while(trailingZeros > -1 && decisionSpace[trailingZeros] == 0) {
-			trailingZeros--;
-		}
-		
-		objectiveSpace[1] = trailingZeros + 1;
+		objectiveSpace[0] = todo; 
+		objectiveSpace[1] = todoaswell;
 	}
 
-	/** Returns a copy of this individual.
+	/** Returns a (deep) copy of this individual.
 	 * 
 	 * @return copy of the this individual
 	 */
 	public IndividualHazmat copy() {
-		IndividualHazmat newInd = new IndividualHazmat(this.decisionSpace, this.objectiveSpace);
+		Vector<LinkedList<Node>> copyOfTruckPaths = new Vector<LinkedList<Node>>();
+		
+		for (LinkedList<Node> path: this.truckPaths) {
+			LinkedList<Node> copiedPath = new LinkedList<Node>();
+
+			for (Node node: path) {
+				copiedPath.add(node);
+			}
+		}
+		
+		IndividualHazmat newInd = new IndividualHazmat(copyOfTruckPaths);
 		return newInd;
+	}
+	
+	/**
+	 * Mutates the current individual.
+	 */
+	void mutate() {
+		/* For each truck path, draw a binary value b uniformly at random and
+		* either add or remove a node depending on b
+		* 
+		* For the moment, the implementation follows exactly the abstract at CTW'2011
+		* where *every* truck path is mutated.
+		*/
+		for (LinkedList<Node> path: this.truckPaths) {
+			boolean b = Variator.randomGenerator.nextBoolean();
+			
+			if (b == true) {
+				/* make path shorter if possible */
+				if (path.size() >= 2) {
+					path.pollLast();
+				}
+			} else {
+				/* make path longer if possible
+				 * to this end, choose new node uniformly at random from neighbors
+				 * if there are some */
+				ArrayList<Arc> arcList = path.getLast().returnList_out_arcs();
+				if (arcList.size() > 0) {
+					int r = Variator.randomGenerator.nextInt(arcList.size());
+					/* now add the corresponding node to the path */
+					path.add(arcList.get(r).returnDestNode());
+				}
+			}
+			
+		}
+		
+		
+		// TODO implement for hazmat routing problem
+		
+
 	}
 	
 }
