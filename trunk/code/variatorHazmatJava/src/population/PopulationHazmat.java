@@ -30,6 +30,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import general.*;
 
 
 /** Handles the problem-specific behavior of the global population.
@@ -41,7 +42,7 @@ import java.io.PrintWriter;
  * @author Tamara Ulrich
  * @version 1.0
  */
-class PopulationHazmat extends PopulationAbstract {
+public class PopulationHazmat extends PopulationAbstract {
 						
 	/** The number of generations of the EA, after which the variator and selector are stopped. */
 	int maximumGenerations = 10;
@@ -56,7 +57,7 @@ class PopulationHazmat extends PopulationAbstract {
 	double bitFlipProbability = 0.1;
 			
 	/** Initializes the population with <code>alpha</code> individuals that have random decision space representations. */
-	void initialize() {
+	public void initialize() {
 		// Construct the initial population
 		IndividualHazmat newIndividual;
 		for (int i = 0; i < alpha; i++) {
@@ -138,7 +139,7 @@ class PopulationHazmat extends PopulationAbstract {
 	 * 
 	 * @return true if the EA should finish, else false
 	 */
-	boolean isFinished() {
+	public boolean isFinished() {
 		return Variator.population.generation >= Variator.population.maximumGenerations+1;
 	}
 		
@@ -192,7 +193,7 @@ class PopulationHazmat extends PopulationAbstract {
 	}
 
 	/** Tests whether the parameters in the parameter file have reasonable values. */
-	void testParam(){
+	public void testParam(){
 		// test if mu and lambda from config file are the same, otherwise exit PISA
 		if ((mu != lambda)){
 			System.err.println("ERROR: wsnNodePlacer::Launcher:main: mu and lambda read from config file are not the same!");
@@ -210,7 +211,7 @@ class PopulationHazmat extends PopulationAbstract {
 	 * file. First, the number of individuals is printed. Then, each line in the output file corresponds to an individual, where the first elements indicate the objective
 	 * space values and the remaining elements give the decision space representation. Finally, an <code>END</code> tag is written.
 	 */
-	void writeOutput(){
+	public void writeOutput(){
 		try {
 			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(Variator.population.outputFileName)), true);
 			writer.println(Integer.toString((Variator.population.globalPopulation.size()-Variator.population.freeIdentities.size())));

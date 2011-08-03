@@ -5,6 +5,7 @@ import java.io.*;
 import java.lang.Integer;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import population.*;
 
 
 public class Graph {
@@ -187,5 +188,8 @@ public class Graph {
 			 
 		 }
 		 
+		 public IndividualHazmat getInitialSolution() {
+			 return null;
+		 }
 			 
 }

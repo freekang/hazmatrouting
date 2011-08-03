@@ -27,6 +27,7 @@
 package general;
 
 import java.util.Random;
+import population.*;
 
 /** 
  * The main variator class. Reads the command line arguments,
@@ -39,13 +40,13 @@ import java.util.Random;
 public class Variator {
 	
 	
-	static PopulationHazmat population;
+	public static PopulationHazmat population;
 	
-	static FileManager fileManager;
+	public static FileManager fileManager;
 	
 	static StateMachine stateMachine;
 	
-	static Random randomGenerator;
+	public static Random randomGenerator;
 		
 	/** Simple constructor. Is never needed,
 	 * because the Variator class has only static
@@ -119,7 +120,7 @@ public class Variator {
 	 * if the parameter <code>Population.debugPrint</code> is set to <code>true</code>.
 	 * @param text The text which will be printed to System.out
 	 */
-	static void debugPrint(String text) {
+	public static void debugPrint(String text) {
 		if (population.debugPrint) {
 			System.out.println(text);
 		}
