@@ -154,23 +154,8 @@ public class Graph {
 		 //   list_Com_Orig_Dest.push_back(l);
 		 // }
 
-		 public void returnNodeOrigineDestCom(int c) {
-			 int a = 1+c;
-			 System.out.println("returnNodeOrigineDestCom");
-		 }
-
-		 public void returnArc() {
-			 System.out.println("returnNodeOrigineDestCom");
-		 }
-
 		 public ArrayList<Node> returnNodes(){
 		   return vectNodes;
-		 }
-
-		 public void displayGraph() {
-		   
-			 System.out.println("Nodes:");
-		   
 		 }
 
 		 public ArrayList<Arc> returnArcs() {
