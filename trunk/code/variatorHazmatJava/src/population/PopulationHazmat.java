@@ -31,6 +31,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import general.*;
+import graph.*;
 
 
 /** Handles the problem-specific behavior of the global population.
@@ -55,9 +56,19 @@ public class PopulationHazmat extends PopulationAbstract {
 	
 	/** The probability during mutation of an individual that the current bit is flipped. */
 	double bitFlipProbability = 0.1;
+	
+	/** File name where graph instance is defined */
+	String graph_definition_file = "graph.dat";
+	
+	Graph mygraph;
 			
 	/** Initializes the population with <code>alpha</code> individuals that have random decision space representations. */
 	public void initialize() {
+		// read graph instance
+		Variator.debugPrint("   reading graph from " + graph_definition_file);
+		mygraph = new Graph();
+		mygraph.readInstance(graph_definition_file);
+		
 		// Construct the initial population
 		IndividualHazmat newIndividual;
 		for (int i = 0; i < alpha; i++) {
@@ -183,6 +194,15 @@ public class PopulationHazmat extends PopulationAbstract {
 		else if (paramName.equals("bitflip_probability")){
 			try {
 				bitFlipProbability = Double.parseDouble(paramValue);
+				return true;
+			}
+			catch (Exception ex) {
+				return false;
+			}
+		}
+		else if (paramName.equals("graph_definition_file")){
+			try {
+				graph_definition_file = paramValue;
 				return true;
 			}
 			catch (Exception ex) {
