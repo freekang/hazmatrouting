@@ -1,5 +1,7 @@
 package graph;
 
+import general.Variator;
+
 import java.util.*;
 import java.io.*;
 import java.lang.Integer;
@@ -35,7 +37,7 @@ public class Graph {
    				sc.useDelimiter(Pattern.compile("[\t\n]"));
    				
    				nbNodes = sc.nextInt();
-   				System.out.println("n = " + nbNodes);  
+   				Variator.debugPrint("n = " + nbNodes);  
    				
    				// Construct the nodes
    				for (int t = 0; t< nbNodes; t++) {
@@ -44,9 +46,9 @@ public class Graph {
    				}	
    				   				
    				nbCom = sc.nextInt();
-   				System.out.println("c = " + nbCom);
+   				Variator.debugPrint("c = " + nbCom);
    				nbReg = sc.nextInt();
-   				System.out.println("r = " + nbReg);
+   				Variator.debugPrint("r = " + nbReg);
    				
    				sc.next();
    				sc.next();
@@ -69,7 +71,7 @@ public class Graph {
    					vectArcs.add(arc);   					
    				}
    				nbArcs = nbA;
-   				System.out.println("Nombre d'arcs = "+nbA);
+   				Variator.debugPrint("number of arcs = "+nbA);
    				String s;
    				// Read: source	 dest	demand	tCap 
    				for (int k = 0; k < 6; k++){
@@ -90,7 +92,7 @@ public class Graph {
    				}
    				
    				this.nbCom = nbCommodities;
-   				System.out.println("Nb Commodities = "+nbCom);
+   				Variator.debugPrint("Number of commodities = " + nbCom);
    				
    				// Set the risk
    				// Aprcourir les commodites
@@ -153,11 +155,11 @@ public class Graph {
 
 		 public void returnNodeOrigineDestCom(int c) {
 			 int a = 1+c;
-			 System.out.println("returnNodeOrigineDestCom");
+			 Variator.debugPrint("returnNodeOrigineDestCom");
 		 }
 
 		 public void returnArc() {
-			 System.out.println("returnNodeOrigineDestCom");
+			 Variator.debugPrint("returnNodeOrigineDestCom");
 		 }
 
 		 public ArrayList<Node> returnNodes(){
@@ -166,7 +168,7 @@ public class Graph {
 
 		 public void displayGraph() {
 		   
-		   System.out.println("Nodes:");
+			 Variator.debugPrint("Nodes:");
 		   
 		 }
 
@@ -182,7 +184,7 @@ public class Graph {
 				 if (arcc.returnOrigNode().get_numero() == o && arcc.returnDestNode().get_numero() == d)
 					return arcc;				 
 			 }
-			 System.out.println("Erreur, Arc introuvable: ("+o+", "+d+")");
+			 System.out.println("Error, arc not found: ("+o+", "+d+")");
 			 arcc =  new Arc();
 			 return arcc;
 			 
