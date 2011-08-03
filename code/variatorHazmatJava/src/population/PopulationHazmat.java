@@ -60,7 +60,7 @@ public class PopulationHazmat extends PopulationAbstract {
 	/** File name where graph instance is defined */
 	String graph_definition_file = "graph.dat";
 	
-	Graph mygraph;
+	static Graph mygraph;
 			
 	/** Initializes the population with <code>alpha</code> individuals that have random decision space representations. */
 	public void initialize() {
@@ -84,6 +84,7 @@ public class PopulationHazmat extends PopulationAbstract {
 	 * @param offspring the indices of the individuals to be variated
 	 */
 	void performVariation(int[] offspring){
+		/* commented out for the moment, in a first attempt, we should go with mutation only
 		// recombination
 		int k;
 		if (offspring.length % 2 != 1) { // equal number of parents
@@ -97,6 +98,7 @@ public class PopulationHazmat extends PopulationAbstract {
 				recombination(offspring[i], offspring[i+1]);
 			}
 		}
+		*/
 		
 		// mutation
 		for (int i = 0; i < Variator.population.lambda; i++) {
@@ -118,31 +120,30 @@ public class PopulationHazmat extends PopulationAbstract {
 		
 		int tmp;
 		
-		for (int i = 0; i < ind1.decisionSpace.length; i++) {
+		/*for (int i = 0; i < ind1.decisionSpace.length; i++) {
 			if (Variator.randomGenerator.nextDouble() <= 0.5) { // switch at index i
 				tmp = ind1.decisionSpace[i];
 				ind1.decisionSpace[i] = ind2.decisionSpace[i];
 				ind2.decisionSpace[i] = tmp;
 			}
-		}
+		}*/
+		
+		// TODO implement for hazmat routing problem
 		
 		globalPopulation.set(id1, ind1);
 		globalPopulation.set(id2, ind2);	
 	}
 	
-	/** Performs independent bit mutation on the specified individual. This means that each bit
-	 * of the individual is flipped with <code>bitFlipProbability</code>.
+	/** Performs mutation on the specified individual and replaces it with its mutant in
+	 * the global population.
 	 * 
 	 * @param id index of the individual
 	 */
 	void mutation(int id){
 		IndividualHazmat ind = globalPopulation.get(id);
 		
-		for (int i = 0; i < ind.decisionSpace.length; i++) {
-			if (Variator.randomGenerator.nextDouble() <= bitFlipProbability) {
-				ind.decisionSpace[i] = 1-ind.decisionSpace[i];
-			}
-		}
+		ind.mutate();
+		
 		globalPopulation.set(id, ind);
 	}
 	
@@ -244,9 +245,12 @@ public class PopulationHazmat extends PopulationAbstract {
 					for (int j = 0; j < Variator.population.dim; j++) {
 						writer.printf("%10.10f\t", currentIndividual.objectiveSpace[j]);
 					}
-					for (int j = 0; j < currentIndividual.decisionSpace.length; j++) {
+					/*for (int j = 0; j < currentIndividual.decisionSpace.length; j++) {
 						writer.print(currentIndividual.decisionSpace[j] + " ");
-					}					
+					}	*/	
+					
+					// TODO implement for hazmat routing problem
+					
 					writer.println("");
 				}
 			}			

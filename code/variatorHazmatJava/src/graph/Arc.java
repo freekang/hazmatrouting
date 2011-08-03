@@ -15,6 +15,7 @@ public class Arc {
 	private Node origNode; 			// origin node of the arc
 	private Node destNode; 			// destination node of the arc
 	private Vector comRegRisk; 				// com --> Reg--> risk
+	// TODO: why do we need a list of successor and predecessor nodes for each arc here? (Dimo)
 	private ArrayList<Node> succNodes;		// Successor Nodes of the arc
 	private ArrayList<Node> predNodes;		// predecessor Nodes of the arc
 	private ArrayList<ArrayList<Integer>>  mapRisk; // commodity - region - risk 

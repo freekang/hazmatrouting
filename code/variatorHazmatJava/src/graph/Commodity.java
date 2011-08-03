@@ -22,6 +22,10 @@ public class Commodity {
 		return this.nbTrucks;
 	}
 	
+	public int getSource() {
+		return this.source;
+	}
+	
 	
 }
 
