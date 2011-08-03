@@ -24,6 +24,7 @@
  Company: ETH Zurich
  */
 
+package population;
 
 /** Specifies the problem-specific behavior of an individual.
  * Defines the decision space representation of the individuals,
