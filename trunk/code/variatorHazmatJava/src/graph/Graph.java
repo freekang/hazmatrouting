@@ -17,7 +17,7 @@ public class Graph {
 		public int nbArcs; 
 		public int nbCom; 
 		public int nbReg; 
-
+		
 		public ArrayList<Node> vectNodes; 
 		public ArrayList<Arc> vectArcs;   
 		public ArrayList<Commodity> listCom; 
@@ -37,7 +37,6 @@ public class Graph {
    				sc.useDelimiter(Pattern.compile("[\t\n]"));
    				
    				nbNodes = sc.nextInt();
-   				
    				System.out.println("n = " + nbNodes);  
    				
    				// Construct the nodes
@@ -75,7 +74,7 @@ public class Graph {
    				System.out.println("number of arcs = "+nbA);
    				String s;
    				// Read: source	 dest	demand	tCap 
-   				for (int k = 0; k < 6; k++){
+   				for (int k = 0; k < 7; k++){
    					s = sc.next();   					
    				}
    				
@@ -87,8 +86,9 @@ public class Graph {
    					int source =  sc.nextInt();   					   					
    					int dest =  sc.nextInt();   					   					
    					int demand =  sc.nextInt();   					   					
-   					int cap =  sc.nextInt();   					   					
-   					Commodity comm = new Commodity(nu, source, dest, demand, cap);
+   					int cap =  sc.nextInt();   		
+   					int nbT = sc.nextInt();  
+   					Commodity comm = new Commodity(nu, source, dest, demand, cap, nbT);
    					this.listCom.add(comm);   									
    				}
    				
@@ -119,7 +119,7 @@ public class Graph {
    					sc.next();
    					numCom++;   					
    				}   				
-   						
+   				
 	   			sc.close(); 
    			}		
 	   		catch (Exception e){
@@ -189,6 +189,17 @@ public class Graph {
 			 arcc =  new Arc();
 			 return arcc;
 			 
+		 }
+		 
+		 public ArrayList<Node> shortestPath(int o, int d) {
+			 ArrayList<Node> sPath = new ArrayList<Node>();
+			 
+			 return sPath;			 
+		 }
+		 
+		 // Return the number of trucks associated to commodity c  
+		 public int getNbTrucks(int c) {
+			 return listCom.get(c).getNbTrucks();
 		 }
 			 
 }
