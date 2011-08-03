@@ -35,7 +35,7 @@ package population;
  * @author Tamara Ulrich
  * @version 1.0
  */
-abstract class IndividualAbstract {
+public abstract class IndividualAbstract {
 	
 	double[] objectiveSpace;
 	

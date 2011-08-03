@@ -26,6 +26,8 @@
 
 package population;
 
+import general.*;
+
 /** Specifies the problem-specific behavior of an individual.
  * Defines the decision space representation of the individuals,
  * provides two constructors
@@ -35,7 +37,7 @@ package population;
  * @author Tamara Ulrich
  * @version 1.0
  */
-class IndividualHazmat extends IndividualAbstract {
+public class IndividualHazmat extends IndividualAbstract {
 	
 	int[] decisionSpace;
 	
