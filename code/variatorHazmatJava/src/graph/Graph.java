@@ -1,3 +1,5 @@
+package graph;
+
 import java.util.*;
 import java.io.*;
 import java.lang.Integer;
@@ -23,7 +25,7 @@ public class Graph {
 		   this.listCom = new ArrayList<Commodity>();
 	   }	
 	   
-	   public void lectureInstance(String fileName) {
+	   public void readInstance(String fileName) {
 		   
     	   //lecture du fichier texte	
    			try{
