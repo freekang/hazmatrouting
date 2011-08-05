@@ -177,16 +177,43 @@ public class Graph {
 		 }
 		 
 		 
-		 public ArrayList<Node> shortestPath(int o, int d) {
-			 ArrayList<Node> sPath = new ArrayList<Node>();
-			 ArrayList<Double> weight = new ArrayList<Double>();
+		 public ArrayList<Node> shortestPath(Node o, Node d) {
 			 
-			 // Initialize the weights
+			 // The path: List of nodes
+			 ArrayList<Node> sPath = new ArrayList<Node>();
+			 
+			 // For each node (numero), we associate its weight
+			 HashMap<Integer, Double> weight = new HashMap<Integer, Double>();
+			 
+			 // For each node (numero), we associate its predecessor node in the shortest path
+			 HashMap<Integer, Integer> pred = new HashMap<Integer, Integer>();
+			 
+			 // List of definively treated nodes
+			 ArrayList<Node> treatedNodes = new ArrayList<Node>();
+			 treatedNodes.add(o);
+			 
+			 // List of temporary treated nodes
+			 ArrayList<Node> visitedNodes = new ArrayList<Node>();
+			 visitedNodes.add(o);
+			 
+			 // Initialize weight and pred
 			 for (int i = 0; i < this.nbNodes; i++) {
-				 if(i == o)
-					 weight.add(0.);
-				 else
-					 weight.add(100000.);
+				 if(i == o.get_numero()) {
+					 weight.put(i, 0.);
+					 pred.put(i, -1);
+				 }
+				 else {
+					 weight.put(i, 100000.);
+					 pred.put(i, o.get_numero());
+				 }
+			 }
+			 
+			 // Initialize Successors of o
+			 ArrayList<Arc> out = o.returnList_out_arcs();
+			 for (int i = 0; i<out.size(); i++) {
+				 int numSucNode = out.get(i).returnDestNode().get_numero();
+				 Double w = out.get(i).returnCost();
+				 weight.put(numSucNode, w);
 			 }
 			 
 			 
