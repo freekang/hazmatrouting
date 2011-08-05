@@ -12,8 +12,8 @@ public class Commodity {
 	public Commodity(int n, int s, int des, int dem, int t, int nb){
 		this.num = n;
 		this.source = s;
-		this.dest = dem;
-		this.demand = n;
+		this.dest = des;
+		this.demand = dem;
 		this.tCap = t;
 		this.nbTrucks = nb;
 	}
