@@ -64,11 +64,15 @@ public class Graph {
    					Node ni = vectNodes.get(i);
    					j = sc.nextInt();
    					Node nj = vectNodes.get(j);
+   					Double cost = Double.parseDouble(sc.next()); 
    					// Add the new arc
    					nbA++;
    					Arc arc = new Arc(ni, nj);
    					arc.addSuccNode(nj);
    					arc.addPredNode(ni);
+   					arc.setCost(cost);
+   					ni.add_out_arc(arc);
+   					ni.add_in_arc(arc);
    					vectArcs.add(arc);   					
    				}
    				nbArcs = nbA;
@@ -180,6 +184,8 @@ public class Graph {
 		 
 		 public ArrayList<Integer> shortestPath(Node o, Node d) {
 			 
+			 System.out.println("shortestPath");
+			 
 			 // The path: List of nodes
 			 ArrayList<Integer> sPath = new ArrayList<Integer>();
 			 
@@ -190,15 +196,13 @@ public class Graph {
 			 HashMap<Integer, Integer> pred = new HashMap<Integer, Integer>();
 			 
 			 // List of definively treated nodes
-			 ArrayList<Node> treatedNodes = new ArrayList<Node>();
-			 treatedNodes.add(o);
-			 
+			 ArrayList<Node> treatedNodes = new ArrayList<Node>(0);
+			 			 
 			 // List of temporary treated nodes
-			 ArrayList<Node> visitedNodes = new ArrayList<Node>();
-			 visitedNodes.add(o);
-			 
+			 ArrayList<Node> visitedNodes = new ArrayList<Node>(0);
+						 
 			 // Initialize weight and pred
-			 for (int i = 0; i < this.nbNodes; i++) {
+			for (int i = 0; i < this.nbNodes; i++) {
 				 if(i == o.get_numero()) {
 					 weight.put(i, 0.);
 					 pred.put(i, -1);
@@ -213,29 +217,35 @@ public class Graph {
 			 
 			 // Initialize Successors of o
 			 ArrayList<Arc> out = o.returnList_out_arcs();
+			 System.out.println("out.size() = "+out.size());
 			 for (int i = 0; i<out.size(); i++) {
 				 int numSucNode = out.get(i).returnDestNode().get_numero();
+				 System.out.println("numSucNode = "+numSucNode);
 				 Double w = out.get(i).returnCost();
+				 System.out.println("Cost = "+w);
 				 weight.put(numSucNode, w);
 			 }
 			 
 			 while (visitedNodes.size() != 0) {				 
+				 System.out.println("visitedNodes.size() = "+visitedNodes.size());
+				 // 1. find the minimum cost element in weight (visitedNodes)
+				 Double min = 10000.;
+				 int indexMin = -1;
 				 
-				 // 1. find the minimum cost element in weight
-				 Double min = 0.;
-				 int indexMin = -1;				 
-				 for( Iterator it = weight.keySet().iterator(); it.hasNext();) { 
-					   Integer key = (Integer) it.next(); 
-					   Double val = (Double) weight.get(key); 
-					   if (val < min) {
-						   min = val;
-						   indexMin = key;
-					   }
-				 }				
-				 
+				 for (int i = 0; i<visitedNodes.size(); i++) {
+					 int numNode = visitedNodes.get(i).get_numero();
+					 Double val = (Double) weight.get(numNode); 
+					 System.out.println("val = "+val);
+					 if (val < min) {
+					   System.out.println("passage22");
+					   min = val;
+					   indexMin = numNode;
+					 }
+				 }
+				 		
+				 System.out.println("passage3333");
 				 // The treated node
 				 Node currentNode = vectNodes.get(indexMin);
-				 
 				 // 2. Extend this node to its successor nodes
 				 ArrayList<Arc> arcs_out = currentNode.returnList_out_arcs();
 				 for (int i = 0; i<arcs_out.size(); i++) {
