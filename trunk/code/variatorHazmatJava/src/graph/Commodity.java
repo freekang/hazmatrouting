@@ -26,6 +26,8 @@ public class Commodity {
 		return this.source;
 	}
 	
-	
+	public int getDest() {
+		return this.dest;
+	}
 }
 

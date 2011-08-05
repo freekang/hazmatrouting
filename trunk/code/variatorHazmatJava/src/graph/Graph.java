@@ -2,6 +2,7 @@ package graph;
 
 import general.Variator;
 
+
 import java.util.*;
 import java.io.*;
 import java.lang.Integer;
@@ -177,10 +178,10 @@ public class Graph {
 		 }
 		 
 		 
-		 public ArrayList<Node> shortestPath(Node o, Node d) {
+		 public ArrayList<Integer> shortestPath(Node o, Node d) {
 			 
 			 // The path: List of nodes
-			 ArrayList<Node> sPath = new ArrayList<Node>();
+			 ArrayList<Integer> sPath = new ArrayList<Integer>();
 			 
 			 // For each node (numero), we associate its weight
 			 HashMap<Integer, Double> weight = new HashMap<Integer, Double>();
@@ -201,10 +202,12 @@ public class Graph {
 				 if(i == o.get_numero()) {
 					 weight.put(i, 0.);
 					 pred.put(i, -1);
+					 treatedNodes.add(o);
 				 }
 				 else {
 					 weight.put(i, 100000.);
 					 pred.put(i, o.get_numero());
+					 visitedNodes.add(vectNodes.get(i));
 				 }
 			 }
 			 
@@ -216,9 +219,49 @@ public class Graph {
 				 weight.put(numSucNode, w);
 			 }
 			 
+			 while (visitedNodes.size() != 0) {				 
+				 
+				 // 1. find the minimum cost element in weight
+				 Double min = 0.;
+				 int indexMin = -1;				 
+				 for( Iterator it = weight.keySet().iterator(); it.hasNext();) { 
+					   Integer key = (Integer) it.next(); 
+					   Double val = (Double) weight.get(key); 
+					   if (val < min) {
+						   min = val;
+						   indexMin = key;
+					   }
+				 }				
+				 
+				 // The treated node
+				 Node currentNode = vectNodes.get(indexMin);
+				 
+				 // 2. Extend this node to its successor nodes
+				 ArrayList<Arc> arcs_out = currentNode.returnList_out_arcs();
+				 for (int i = 0; i<arcs_out.size(); i++) {
+					 int numSuccNode = arcs_out.get(i).returnDestNode().get_numero();
+					 Double newCost = min + arcs_out.get(i).returnCost();
+					 weight.put(numSuccNode, newCost);
+					 pred.put(numSuccNode, indexMin);
+				 }				 
+				 
+				 // 3. Add this node to the set of treated node: treatedNodes
+				 treatedNodes.add(currentNode);
+				 
+				 // 4. Remove this node from visitedNodes
+				 for (int i = 0; i<visitedNodes.size(); i++) {
+					 if (visitedNodes.get(i).get_numero() == indexMin)
+						 visitedNodes.remove(indexMin);
+				 }
+				 
+			 } 
 			 
-			 
-			 
+			 // Construct the ptimal path;
+			 int num = d.get_numero();
+			 while (num != -1) {
+				 sPath.add(num);
+				 num = pred.get(num);
+			 }
 			 return sPath;			 
 		 }
 		 
@@ -239,5 +282,9 @@ public class Graph {
 		 public int getNbTrucks(int c) {
 			 return listCom.get(c).getNbTrucks();
 		 }
+		 
+		 public ArrayList<Commodity> returnListCommodities() {
+			 return listCom;
+		 } 
 			 
 }
