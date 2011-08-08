@@ -29,5 +29,13 @@ public class Commodity {
 	public int getDest() {
 		return this.dest;
 	}
+
+	/** 
+	 * Returns a (deep) copy of itself.
+	 * @return deep copy
+	 */
+	public Commodity getCopy() {
+		return new Commodity(this.num, this.source, this.dest, this.demand, this.tCap, this.nbTrucks);
+	}
 }
 

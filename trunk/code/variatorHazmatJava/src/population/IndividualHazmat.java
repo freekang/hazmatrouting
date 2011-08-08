@@ -45,6 +45,7 @@ import java.util.ArrayList;
 public class IndividualHazmat extends IndividualAbstract {
 	
 	Vector<LinkedList<Node>> truckPaths; // for each truck a list of nodes gives the path they travel
+	Vector<Commodity> associatedCommodities; // list of associated commodities of each truck
 	
 	/** Standard class constructor, initializes the decision space representation randomly
 	 * based on the graph instance in PopulationHazmat.mygraph.
@@ -55,6 +56,7 @@ public class IndividualHazmat extends IndividualAbstract {
 	 */
 	public IndividualHazmat(){
 		this.truckPaths = new Vector<LinkedList<Node>>();
+		this.associatedCommodities = new Vector<Commodity>();
 		
 		for (Commodity commodity: PopulationHazmat.mygraph.listCom) {
 			/* create "empty" path, consisting of only the source node for this commodity */
@@ -62,7 +64,8 @@ public class IndividualHazmat extends IndividualAbstract {
 			emptyPath.add(PopulationHazmat.mygraph.returnNode(commodity.getSource()));
 
 			for (int i=0; i < commodity.getNbTrucks(); i++) {
-				truckPaths.add(emptyPath);
+				this.truckPaths.add(emptyPath);
+				this.associatedCommodities.add(commodity);
 			}
 		}
 		
@@ -74,9 +77,12 @@ public class IndividualHazmat extends IndividualAbstract {
 	 * 
 	 * @param initialTruckPaths A vector of node lists which specifies the paths through the graph
 	 *                          for each truck
+	 * @param listOfCommodities A vector of commodities, giving the type of commodity associtated with
+	 *                          the truck paths
 	 */
-	public IndividualHazmat(Vector<LinkedList<Node>> initialTruckPaths) {
+	public IndividualHazmat(Vector<LinkedList<Node>> initialTruckPaths, Vector<Commodity> listOfCommodities) {
 		this.truckPaths = initialTruckPaths;
+		this.associatedCommodities = listOfCommodities;
 		
 		this.objectiveSpace = new double[3];
 		this.eval();
@@ -102,6 +108,7 @@ public class IndividualHazmat extends IndividualAbstract {
 	 */
 	public IndividualHazmat copy() {
 		Vector<LinkedList<Node>> copyOfTruckPaths = new Vector<LinkedList<Node>>();
+		Vector<Commodity> copyOfAssociatedCommodities = new Vector<Commodity>();
 		
 		for (LinkedList<Node> path: this.truckPaths) {
 			LinkedList<Node> copiedPath = new LinkedList<Node>();
@@ -111,7 +118,11 @@ public class IndividualHazmat extends IndividualAbstract {
 			}
 		}
 		
-		IndividualHazmat newInd = new IndividualHazmat(copyOfTruckPaths);
+		for (Commodity comm: this.associatedCommodities) {
+			copyOfAssociatedCommodities.add(comm);
+		}
+		
+		IndividualHazmat newInd = new IndividualHazmat(copyOfTruckPaths, copyOfAssociatedCommodities);
 		return newInd;
 	}
 	
@@ -146,10 +157,6 @@ public class IndividualHazmat extends IndividualAbstract {
 			}
 			
 		}
-		
-		
-		// TODO implement for hazmat routing problem
-		
 
 	}
 	
