@@ -19,7 +19,7 @@ Arcs
 EndArcs
 
 source	dest	demand	tCap	nbTrucks
-0	0	2	4000	35	3
+0	0	3	4000	35	3
 1	1	4	5500	25	3
 
 Arcs	r	risque

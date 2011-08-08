@@ -184,7 +184,7 @@ public class Graph {
 		 
 		 public ArrayList<Integer> shortestPath(Node o, Node d) {
 			 
-			 System.out.println("shortestPath");
+			 System.out.println("shortestPath from "+ o.get_numero() + " to "+d.get_numero());
 			 
 			 // The path: List of nodes
 			 ArrayList<Integer> sPath = new ArrayList<Integer>();
@@ -210,68 +210,130 @@ public class Graph {
 				 }
 				 else {
 					 weight.put(i, 100000.);
-					 pred.put(i, o.get_numero());
 					 visitedNodes.add(vectNodes.get(i));
 				 }
 			 }
-			 
+			//System.out.println("Initialisation:");
+			
+			//System.out.println("Affichage des poids:");
+			Set cles = weight.keySet();
+			Iterator it = cles.iterator();
+			while (it.hasNext()){
+				   Integer cle = (Integer) it.next(); 
+				   Double valeur = weight.get(cle); 
+				   // System.out.println("weight("+cle+") = "+ valeur);
+			}
+			
+			//System.out.println("Affichage de treatedNodes:");
+			//for (int i = 0; i < treatedNodes.size(); i++) {
+				//	System.out.println("treatedNodes["+i+"] = "+ treatedNodes.get(i).get_numero());
+				//}
+			
+			//System.out.println("Affichage de visitedNodes:");
+			//for (int i = 0; i < visitedNodes.size(); i++) {
+			//	System.out.println("visitedNodes["+i+"] = "+ visitedNodes.get(i).get_numero());
+			//}
+			
 			 // Initialize Successors of o
 			 ArrayList<Arc> out = o.returnList_out_arcs();
-			 System.out.println("out.size() = "+out.size());
+			 //System.out.println("out.size() = "+out.size());
 			 for (int i = 0; i<out.size(); i++) {
 				 int numSucNode = out.get(i).returnDestNode().get_numero();
-				 System.out.println("numSucNode = "+numSucNode);
+				 //System.out.println("numSucNode = "+numSucNode);
 				 Double w = out.get(i).returnCost();
-				 System.out.println("Cost = "+w);
+				 //System.out.println("Cost = "+w);
 				 weight.put(numSucNode, w);
+				 pred.put(numSucNode, o.get_numero());
 			 }
 			 
-			 while (visitedNodes.size() != 0) {				 
-				 System.out.println("visitedNodes.size() = "+visitedNodes.size());
-				 // 1. find the minimum cost element in weight (visitedNodes)
+			 boolean stop = false;
+			 while (visitedNodes.size() != 0 && !stop) {				 
+				 //System.out.println("visitedNodes.size() = "+visitedNodes.size());
+				 
+				 /** 1. find the minimum cost element in weight (visitedNodes) */
+				 
 				 Double min = 10000.;
 				 int indexMin = -1;
 				 
 				 for (int i = 0; i<visitedNodes.size(); i++) {
 					 int numNode = visitedNodes.get(i).get_numero();
 					 Double val = (Double) weight.get(numNode); 
-					 System.out.println("val = "+val);
+					 //System.out.println("val = "+val);
 					 if (val < min) {
-					   System.out.println("passage22");
+						 //System.out.println("passage22");
 					   min = val;
 					   indexMin = numNode;
 					 }
 				 }
 				 		
-				 System.out.println("passage3333");
 				 // The treated node
 				 Node currentNode = vectNodes.get(indexMin);
-				 // 2. Extend this node to its successor nodes
+				 if (currentNode.get_numero() == d.get_numero())
+					 stop = false; 
+				 //System.out.println("current node = "+currentNode.get_numero());
+				 
+				 /**  2. Extend this node to its successor nodes in visitedNodes */
+				 
 				 ArrayList<Arc> arcs_out = currentNode.returnList_out_arcs();
-				 for (int i = 0; i<arcs_out.size(); i++) {
+				 //System.out.println("nombre d'arcs sortants de "+currentNode.get_numero()+" est: "+arcs_out.size());
+				 //System.out.println("Prolongement: ");
+				 for (int i = 0; i<arcs_out.size() && !stop; i++) {	
 					 int numSuccNode = arcs_out.get(i).returnDestNode().get_numero();
-					 Double newCost = min + arcs_out.get(i).returnCost();
-					 weight.put(numSuccNode, newCost);
-					 pred.put(numSuccNode, indexMin);
+					 // if numSuccNode is in visitedNodes
+					 Boolean visited = false;
+					for (int j = 0; j<visitedNodes.size() && !visited; j++) {
+						 if (visitedNodes.get(j).get_numero() == numSuccNode)
+							 visited = true;
+					 }
+					if(visited) {
+						//System.out.println("Successeur: " + numSuccNode);
+						 //System.out.println("ancien poid: " + weight.get(numSuccNode));
+						 Double newCost = min + arcs_out.get(i).returnCost();
+						 //System.out.println("ancien poid: (min + arc.cout) = " + min + " + "+ arcs_out.get(i).returnCost()+" = "+ newCost);
+						 weight.put(numSuccNode, newCost);
+						 pred.put(numSuccNode, indexMin);						 
+					 }					
 				 }				 
 				 
-				 // 3. Add this node to the set of treated node: treatedNodes
+				 /** 3. Add this node to the set of treated node: treatedNodes */
+				 
+				// System.out.println("coucou1: ");
 				 treatedNodes.add(currentNode);
 				 
-				 // 4. Remove this node from visitedNodes
-				 for (int i = 0; i<visitedNodes.size(); i++) {
-					 if (visitedNodes.get(i).get_numero() == indexMin)
-						 visitedNodes.remove(indexMin);
-				 }
+				 /** 4. Remove this node from visitedNodes */
 				 
+				 for (int i = 0; i<visitedNodes.size(); i++) {
+					 if (visitedNodes.get(i).get_numero() == indexMin) {
+						 visitedNodes.remove(i);						
+					 }
+				 }				 
 			 } 
 			 
-			 // Construct the ptimal path;
-			 int num = d.get_numero();
+			 // Construct the optimal path;
+			 int num = d.get_numero();	
 			 while (num != -1) {
 				 sPath.add(num);
-				 num = pred.get(num);
+				 num = pred.get(num);				 
 			 }
+			 
+			 
+			 // Inverse the array
+			 for (int i = 0; i<sPath.size()/2; i++) {
+				 int c;
+				 int index = sPath.size() - i -1;
+				 int elementIndex = sPath.get(index);
+				 c = sPath.get(i);				 
+				 sPath.set(i, elementIndex);
+				 sPath.set(index, c);
+			 }
+			 System.out.println("The optimal path: ");
+			 for (int i = 0; i<sPath.size(); i++) {
+				 if(i == sPath.size()-1)
+					 System.out.println(sPath.get(i)+"	");
+				 else
+					 System.out.print(sPath.get(i)+"	");
+			 }
+			 System.out.println("Cost = " + weight.get(d.get_numero()));
 			 return sPath;			 
 		 }
 		 
