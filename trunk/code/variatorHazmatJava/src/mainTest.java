@@ -16,7 +16,6 @@ public class mainTest {
 		   int indexD = c.getDest();
 		   Node d = G.returnNode(indexD);
 		   ArrayList<Integer> sPath= G.shortestPath(o,d);
-		   System.out.println("888");
 	   }
 
 }
