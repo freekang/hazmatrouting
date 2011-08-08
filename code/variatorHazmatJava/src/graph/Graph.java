@@ -337,18 +337,6 @@ public class Graph {
 			 return sPath;			 
 		 }
 		 
-		 // return the first index of the minimum value in the ArrayList
-		 public int min(ArrayList<Integer> a) {
-			 int min = 0;
-			 int indexMin = -1;
-			 for (int i = 0; i< a.size(); i++){
-				 if (a.get(i) < min) {
-					 min = a.get(i);
-					 indexMin = i;
-				 }
-			 }
-			 return indexMin;
-		 }
 		 
 		 // Return the number of trucks associated to commodity c  
 		 public int getNbTrucks(int c) {
