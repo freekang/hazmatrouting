@@ -15,7 +15,7 @@ public class mainTest {
 		   Node o = G.returnNode(indexO);
 		   int indexD = c.getDest();
 		   Node d = G.returnNode(indexD);
-		   ArrayList<Integer> sPath= G.shortestPath(o,d);
+		   ArrayList<Node> sPath= G.shortestPath(o,d);
 	   }
 
 }
