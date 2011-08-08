@@ -182,12 +182,13 @@ public class Graph {
 		 }
 		 
 		 
-		 public ArrayList<Integer> shortestPath(Node o, Node d) {
+		 public ArrayList<Node> shortestPath(Node o, Node d) {
 			 
 			 System.out.println("shortestPath from "+ o.get_numero() + " to "+d.get_numero());
 			 
 			 // The path: List of nodes
 			 ArrayList<Integer> sPath = new ArrayList<Integer>();
+			 ArrayList<Node> sPathSol = new ArrayList<Node>();
 			 
 			 // For each node (numero), we associate its weight
 			 HashMap<Integer, Double> weight = new HashMap<Integer, Double>();
@@ -334,7 +335,13 @@ public class Graph {
 					 System.out.print(sPath.get(i)+"	");
 			 }
 			 System.out.println("Cost = " + weight.get(d.get_numero()));
-			 return sPath;			 
+			 
+			 for (int i = 0; i<sPath.size(); i++) {
+				 int nn = sPath.get(i);
+				 Node n = this.returnNode(nn);
+				 sPathSol.add(n);
+			 }
+			 return sPathSol;			 
 		 }
 		 
 		 
