@@ -1,0 +1,9 @@
+This simple test instance is a graph with 8 nodes (cities) where the population is assumed to be equally distributed.
+
+region 0 is containing the cities 0, 2, 4, 5, and 7
+region 1 is containing the cities 1, 3, 5, 6, and 7
+
+commodity 0 is locally harmful, i.e., transport over edge e=(v,w) only affects the cities v and w with a risk of 1 each.
+commodity 1 is globally harmful, i.e., transport over edge e=(v,w) affects v and w with a risk of 10 each and in addition each other city in range 1 (wrt the distance) by 8, in range 2 by 4, and in range 3 by 2. Cities with larger distances than 3 to v or w are not affected.
+
+Both commodities have to be transported from city 1 to city 7 with 3 (commodity 0) and 6 (commodity 1) trucks respectively.
