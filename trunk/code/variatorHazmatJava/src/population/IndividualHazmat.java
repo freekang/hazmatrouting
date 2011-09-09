@@ -46,6 +46,7 @@ public class IndividualHazmat extends IndividualAbstract {
 	
 	Vector<LinkedList<Node>> truckPaths; // for each truck a list of nodes gives the path they travel
 	Vector<Commodity> associatedCommodities; // list of associated commodities of each truck
+	boolean alreadyEvaluated;
 	
 	/** Standard class constructor, initializes the decision space representation randomly
 	 * based on the graph instance in PopulationHazmat.mygraph.
@@ -57,6 +58,7 @@ public class IndividualHazmat extends IndividualAbstract {
 	public IndividualHazmat(){
 		this.truckPaths = new Vector<LinkedList<Node>>();
 		this.associatedCommodities = new Vector<Commodity>();
+		this.alreadyEvaluated = false;
 		
 		for (Commodity commodity: PopulationHazmat.mygraph.listCom) {
 			/* create "empty" path, consisting of only the source node for this commodity */
@@ -83,9 +85,34 @@ public class IndividualHazmat extends IndividualAbstract {
 	public IndividualHazmat(Vector<LinkedList<Node>> initialTruckPaths, Vector<Commodity> listOfCommodities) {
 		this.truckPaths = initialTruckPaths;
 		this.associatedCommodities = listOfCommodities;
+		this.alreadyEvaluated = false;
 		
 		this.objectiveSpace = new double[3];
 		this.eval();
+	}
+	
+	/** Class constructor which initializes the decision and objective space representations with the given values.
+	 *  The individual is *not* again evaluated in this case (e.g. when stemming from invoking
+	 *  the copy() method. 
+	 * 
+	 * @param initialTruckPaths            A vector of node lists which specifies the paths through
+	 *                                     the graph for each truck
+	 * @param listOfCommodities            A vector of commodities, giving the type of commodity
+	 *                                     associtated with the truck paths
+	 * @param correctlyEvaluatedObjVector  The objective vector, the new individual inherits from another,
+	 *                                     correctly evaluated individual with the same nodes and commodities
+	 */
+	public IndividualHazmat(Vector<LinkedList<Node>> initialTruckPaths, Vector<Commodity> listOfCommodities, double[] correctlyEvaluatedObjVector) {
+		this.truckPaths = initialTruckPaths;
+		this.associatedCommodities = listOfCommodities;
+		this.objectiveSpace = new double[3];
+		
+		/* no evaluation necessary here: */
+		this.objectiveSpace[0] = correctlyEvaluatedObjVector[0];
+		this.objectiveSpace[1] = correctlyEvaluatedObjVector[1];
+		this.objectiveSpace[2] = correctlyEvaluatedObjVector[2];
+		this.alreadyEvaluated = true;
+		
 	}
 	
 	/** Calculates the objective space values of this individual. The two objectives are number of
@@ -93,13 +120,20 @@ public class IndividualHazmat extends IndividualAbstract {
 	 * be minimized (by subtracting them from the total number of decision variables). */
 	public void eval() {
 		
-		// TODO implement
+		if (!alreadyEvaluated) {
+			// TODO implement
 		
-		int todo=1000;
-		int todoaswell=1000;
+			int todo=1000;
+			int todoaswell=1000;
+			int thirdtodo=2000;
 		
-		objectiveSpace[0] = todo; 
-		objectiveSpace[1] = todoaswell;
+			objectiveSpace[0] = todo; 
+			objectiveSpace[1] = todoaswell;
+			objectiveSpace[2] = thirdtodo;
+		
+			this.alreadyEvaluated = true;
+		}
+		
 	}
 
 	/** Returns a (deep) copy of this individual.
@@ -122,7 +156,7 @@ public class IndividualHazmat extends IndividualAbstract {
 			copyOfAssociatedCommodities.add(comm);
 		}
 		
-		IndividualHazmat newInd = new IndividualHazmat(copyOfTruckPaths, copyOfAssociatedCommodities);
+		IndividualHazmat newInd = new IndividualHazmat(copyOfTruckPaths, copyOfAssociatedCommodities, this.objectiveSpace);
 		return newInd;
 	}
 	
@@ -157,7 +191,9 @@ public class IndividualHazmat extends IndividualAbstract {
 			}
 			
 		}
-
+		/* since the representation of the individual changed, ensure a new
+		 * evaluation next time: */
+		this.alreadyEvaluated = false;
 	}
 	
 }
