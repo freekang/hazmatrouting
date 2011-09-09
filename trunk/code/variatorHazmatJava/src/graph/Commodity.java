@@ -29,6 +29,10 @@ public class Commodity {
 	public int getDest() {
 		return this.dest;
 	}
+	
+	public int getNum() {
+		return this.num;
+	}
 
 	/** 
 	 * Returns a (deep) copy of itself.

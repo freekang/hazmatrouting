@@ -76,4 +76,10 @@ public class Arc {
 		v.add(1, risk);
 		this.mapRisk.add(v);		
 	}
+	
+	/* returns risk on region reg when this arc is used to transport commodity c */
+	public double getRisk(int c, int reg) {
+		// TODO
+		return 13;
+	}
 }
