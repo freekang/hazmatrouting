@@ -35,7 +35,7 @@ public class Graph {
    			try{
    				FileReader f = new FileReader(fileName);
    				Scanner sc = new Scanner(f);
-   				sc.useDelimiter(Pattern.compile("[\t\n]"));
+   				sc.useDelimiter(Pattern.compile("\t|\r\n|\n"));
    				
    				nbNodes = sc.nextInt();
    				System.out.println("n = " + nbNodes);  
@@ -45,7 +45,7 @@ public class Graph {
    					Node n = new Node(t);   
    					vectNodes.add(n);
    				}	
-   				   				
+   				
    				nbCom = sc.nextInt();
    				System.out.println("c = " + nbCom);
    				nbReg = sc.nextInt();
