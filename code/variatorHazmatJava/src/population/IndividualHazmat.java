@@ -121,16 +121,75 @@ public class IndividualHazmat extends IndividualAbstract {
 	public void eval() {
 		
 		if (!alreadyEvaluated) {
-			// TODO implement
-		
-			int todo=1000;
-			int todoaswell=1000;
-			int thirdtodo=2000;
-		
-			objectiveSpace[0] = todo; 
-			objectiveSpace[1] = todoaswell;
-			objectiveSpace[2] = thirdtodo;
-		
+			
+			/* First, store 'completed' paths, not only the evolved parts */
+			Vector<LinkedList<Node>> completedTruckPaths = new Vector<LinkedList<Node>>();
+			int i=0; // index to get commodity of each truck
+			
+			for (LinkedList<Node> list : this.truckPaths ) {
+				/* copy beginning of each path from individual */
+				LinkedList<Node> pathToComplete = new LinkedList<Node>();
+				for (Node node : list) {
+					pathToComplete.add(node);
+				}
+				/* compute remaining part as shortest path from last node to destination */
+				Node o = pathToComplete.getLast();
+				Node d = PopulationHazmat.mygraph.returnNode(this.associatedCommodities.get(i).getDest());
+				if (o.get_numero() == d.get_numero()) {
+					continue; // no need to finish this path since already correct
+				}
+				ArrayList<Node> sp = PopulationHazmat.mygraph.shortestPath(o, d);
+				/* go through this path and add every node to completedTruckPaths */
+				for (Node node : sp) {
+					if (node.get_numero() != pathToComplete.getLast().get_numero()) {
+						pathToComplete.add(node);
+					}
+				}
+				
+				completedTruckPaths.add(pathToComplete);
+				i++;
+			}
+			
+			
+			/* Second, go through all paths and compute the objective functions */
+			i = 0; // as above, an index to get the corresponding commodity
+			this.objectiveSpace[0] = 0;
+			this.objectiveSpace[1] = 0;
+			this.objectiveSpace[2] = Double.NEGATIVE_INFINITY; // 2nd obj. is a maximum of risks
+			// store preliminary sums of the r^{cq}_{ij} y^c_{ij} for each region:
+			ArrayList<Double> risksumsPerRegion = new ArrayList<Double>(
+					                                      PopulationHazmat.mygraph.nbReg);
+			for (int r=0; r < risksumsPerRegion.size(); r++) {
+				risksumsPerRegion.add(r, 0.0);
+			}
+			
+			for (LinkedList<Node> path : completedTruckPaths) {
+				Node a, b = path.poll();
+				
+				while (!path.isEmpty()) {
+					a = b;
+					b = path.poll(); 
+					Arc currArc = PopulationHazmat.mygraph.getArc(a.get_numero(), b.get_numero());
+					// update 1st objective for first arc
+					this.objectiveSpace[0] += currArc.returnCost();
+					// for update of 2nd and 3rd objective, update the risk per region
+					for (int r=0; r < risksumsPerRegion.size(); r++) {
+						risksumsPerRegion.set(r, risksumsPerRegion.get(r)
+								+ currArc.getRisk(this.associatedCommodities.get(i).getNum(), r));
+					}
+				}
+				i++;
+			} // now, 1st objective already computed, 2nd, and 3rd still missing
+			
+			// go through risksumsPerRegion and compute remaining objectives as sum and max resp.
+			for (int r=0; r < risksumsPerRegion.size(); r++) {
+				double currRisk = risksumsPerRegion.get(r);
+				this.objectiveSpace[1] += currRisk; 
+				if (currRisk > this.objectiveSpace[2]) {
+					this.objectiveSpace[2] = currRisk;
+				}
+			}
+			
 			this.alreadyEvaluated = true;
 		}
 		
