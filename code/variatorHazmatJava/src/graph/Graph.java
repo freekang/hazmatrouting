@@ -220,18 +220,18 @@ public class Graph {
 			//System.out.println("Initialisation:");
 			
 			//System.out.println("Affichage des poids:");
-			Set cles = weight.keySet();
-			Iterator it = cles.iterator();
-			while (it.hasNext()){
-				   Integer cle = (Integer) it.next(); 
-				   Double valeur = weight.get(cle); 
-				   // System.out.println("weight("+cle+") = "+ valeur);
-			}
+			//Set<Integer> cles = weight.keySet();
+			//Iterator<Integer> it = cles.iterator();
+			//while (it.hasNext()){
+				//Integer cle = (Integer) it.next(); 
+			//Double valeur = weight.get(cle); 
+			//System.out.println("weight("+cle+") = "+ valeur);
+			//}
 			
 			//System.out.println("Affichage de treatedNodes:");
 			//for (int i = 0; i < treatedNodes.size(); i++) {
-				//	System.out.println("treatedNodes["+i+"] = "+ treatedNodes.get(i).get_numero());
-				//}
+				//		System.out.println("treatedNodes["+i+"] = "+ treatedNodes.get(i).get_numero());
+					//}
 			
 			//System.out.println("Affichage de visitedNodes:");
 			//for (int i = 0; i < visitedNodes.size(); i++) {
@@ -239,20 +239,16 @@ public class Graph {
 			//}
 			
 			 // Initialize Successors of o
-			 ArrayList<Arc> out = o.returnList_out_arcs();
-			 //System.out.println("out.size() = "+out.size());
-			 for (int i = 0; i<out.size(); i++) {
+			ArrayList<Arc> out = o.returnList_out_arcs();
+			for (int i = 0; i<out.size(); i++) {
 				 int numSucNode = out.get(i).returnDestNode().get_numero();
-				 //System.out.println("numSucNode = "+numSucNode);
 				 Double w = out.get(i).returnCost();
-				 //System.out.println("Cost = "+w);
 				 weight.put(numSucNode, w);
-				 pred.put(numSucNode, o.get_numero());
+				 pred.put(numSucNode, o.get_numero());				 
 			 }
 			 
 			 boolean stop = false;
 			 while (visitedNodes.size() != 0 && !stop) {				 
-				 //System.out.println("visitedNodes.size() = "+visitedNodes.size());
 				 
 				 /** 1. find the minimum cost element in weight (visitedNodes) */
 				 
@@ -274,28 +270,26 @@ public class Graph {
 				 Node currentNode = vectNodes.get(indexMin);
 				 if (currentNode.get_numero() == d.get_numero())
 					 stop = false; 
-				 //System.out.println("current node = "+currentNode.get_numero());
+				 
 				 
 				 /**  2. Extend this node to its successor nodes in visitedNodes */
 				 
 				 ArrayList<Arc> arcs_out = currentNode.returnList_out_arcs();
-				 //System.out.println("nombre d'arcs sortants de "+currentNode.get_numero()+" est: "+arcs_out.size());
-				 //System.out.println("Prolongement: ");
+				 
 				 for (int i = 0; i<arcs_out.size() && !stop; i++) {	
-					 int numSuccNode = arcs_out.get(i).returnDestNode().get_numero();
+					 int numSuccNode = arcs_out.get(i).returnDestNode().get_numero();					 
 					 // if numSuccNode is in visitedNodes
 					 Boolean visited = false;
 					for (int j = 0; j<visitedNodes.size() && !visited; j++) {
 						 if (visitedNodes.get(j).get_numero() == numSuccNode)
 							 visited = true;
 					 }
-					if(visited) {
-						//System.out.println("Successeur: " + numSuccNode);
-						 //System.out.println("ancien poid: " + weight.get(numSuccNode));
-						 Double newCost = min + arcs_out.get(i).returnCost();
-						 //System.out.println("ancien poid: (min + arc.cout) = " + min + " + "+ arcs_out.get(i).returnCost()+" = "+ newCost);
-						 weight.put(numSuccNode, newCost);
-						 pred.put(numSuccNode, indexMin);						 
+					if(visited) {						 
+						 Double newCost = min + arcs_out.get(i).returnCost();						 
+						 if (weight.get(numSuccNode) > newCost) {
+							 weight.put(numSuccNode, newCost);
+							 pred.put(numSuccNode, indexMin);	
+						 }
 					 }					
 				 }				 
 				 
