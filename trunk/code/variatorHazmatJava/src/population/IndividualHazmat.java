@@ -150,16 +150,14 @@ public class IndividualHazmat extends IndividualAbstract {
 				i++;
 			}
 			
-			
 			/* Second, go through all paths and compute the objective functions */
 			i = 0; // as above, an index to get the corresponding commodity
 			this.objectiveSpace[0] = 0;
 			this.objectiveSpace[1] = 0;
 			this.objectiveSpace[2] = Double.NEGATIVE_INFINITY; // 2nd obj. is a maximum of risks
 			// store preliminary sums of the r^{cq}_{ij} y^c_{ij} for each region:
-			ArrayList<Double> risksumsPerRegion = new ArrayList<Double>(
-					                                      PopulationHazmat.mygraph.nbReg);
-			for (int r=0; r < risksumsPerRegion.size(); r++) {
+			ArrayList<Double> risksumsPerRegion = new ArrayList<Double>();
+			for (int r=0; r < PopulationHazmat.mygraph.nbReg; r++) {
 				risksumsPerRegion.add(r, 0.0);
 			}
 			
@@ -184,6 +182,9 @@ public class IndividualHazmat extends IndividualAbstract {
 			// go through risksumsPerRegion and compute remaining objectives as sum and max resp.
 			for (int r=0; r < risksumsPerRegion.size(); r++) {
 				double currRisk = risksumsPerRegion.get(r);
+				
+				System.out.println("CurrRisk for r=" + r + ":    " + currRisk);
+				
 				this.objectiveSpace[1] += currRisk; 
 				if (currRisk > this.objectiveSpace[2]) {
 					this.objectiveSpace[2] = currRisk;
