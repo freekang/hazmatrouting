@@ -119,14 +119,14 @@ public class Graph {
 		   				int de = sc.nextInt(); 
 		   				   				
 		   				Arc theArc = getArc(so, de);
-		   				
-		   				int reg = sc.nextInt();
+		   						   				
+		   				int reg = sc.nextInt();		   				
 		   				int risk = sc.nextInt();		   				
 		   				theArc.setRisk(numCom, reg, risk);		   				
    					}
    					sc.next();
    					numCom++;   					
-   				}   				
+   				}   	   				
    				
 	   			sc.close(); 
    			}		
@@ -351,6 +351,7 @@ public class Graph {
 			 return listCom;
 		 }
 		 
+		
 		 
 			 
 }
