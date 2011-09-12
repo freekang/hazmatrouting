@@ -217,13 +217,13 @@ public class PopulationHazmat extends PopulationAbstract {
 	public void testParam(){
 		// test if mu and lambda from config file are the same, otherwise exit PISA
 		if ((mu != lambda)){
-			System.err.println("ERROR: wsnNodePlacer::Launcher:main: mu and lambda read from config file are not the same!");
+			System.err.println("ERROR: hazmat::Variator:main: mu and lambda read from config file are not the same!");
 			System.exit(1);
 		}
 
 		// test if dim equals 2, the only allowed setting for this problem
-		if (dim != 2) {
-			System.err.println("ERROR: wsnNodePlacer::Launcher:main: For this problem, number of objectives needs to be 2 not "+ dim+"!");
+		if (dim != 3) {
+			System.err.println("ERROR: hazmat::Variator:main: For this problem, number of objectives needs to be 3 not "+ dim+"!");
 			System.exit(1);
 		}
 	}
