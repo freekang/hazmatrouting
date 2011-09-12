@@ -352,6 +352,47 @@ public class Graph {
 		 }
 		 
 		
+		 public void graphViz(String fileName) {
+			 
+			 PrintWriter pg = null;			
+			 String nom_fich;			 
+
+			nom_fich = new String(fileName);
+		    nom_fich.concat(".dot");
+		    		    
+			//pg = fopen(nom_fich,"w");
+			try
+		    {
+				pg = new PrintWriter(new FileWriter(nom_fich));
+			}
+		    catch (ArrayIndexOutOfBoundsException e) {
+		      System.err.println("Caught ArrayIndexOutOfBoundsException: "
+		          + e.getMessage());		  
+		    }catch (IOException e) {
+		        System.err.println("Caught IOException: " + e.getMessage());
+		    }
+			//fprintf(pg,"digraph G {\n");
+		    pg.print("digraph G {\n");
+			pg.flush();
+
+			// decrir les sommets
+			for (int i = 0; i < this.vectNodes.size(); i++) {
+				pg.print(i+"[label = "+i+"];");				
+			}
+			
+			// decrir les arcs et les couts
+			
+			for (int i = 0; i < this.vectArcs.size(); i++) {
+				int o = vectArcs.get(i).returnOrigNode().get_numero();
+				int d = vectArcs.get(i).returnDestNode().get_numero();
+				double cos = vectArcs.get(i).returnCost();
+				pg.print(o+" -> "+d+"[label = "+ cos +"];");	
+			}
+			pg.print("}");	
+			pg.close();
+			
+		 }
+
 		 
 			 
 }
