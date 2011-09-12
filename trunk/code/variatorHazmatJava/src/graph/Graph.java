@@ -9,6 +9,9 @@ import java.lang.Integer;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import population.*;
+import java.io.*;
+
+
 
 
 public class Graph {
@@ -352,6 +355,8 @@ public class Graph {
 		 
 		 public ArrayList<Commodity> returnListCommodities() {
 			 return listCom;
-		 } 
+		 }
+		 
+		 
 			 
 }
