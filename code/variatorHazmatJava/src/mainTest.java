@@ -16,6 +16,11 @@ public class mainTest {
 		   int indexD = c.getDest();
 		   Node d = G.returnNode(indexD);
 		   ArrayList<Node> sPath= G.shortestPath(o,d);
+		   
+		   // Test		   
+		   Arc arc = G.getArc(3, 6);		      
+		   double risk = arc.getRisk(1, 1);
+		   System.out.println("3  6  1  1 = " + risk);	
 	   }
 
 }

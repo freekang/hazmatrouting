@@ -71,15 +71,29 @@ public class Arc {
 	}
 	
 	public void setRisk(int c, int reg, int risk) {
-		ArrayList<Integer> v = new ArrayList<Integer>(2);
-		v.add(0, reg);
-		v.add(1, risk);
+		ArrayList<Integer> v = new ArrayList<Integer>(3);
+		v.add(0, c);
+		v.add(1, reg);
+		v.add(2, risk);
 		this.mapRisk.add(v);		
+	}
+	public int getRiskSize() {
+		return this.mapRisk.size();
+	}
+	
+	public ArrayList<ArrayList<Integer>> getMapRisk() {
+		return this.mapRisk;
 	}
 	
 	/* returns risk on region reg when this arc is used to transport commodity c */
 	public double getRisk(int c, int reg) {
-		// TODO
-		return 13;
+		// parcourir mapRisk
+		for (int i = 0; i < this.mapRisk.size(); i++) {
+			if (this.mapRisk.get(i).get(0) == c && this.mapRisk.get(i).get(1) == reg) {
+					return this.mapRisk.get(i).get(2);
+			}
+		}		
+		System.out.println("Error, risk not found");	
+		return -1;
 	}
 }
