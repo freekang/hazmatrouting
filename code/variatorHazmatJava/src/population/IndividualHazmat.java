@@ -145,7 +145,10 @@ public class IndividualHazmat extends IndividualAbstract {
 				Node o = pathToComplete.getLast();
 				Node d = PopulationHazmat.mygraph.returnNode(this.associatedCommodities.get(i).getDest());
 				if (o.get_numero() == d.get_numero()) {
-					continue; // no need to finish this path since already correct
+					// no need to finish this path since already correct
+					// but don't forget to store the complete path itself:
+					completedTruckPaths.add(pathToComplete);
+					continue; 
 				}
 				ArrayList<Node> sp = PopulationHazmat.mygraph.shortestPath(o, d);
 				/* go through this path and add every node to completedTruckPaths */
@@ -158,6 +161,15 @@ public class IndividualHazmat extends IndividualAbstract {
 				completedTruckPaths.add(pathToComplete);
 				i++;
 			}
+			
+			String s = "";
+			for (LinkedList<Node> tp: completedTruckPaths) {
+				s += "path: ";
+				for (Node n: tp) {
+					s += n.get_numero() + " ";
+				}
+			}
+			System.out.println(s);
 			
 			/* Second, go through all paths and compute the objective functions */
 			i = 0; // as above, an index to get the corresponding commodity
@@ -230,13 +242,6 @@ public class IndividualHazmat extends IndividualAbstract {
 		}
 		
 		IndividualHazmat newInd = new IndividualHazmat(copyOfTruckPaths, copyOfAssociatedCommodities, this.objectiveSpace);
-		
-		System.out.println("Individual copied:  ");
-		System.out.println("original:  ");
-		System.out.println(this);
-		System.out.println("copy:  ");
-		System.out.println(newInd);
-		
 		
 		return newInd;
 	}
