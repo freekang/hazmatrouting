@@ -187,7 +187,7 @@ public class Graph {
 		 
 		 public ArrayList<Node> shortestPath(Node o, Node d) {
 			 
-			 System.out.println("shortestPath from "+ o.get_numero() + " to "+d.get_numero());
+			 //System.out.println("shortestPath from "+ o.get_numero() + " to "+d.get_numero());
 			 
 			 // The path: List of nodes
 			 ArrayList<Integer> sPath = new ArrayList<Integer>();
@@ -324,14 +324,14 @@ public class Graph {
 				 sPath.set(i, elementIndex);
 				 sPath.set(index, c);
 			 }
-			 System.out.println("The optimal path: ");
-			 for (int i = 0; i<sPath.size(); i++) {
-				 if(i == sPath.size()-1)
-					 System.out.println(sPath.get(i)+"	");
-				 else
-					 System.out.print(sPath.get(i)+"	");
-			 }
-			 System.out.println("Cost = " + weight.get(d.get_numero()));
+//			 System.out.println("The optimal path: ");
+//			 for (int i = 0; i<sPath.size(); i++) {
+//				 if(i == sPath.size()-1)
+//					 System.out.println(sPath.get(i)+"	");
+//				 else
+//					 System.out.print(sPath.get(i)+"	");
+//			 }
+//			 System.out.println("Cost = " + weight.get(d.get_numero()));
 			 
 			 for (int i = 0; i<sPath.size(); i++) {
 				 int nn = sPath.get(i);
