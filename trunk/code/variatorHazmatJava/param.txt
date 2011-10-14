@@ -1,5 +1,5 @@
 seed 1
-maximum_generations 100
+maximum_generations 50
 output_file_name out.txt
 debug_print true
 recombination_probability 0.1

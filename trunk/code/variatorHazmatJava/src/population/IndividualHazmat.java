@@ -113,12 +113,21 @@ public class IndividualHazmat extends IndividualAbstract {
 		this.objectiveSpace[2] = correctlyEvaluatedObjVector[2];
 		this.alreadyEvaluated = true;
 		
+		
+		System.out.println("---");
+		System.out.println(this.truckPaths);
+		System.out.println(this.associatedCommodities);
+		System.out.println(this.objectiveSpace);
+		
+		
 	}
 	
 	/** Calculates the objective space values of this individual. The two objectives are number of
 	 * leading ones and number of trailing zeros. Both objectives are converted such that they have to
 	 * be minimized (by subtracting them from the total number of decision variables). */
 	public void eval() {
+		
+		alreadyEvaluated = false; // for the moment to ensure a new evaluation each time (testing) 
 		
 		if (!alreadyEvaluated) {
 			
@@ -181,10 +190,7 @@ public class IndividualHazmat extends IndividualAbstract {
 			
 			// go through risksumsPerRegion and compute remaining objectives as sum and max resp.
 			for (int r=0; r < risksumsPerRegion.size(); r++) {
-				double currRisk = risksumsPerRegion.get(r);
-				
-				System.out.println("CurrRisk for r=" + r + ":    " + currRisk);
-				
+				double currRisk = risksumsPerRegion.get(r);	
 				this.objectiveSpace[1] += currRisk; 
 				if (currRisk > this.objectiveSpace[2]) {
 					this.objectiveSpace[2] = currRisk;
@@ -194,6 +200,11 @@ public class IndividualHazmat extends IndividualAbstract {
 			this.alreadyEvaluated = true;
 		}
 		
+		System.out.println(this);
+		System.out.println(this.objectiveSpace[0]);
+		System.out.println(this.objectiveSpace[1]);
+		System.out.println(this.objectiveSpace[2]);
+		System.out.println();
 	}
 
 	/** Returns a (deep) copy of this individual.
@@ -210,6 +221,8 @@ public class IndividualHazmat extends IndividualAbstract {
 			for (Node node: path) {
 				copiedPath.add(node);
 			}
+			
+			copyOfTruckPaths.add(copiedPath);
 		}
 		
 		for (Commodity comm: this.associatedCommodities) {
@@ -217,6 +230,14 @@ public class IndividualHazmat extends IndividualAbstract {
 		}
 		
 		IndividualHazmat newInd = new IndividualHazmat(copyOfTruckPaths, copyOfAssociatedCommodities, this.objectiveSpace);
+		
+		System.out.println("Individual copied:  ");
+		System.out.println("original:  ");
+		System.out.println(this);
+		System.out.println("copy:  ");
+		System.out.println(newInd);
+		
+		
 		return newInd;
 	}
 	
@@ -254,6 +275,20 @@ public class IndividualHazmat extends IndividualAbstract {
 		/* since the representation of the individual changed, ensure a new
 		 * evaluation next time: */
 		this.alreadyEvaluated = false;
+	}
+	
+	public String toString() {
+		String s = "solution: ";
+		int i = 0;
+		for (LinkedList<Node> path: this.truckPaths) {
+			s += "\n" + i + "'th path: ";
+			for (Node n: path) {
+				s+= n.get_numero() + " ";
+			}
+			i++;
+		}
+		
+		return s;
 	}
 	
 }
