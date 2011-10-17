@@ -19,7 +19,7 @@ public class mainTest {
 		   System.out.println("Commodite 0: Origine = "+o.get_numero()+", Dest = "+d.get_numero());	
 		   ArrayList<Node> sPath= G.shortestPath(o,d);
 		   // Test	
-		   System.out.println("Je suis laaaaaaa11111111111");	
+		   //System.out.println("Je suis laaaaaaa11111111111");	
 		   Arc arc = G.getArc(39, 38);		      
 		   double risk = arc.getRisk(0);
 		   System.out.println("r(39, 38) = " + risk);	

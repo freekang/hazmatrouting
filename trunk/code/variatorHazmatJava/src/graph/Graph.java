@@ -63,19 +63,19 @@ public class Graph {
    				int j = 0;
    				int nbA = 0;   // The number of arcs 
    				while (sc.hasNextInt()){
-   					System.out.println("New arc \n");
+   					//System.out.println("New arc \n");
    					//buffer = sc.next();
    					i = sc.nextInt();
-   					System.out.println("Noeud origine "+i);
+   					//System.out.println("Noeud origine "+i);
    					Node ni = vectNodes.get(i);
-   					System.out.println("Noeud origine2222 "+ni.get_numero());
+   					//System.out.println("Noeud origine2222 "+ni.get_numero());
    					j = sc.nextInt();
-   					System.out.println("Noeud dest "+j);
+   					//System.out.println("Noeud dest "+j);
    					Node nj = vectNodes.get(j);
-   					System.out.println("Noeud dest2222 "+nj.get_numero());
+   					//System.out.println("Noeud dest2222 "+nj.get_numero());
    					String ss = sc.next();
    					Double cost = Double.parseDouble(ss); 
-   					System.out.println("Cout "+cost);
+   					//System.out.println("Cout "+cost);
    					// Add the new arc
    					nbA++;
    					Arc arc = new Arc(ni, nj);
@@ -90,7 +90,7 @@ public class Graph {
    						Double risk = Double.parseDouble(sc.next()); 
    						Double t = k.doubleValue();
    						arc.setRisk(t, risk);	
-   						System.out.println("risk com"+k+" = "+ risk);
+   						//System.out.println("risk com"+k+" = "+ risk);
    					}
    					
    					vectArcs.add(arc);   
@@ -98,7 +98,7 @@ public class Graph {
    					
    				}
    				nbArcs = nbA;
-   				System.out.println("number of arcs = "+nbA);
+   				//System.out.println("number of arcs = "+nbA);
    				String s;
    				// Read: EndArcs source	 dest	demand 
    				for (int k = 0; k < 4; k++){
@@ -110,12 +110,12 @@ public class Graph {
    					int source =  sc.nextInt();   					   					
    					int dest =  sc.nextInt();   					   					
    					int demand =  sc.nextInt(); 
-   					System.out.println("Commodity "+k+": Source = "+source+", dest = "+ dest+" and demand = "+demand);
+   					//System.out.println("Commodity "+k+": Source = "+source+", dest = "+ dest+" and demand = "+demand);
    					Commodity comm = new Commodity(k, source, dest, demand);
    					this.listCom.add(comm); 
    				}   				
 	   			sc.close(); 
-	   			System.out.println("FIN \n");
+	   			//System.out.println("FIN \n");
    			}		
 	   		catch (Exception e){
 	   			System.out.println(e.toString());
@@ -174,7 +174,7 @@ public class Graph {
 		 
 		 public ArrayList<Node> shortestPath(Node o, Node d) {
 			 
-			 System.out.println("shortestPath from "+ o.get_numero() + " to "+d.get_numero());
+			 //System.out.println("shortestPath from "+ o.get_numero() + " to "+d.get_numero());
 			 
 			 // The path: List of nodes
 			 ArrayList<Integer> sPath = new ArrayList<Integer>();
@@ -204,7 +204,7 @@ public class Graph {
 					 visitedNodes.add(vectNodes.get(i));
 				 }
 			 }
-			System.out.println("Initialisation:");
+			//System.out.println("Initialisation:");
 			
 			//System.out.println("Affichage des poids:");
 			//Set<Integer> cles = weight.keySet();
@@ -297,7 +297,7 @@ public class Graph {
 			 // Construct the optimal path;
 			 int num = d.get_numero();	
 			 while (num != -1) {
-				 System.out.println("num = "+num);	
+				 //System.out.println("num = "+num);	
 				 sPath.add(num);
 				 num = pred.get(num);				 
 			 }
@@ -312,14 +312,14 @@ public class Graph {
 				 sPath.set(i, elementIndex);
 				 sPath.set(index, c);
 			 }
-			 System.out.println("The optimal path: ");
-			 for (int i = 0; i<sPath.size(); i++) {
-				 if(i == sPath.size()-1)
-					 System.out.println(sPath.get(i)+"	");
-				 else
-					 System.out.print(sPath.get(i)+"	");
-			 }
-			 System.out.println("Cost = " + weight.get(d.get_numero()));
+			 //System.out.println("The optimal path: ");
+			 //for (int i = 0; i<sPath.size(); i++) {
+			 //if(i == sPath.size()-1)
+			 //	 System.out.println(sPath.get(i)+"	");
+			 // else
+			 //	 System.out.print(sPath.get(i)+"	");
+			 // }
+			 //System.out.println("Cost = " + weight.get(d.get_numero()));
 			 
 			 for (int i = 0; i<sPath.size(); i++) {
 				 int nn = sPath.get(i);
