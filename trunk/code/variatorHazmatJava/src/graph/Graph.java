@@ -6,11 +6,12 @@ import general.Variator;
 import java.util.*;
 import java.io.*;
 import java.lang.Integer;
+import java.lang.Runtime;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import population.*;
 import java.io.*;
-
+import java.lang.*;
 
 
 
@@ -20,7 +21,7 @@ public class Graph {
 	    public int nbNodes; 
 		public int nbArcs; 
 		public int nbCom; 
-		public int nbReg; 
+		//public int nbReg; 
 		
 		public ArrayList<Node> vectNodes; 
 		public ArrayList<Arc> vectArcs;   
@@ -51,23 +52,30 @@ public class Graph {
    				
    				nbCom = sc.nextInt();
    				System.out.println("c = " + nbCom);
-   				nbReg = sc.nextInt();
-   				System.out.println("r = " + nbReg);
+   				//nbReg = sc.nextInt();
+   				//System.out.println("r = " + nbReg);
    				
-   				sc.next();
-   				sc.next();
+   				//sc.next();
+   				sc.next();sc.next();sc.next();sc.next();
    				
    				// Read Arcs
    				int i = 0;
    				int j = 0;
    				int nbA = 0;   // The number of arcs 
    				while (sc.hasNextInt()){
+   					System.out.println("New arc \n");
    					//buffer = sc.next();
    					i = sc.nextInt();
+   					System.out.println("Noeud origine "+i);
    					Node ni = vectNodes.get(i);
+   					System.out.println("Noeud origine2222 "+ni.get_numero());
    					j = sc.nextInt();
+   					System.out.println("Noeud dest "+j);
    					Node nj = vectNodes.get(j);
-   					Double cost = Double.parseDouble(sc.next()); 
+   					System.out.println("Noeud dest2222 "+nj.get_numero());
+   					String ss = sc.next();
+   					Double cost = Double.parseDouble(ss); 
+   					System.out.println("Cout "+cost);
    					// Add the new arc
    					nbA++;
    					Arc arc = new Arc(ni, nj);
@@ -76,59 +84,38 @@ public class Graph {
    					arc.setCost(cost);
    					ni.add_out_arc(arc);
    					ni.add_in_arc(arc);
-   					vectArcs.add(arc);   					
+   					
+   					// add the risk to the arc
+   					for (Integer k = 0; k < nbCom; k++){
+   						Double risk = Double.parseDouble(sc.next()); 
+   						Double t = k.doubleValue();
+   						arc.setRisk(t, risk);	
+   						System.out.println("risk com"+k+" = "+ risk);
+   					}
+   					
+   					vectArcs.add(arc);   
+   					
+   					
    				}
    				nbArcs = nbA;
    				System.out.println("number of arcs = "+nbA);
    				String s;
-   				// Read: source	 dest	demand	tCap 
-   				for (int k = 0; k < 7; k++){
+   				// Read: EndArcs source	 dest	demand 
+   				for (int k = 0; k < 4; k++){
    					s = sc.next();   					
    				}
    				
-   				int nbCommodities = 0;
-   				while (sc.hasNextInt()){
-   				
-   					nbCommodities++;
-   					int nu =  sc.nextInt();   					   					
+   				for (int k = 0; k < nbCom; k++) {
+   					
    					int source =  sc.nextInt();   					   					
    					int dest =  sc.nextInt();   					   					
-   					int demand =  sc.nextInt();   					   					
-   					int cap =  sc.nextInt();   		
-   					int nbT = sc.nextInt();  
-   					Commodity comm = new Commodity(nu, source, dest, demand, cap, nbT);
-   					this.listCom.add(comm);   									
-   				}
-   				
-   				this.nbCom = nbCommodities;
-   				System.out.println("Number of commodities = " + nbCom);
-   				
-   				// Set the risk
-   				// Aprcourir les commodites
-   				while (!sc.hasNextInt())
-   					sc.next();
-   				
-   				int numCom = 0;
-   				while (sc.hasNextInt()) {	   				
-	   				
-   					while (sc.hasNextInt()) {
-		   				// The source of the arc
-		   				int so = sc.nextInt();   
-		   				   			 
-		   				// The destination of the arc
-		   				int de = sc.nextInt(); 
-		   				   				
-		   				Arc theArc = getArc(so, de);
-		   						   				
-		   				int reg = sc.nextInt();		   				
-		   				int risk = sc.nextInt();		   				
-		   				theArc.setRisk(numCom, reg, risk);		   				
-   					}
-   					sc.next();
-   					numCom++;   					
-   				}   	   				
-   				
+   					int demand =  sc.nextInt(); 
+   					System.out.println("Commodity "+k+": Source = "+source+", dest = "+ dest+" and demand = "+demand);
+   					Commodity comm = new Commodity(k, source, dest, demand);
+   					this.listCom.add(comm); 
+   				}   				
 	   			sc.close(); 
+	   			System.out.println("FIN \n");
    			}		
 	   		catch (Exception e){
 	   			System.out.println(e.toString());
@@ -147,9 +134,9 @@ public class Graph {
 		   return nbCom;
 		 }
 
-		 public int returnNbReg() {
-		   return nbReg;
-		 }
+		 //public int returnNbReg() {
+		 //return nbReg;
+		 //}
 
 		 public Node returnNode(int n) {
 		   return vectNodes.get(n);
@@ -187,7 +174,7 @@ public class Graph {
 		 
 		 public ArrayList<Node> shortestPath(Node o, Node d) {
 			 
-			 //System.out.println("shortestPath from "+ o.get_numero() + " to "+d.get_numero());
+			 System.out.println("shortestPath from "+ o.get_numero() + " to "+d.get_numero());
 			 
 			 // The path: List of nodes
 			 ArrayList<Integer> sPath = new ArrayList<Integer>();
@@ -217,7 +204,7 @@ public class Graph {
 					 visitedNodes.add(vectNodes.get(i));
 				 }
 			 }
-			//System.out.println("Initialisation:");
+			System.out.println("Initialisation:");
 			
 			//System.out.println("Affichage des poids:");
 			//Set<Integer> cles = weight.keySet();
@@ -254,7 +241,7 @@ public class Graph {
 				 
 				 Double min = 10000.;
 				 int indexMin = -1;
-				 
+				 // System.out.println("Je suis la shortest path5");	
 				 for (int i = 0; i<visitedNodes.size(); i++) {
 					 int numNode = visitedNodes.get(i).get_numero();
 					 Double val = (Double) weight.get(numNode); 
@@ -265,7 +252,7 @@ public class Graph {
 					   indexMin = numNode;
 					 }
 				 }
-				 		
+				 //System.out.println("Je suis la shortest path4");	
 				 // The treated node
 				 Node currentNode = vectNodes.get(indexMin);
 				 if (currentNode.get_numero() == d.get_numero())
@@ -275,7 +262,7 @@ public class Graph {
 				 /**  2. Extend this node to its successor nodes in visitedNodes */
 				 
 				 ArrayList<Arc> arcs_out = currentNode.returnList_out_arcs();
-				 
+				 // System.out.println("Je suis la shortest path3");	
 				 for (int i = 0; i<arcs_out.size() && !stop; i++) {	
 					 int numSuccNode = arcs_out.get(i).returnDestNode().get_numero();					 
 					 // if numSuccNode is in visitedNodes
@@ -292,7 +279,7 @@ public class Graph {
 						 }
 					 }					
 				 }				 
-				 
+				 //System.out.println("Je suis la shortest path2");	
 				 /** 3. Add this node to the set of treated node: treatedNodes */
 				 
 				// System.out.println("coucou1: ");
@@ -306,15 +293,16 @@ public class Graph {
 					 }
 				 }				 
 			 } 
-			 
+			 //System.out.println("Je suis la shortest path1");	
 			 // Construct the optimal path;
 			 int num = d.get_numero();	
 			 while (num != -1) {
+				 System.out.println("num = "+num);	
 				 sPath.add(num);
 				 num = pred.get(num);				 
 			 }
 			 
-			 
+			 //System.out.println("Je suis la shortest path");	
 			 // Inverse the array
 			 for (int i = 0; i<sPath.size()/2; i++) {
 				 int c;
@@ -324,14 +312,14 @@ public class Graph {
 				 sPath.set(i, elementIndex);
 				 sPath.set(index, c);
 			 }
-//			 System.out.println("The optimal path: ");
-//			 for (int i = 0; i<sPath.size(); i++) {
-//				 if(i == sPath.size()-1)
-//					 System.out.println(sPath.get(i)+"	");
-//				 else
-//					 System.out.print(sPath.get(i)+"	");
-//			 }
-//			 System.out.println("Cost = " + weight.get(d.get_numero()));
+			 System.out.println("The optimal path: ");
+			 for (int i = 0; i<sPath.size(); i++) {
+				 if(i == sPath.size()-1)
+					 System.out.println(sPath.get(i)+"	");
+				 else
+					 System.out.print(sPath.get(i)+"	");
+			 }
+			 System.out.println("Cost = " + weight.get(d.get_numero()));
 			 
 			 for (int i = 0; i<sPath.size(); i++) {
 				 int nn = sPath.get(i);
@@ -343,9 +331,9 @@ public class Graph {
 		 
 		 
 		 // Return the number of trucks associated to commodity c  
-		 public int getNbTrucks(int c) {
-			 return listCom.get(c).getNbTrucks();
-		 }
+		 //public int getNbTrucks(int c) {
+		 //return listCom.get(c).getNbTrucks();
+		 // }
 		 
 		 public ArrayList<Commodity> returnListCommodities() {
 			 return listCom;
@@ -357,8 +345,9 @@ public class Graph {
 			 PrintWriter pg = null;			
 			 String nom_fich;			 
 
-			nom_fich = new String(fileName);
-		    nom_fich.concat(".dot");
+			nom_fich = fileName.concat(".dot");
+		    		    
+		    System.out.println("nom_fich = " + nom_fich);
 		    		    
 			//pg = fopen(nom_fich,"w");
 			try
@@ -377,7 +366,7 @@ public class Graph {
 
 			// decrir les sommets
 			for (int i = 0; i < this.vectNodes.size(); i++) {
-				pg.print(i+"[label = "+i+"];");				
+				pg.print(i+"[label = "+i+"];\n");				
 			}
 			
 			// decrir les arcs et les couts
@@ -386,10 +375,19 @@ public class Graph {
 				int o = vectArcs.get(i).returnOrigNode().get_numero();
 				int d = vectArcs.get(i).returnDestNode().get_numero();
 				double cos = vectArcs.get(i).returnCost();
-				pg.print(o+" -> "+d+"[label = "+ cos +"];");	
+				pg.print(o+" -> "+d+"[label = "+ cos +"];\n");	
 			}
 			pg.print("}");	
 			pg.close();
+			
+			try { 
+				String cmd = "dot -Tpng simpleTest.dat.dot > sortie.png"; 
+				Runtime r = Runtime.getRuntime();
+				r.exec(cmd,null,null);
+				//p.waitFor();
+			} catch (IOException t) { 
+				System.out.println("erreur d'execution " +  t.toString()); 
+			} 
 			
 		 }
 
