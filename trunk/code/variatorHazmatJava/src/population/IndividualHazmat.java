@@ -114,10 +114,10 @@ public class IndividualHazmat extends IndividualAbstract {
 		this.alreadyEvaluated = true;
 		
 		
-		System.out.println("---");
-		System.out.println(this.truckPaths);
-		System.out.println(this.associatedCommodities);
-		System.out.println(this.objectiveSpace);
+		//System.out.println("---");
+		//System.out.println(this.truckPaths);
+		//System.out.println(this.associatedCommodities);
+		//System.out.println(this.objectiveSpace);
 		
 		
 	}
@@ -125,6 +125,9 @@ public class IndividualHazmat extends IndividualAbstract {
 	/** Calculates the objective space values of this individual. The two objectives are number of
 	 * leading ones and number of trailing zeros. Both objectives are converted such that they have to
 	 * be minimized (by subtracting them from the total number of decision variables). */
+	/* (non-Javadoc)
+	 * @see population.IndividualAbstract#eval()
+	 */
 	public void eval() {
 		
 		alreadyEvaluated = false; // for the moment to ensure a new evaluation each time (testing) 
@@ -162,14 +165,14 @@ public class IndividualHazmat extends IndividualAbstract {
 				i++;
 			}
 			
-			String s = "";
-			for (LinkedList<Node> tp: completedTruckPaths) {
-				s += "path: ";
-				for (Node n: tp) {
-					s += n.get_numero() + " ";
-				}
-			}
-			System.out.println(s);
+			//String s = "";
+			//for (LinkedList<Node> tp: completedTruckPaths) {
+			//	s += "path: ";
+			//	for (Node n: tp) {
+			//		s += n.get_numero() + " ";
+			//	}
+			//}
+			//System.out.println(s);
 			
 			/* Second, go through all paths and compute the objective functions */
 			i = 0; // as above, an index to get the corresponding commodity
@@ -211,11 +214,11 @@ public class IndividualHazmat extends IndividualAbstract {
 			this.alreadyEvaluated = true;
 		}
 		
-		System.out.println(this);
-		System.out.println(this.objectiveSpace[0]);
-		System.out.println(this.objectiveSpace[1]);
-		System.out.println(this.objectiveSpace[2]);
-		System.out.println();
+		//System.out.println(this);
+		//System.out.println(this.objectiveSpace[0]);
+		//System.out.println(this.objectiveSpace[1]);
+		//System.out.println(this.objectiveSpace[2]);
+		//System.out.println();
 	}
 
 	/** Returns a (deep) copy of this individual.
