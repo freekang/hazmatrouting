@@ -7,7 +7,7 @@ public class Commodity {
 	private int dest;
 	private int demand;
 	//private int tCap;
-	//private int nbTrucks;
+	private int nbTrucks;
 	
 	//public Commodity(int n, int s, int des, int dem, int t, int nb){
 	//this.num = n;
@@ -18,16 +18,17 @@ public class Commodity {
 	//this.nbTrucks = nb;
 	//}
 	
-	public Commodity(int n, int s, int des, int dem){
+	public Commodity(int n, int s, int des, int dem, int nb){
 		this.num = n;
 		this.source = s;
 		this.dest = des;
 		this.demand = dem;
+		this.nbTrucks = nb;
 	}
 	
-	//public int getNbTrucks() {
-	//return this.nbTrucks;
-	//}
+	public int getNbTrucks() {
+	return this.nbTrucks;
+	}
 	
 	public int getSource() {
 		return this.source;
@@ -50,7 +51,7 @@ public class Commodity {
 	//}
 	
 	public Commodity getCopy() {
-		return new Commodity(this.num, this.source, this.dest, this.demand);
+		return new Commodity(this.num, this.source, this.dest, this.demand, this.nbTrucks);
 	}
 }
 

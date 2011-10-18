@@ -101,7 +101,7 @@ public class Graph {
    				//System.out.println("number of arcs = "+nbA);
    				String s;
    				// Read: EndArcs source	 dest	demand 
-   				for (int k = 0; k < 4; k++){
+   				for (int k = 0; k < 5; k++){
    					s = sc.next();   					
    				}
    				
@@ -110,8 +110,9 @@ public class Graph {
    					int source =  sc.nextInt();   					   					
    					int dest =  sc.nextInt();   					   					
    					int demand =  sc.nextInt(); 
-   					//System.out.println("Commodity "+k+": Source = "+source+", dest = "+ dest+" and demand = "+demand);
-   					Commodity comm = new Commodity(k, source, dest, demand);
+   					int nbTrucks = sc.nextInt();
+   					//System.out.println("Commodity "+k+": Source = "+source+", dest = "+ dest+" and demand = "+demand+" and NbTrucks = "+nbTrucks);
+   					Commodity comm = new Commodity(k, source, dest, demand, nbTrucks);
    					this.listCom.add(comm); 
    				}   				
 	   			sc.close(); 
