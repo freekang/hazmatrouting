@@ -884,6 +884,6 @@ Arcs	Cost	Risk_C1	Risk_C2
 310	270	4.5	9746.33	7797.06
 310	308	10.4	22524.84	18019.87
 EndArcs
-source	dest	demand
-262	173	923
-209	105	107
+source	dest	demand	nbTrucks
+262	173	923	100
+209	105	107	15
