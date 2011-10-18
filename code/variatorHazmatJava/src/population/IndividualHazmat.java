@@ -176,10 +176,10 @@ public class IndividualHazmat extends IndividualAbstract {
 			this.objectiveSpace[0] = 0;
 			this.objectiveSpace[1] = 0;
 			this.objectiveSpace[2] = Double.NEGATIVE_INFINITY; // 2nd obj. is a maximum of risks
-			// store preliminary sums of the r^{cq}_{ij} y^c_{ij} for each region:
-			ArrayList<Double> risksumsPerRegion = new ArrayList<Double>();
-			for (int r=0; r < PopulationHazmat.mygraph.nbReg; r++) {
-				risksumsPerRegion.add(r, 0.0);
+			// store risks summed over all commodities for each arc:
+			ArrayList<Double> risksumsPerArc = new ArrayList<Double>();
+			for (int arcRisk=0; arcRisk < PopulationHazmat.mygraph.nbArcs; arcRisk++) {
+				risksumsPerArc.add(arcRisk, 0.0);
 			}
 			
 			for (LinkedList<Node> path : completedTruckPaths) {
@@ -191,18 +191,17 @@ public class IndividualHazmat extends IndividualAbstract {
 					Arc currArc = PopulationHazmat.mygraph.getArc(a.get_numero(), b.get_numero());
 					// update 1st objective for first arc
 					this.objectiveSpace[0] += currArc.returnCost();
-					// for update of 2nd and 3rd objective, update the risk per region
-					for (int r=0; r < risksumsPerRegion.size(); r++) {
-						risksumsPerRegion.set(r, risksumsPerRegion.get(r)
-								+ currArc.getRisk(this.associatedCommodities.get(i).getNum(), r));
-					}
+					// for update of 2nd and 3rd objective, update the risk per arc
+					int currArcID = currArc.returnNum();
+					risksumsPerArc.set(currArcID, risksumsPerArc.get(currArcID)
+								+ currArc.getRisk(this.associatedCommodities.get(i).getNum()));
 				}
 				i++;
 			} // now, 1st objective already computed, 2nd, and 3rd still missing
 			
 			// go through risksumsPerRegion and compute remaining objectives as sum and max resp.
-			for (int r=0; r < risksumsPerRegion.size(); r++) {
-				double currRisk = risksumsPerRegion.get(r);	
+			for (int arcID=0; arcID < risksumsPerArc.size(); arcID++) {
+				double currRisk = risksumsPerArc.get(arcID);	
 				this.objectiveSpace[1] += currRisk; 
 				if (currRisk > this.objectiveSpace[2]) {
 					this.objectiveSpace[2] = currRisk;
