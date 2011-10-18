@@ -28,9 +28,10 @@ public class Arc {
 		this.comRisk = new ArrayList<ArrayList<Double>>();
 	}
 
-	public Arc(Node v1, Node v2){
+	public Arc(Node v1, Node v2, int n){
 	  this.origNode = v1;
 	  this.destNode = v2;
+	  this.num = n;
 	  this.succNodes = new ArrayList<Node>();
 	  this.predNodes = new ArrayList<Node>();
 	  this.comRisk = new ArrayList<ArrayList<Double>>();
@@ -54,6 +55,10 @@ public class Arc {
 	
 	public int returnNum() {
 	  return num;
+	}
+	
+	public void setNum(int n) {
+		num = n;
 	}
 
 	//public double returnReducedCost() {

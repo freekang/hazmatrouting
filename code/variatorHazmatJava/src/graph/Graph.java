@@ -77,8 +77,7 @@ public class Graph {
    					Double cost = Double.parseDouble(ss); 
    					//System.out.println("Cout "+cost);
    					// Add the new arc
-   					nbA++;
-   					Arc arc = new Arc(ni, nj);
+   					Arc arc = new Arc(ni, nj, nbA);
    					arc.addSuccNode(nj);
    					arc.addPredNode(ni);
    					arc.setCost(cost);
@@ -94,7 +93,7 @@ public class Graph {
    					}
    					
    					vectArcs.add(arc);   
-   					
+   					nbA++;
    					
    				}
    				nbArcs = nbA;
