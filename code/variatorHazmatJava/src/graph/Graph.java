@@ -62,7 +62,10 @@ public class Graph {
    				//System.out.println("r = " + nbReg);
    				
    				//sc.next();
-   				sc.next();sc.next();sc.next();sc.next();
+   				sc.next();sc.next();
+   				for (Integer k = 0; k < nbCom; k++){
+   					sc.next();
+   				}
    				
    				// Read Arcs
    				int i = 0;
