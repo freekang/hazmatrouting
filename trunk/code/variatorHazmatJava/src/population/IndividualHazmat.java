@@ -153,6 +153,11 @@ public class IndividualHazmat extends IndividualAbstract {
 					completedTruckPaths.add(pathToComplete);
 					continue; 
 				}
+				
+				System.out.println("Origin: " + o.get_numero());
+				System.out.println("destination: " + d.get_numero());
+				
+				
 				ArrayList<Node> sp = PopulationHazmat.mygraph.shortestPath(o, d);
 				/* go through this path and add every node to completedTruckPaths */
 				for (Node node : sp) {
