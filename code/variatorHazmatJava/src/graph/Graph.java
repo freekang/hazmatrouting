@@ -259,9 +259,10 @@ public class Graph {
 					 
 					 /** 1. find the minimum cost element in weight (visitedNodes) */
 					 
-					 Double min = 10000.;
+					 Double min = 900000.;
 					 int indexMin = -1;
-					 // System.out.println("Je suis la shortest path5");	
+					 //System.out.println("Trouver le sommet a traiter");	
+					 //System.out.println("visitedNodes.size() = "+visitedNodes.size());
 					 for (int i = 0; i<visitedNodes.size(); i++) {
 						 int numNode = visitedNodes.get(i).get_numero();
 						 Double val = (Double) weight.get(numNode); 
@@ -272,6 +273,7 @@ public class Graph {
 						   indexMin = numNode;
 						 }
 					 }
+					 //System.out.println("Le sommet a traiter est de num "+ indexMin);	
 					 //System.out.println("Je suis la shortest path4");	
 					 // The treated node
 					 Node currentNode = vectNodes.get(indexMin);
@@ -302,7 +304,7 @@ public class Graph {
 					 //System.out.println("Je suis la shortest path2");	
 					 /** 3. Add this node to the set of treated node: treatedNodes */
 					 
-					// System.out.println("coucou1: ");
+					 //System.out.println("coucou1: ");
 					 treatedNodes.add(currentNode);
 					 
 					 /** 4. Remove this node from visitedNodes */
@@ -311,7 +313,8 @@ public class Graph {
 						 if (visitedNodes.get(i).get_numero() == indexMin) {
 							 visitedNodes.remove(i);						
 						 }
-					 }				 
+					 }
+					 
 				 } 
 				 //System.out.println("Je suis la shortest path1");	
 				 // Construct the optimal path;
@@ -335,10 +338,10 @@ public class Graph {
 				 //System.out.println("The optimal path: ");
 				 //for (int i = 0; i<sPath.size(); i++) {
 				 //if(i == sPath.size()-1)
-				 //	 System.out.println(sPath.get(i)+"	");
+				 // System.out.println(sPath.get(i)+"	");
 				 // else
 				 //	 System.out.print(sPath.get(i)+"	");
-				 // }
+				 //}
 				 //System.out.println("Cost = " + weight.get(d.get_numero()));
 				 
 				 for (int i = 0; i<sPath.size(); i++) {
@@ -351,7 +354,7 @@ public class Graph {
 				  * this.shortestPathStorage: */
 				 this.shortestPathStorage.get(o.get_numero()).put(d, sPathSol);
 				 
-				 System.out.println("new shortest path added");
+				 //System.out.println("new shortest path added");
 				 
 				 return sPathSol;
 			 }
