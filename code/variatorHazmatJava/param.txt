@@ -1,8 +1,8 @@
 seed 1
-maximum_generations 1
+maximum_generations 10000
 output_file_name out.txt
 debug_print true
 recombination_probability 0.1
 mutation_probability 1
 bitflip_probability 0.1
-graph_definition_file test2.dat
+graph_definition_file graph_ns2_1_New.dat

@@ -245,13 +245,7 @@ public class PopulationHazmat extends PopulationAbstract {
 					for (int j = 0; j < Variator.population.dim; j++) {
 						writer.printf("%10.10f\t", currentIndividual.objectiveSpace[j]);
 					}
-					/*for (int j = 0; j < currentIndividual.decisionSpace.length; j++) {
-						writer.print(currentIndividual.decisionSpace[j] + " ");
-					}	*/	
-					
-					// TODO implement for hazmat routing problem
-					
-					writer.println("");
+					writer.println(currentIndividual.getRepresentation());
 				}
 			}			
 			writer.println("END");

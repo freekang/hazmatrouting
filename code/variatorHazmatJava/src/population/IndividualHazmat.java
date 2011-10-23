@@ -154,10 +154,6 @@ public class IndividualHazmat extends IndividualAbstract {
 					continue; 
 				}
 				
-				System.out.println("Origin: " + o.get_numero());
-				System.out.println("destination: " + d.get_numero());
-				
-				
 				ArrayList<Node> sp = PopulationHazmat.mygraph.shortestPath(o, d);
 				/* go through this path and add every node to completedTruckPaths */
 				for (Node node : sp) {
@@ -300,6 +296,32 @@ public class IndividualHazmat extends IndividualAbstract {
 				s+= n.get_numero() + " ";
 			}
 			i++;
+		}
+		
+		return s;
+	}
+	
+	public String getRepresentation() {
+		String s = "";
+		int i = 1;
+		for (LinkedList<Node> path: this.truckPaths) {
+			if (i==1) {
+				s += i + "st path (commodity " + this.associatedCommodities.get(i-1).getNum() + "): ";
+			}
+			else if (i==2) {
+				s += i + "nd path (commodity " + this.associatedCommodities.get(i-1).getNum() + "): ";
+			}
+			else if (i==3) {
+				s += i + "rd path (commodity " + this.associatedCommodities.get(i-1).getNum() + "): ";
+			}
+			else {
+				s += i + "th path (commodity " + this.associatedCommodities.get(i-1).getNum() + "): ";
+			}
+			for (Node n: path) {
+				s+= n.get_numero() + " ";
+			}
+			i++;
+			s += " ";
 		}
 		
 		return s;
