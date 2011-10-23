@@ -130,7 +130,7 @@ public class IndividualHazmat extends IndividualAbstract {
 	 */
 	public void eval() {
 		
-		alreadyEvaluated = false; // for the moment to ensure a new evaluation each time (testing) 
+		//alreadyEvaluated = false; // for the moment to ensure a new evaluation each time (testing) 
 		
 		if (!alreadyEvaluated) {
 			
@@ -151,6 +151,7 @@ public class IndividualHazmat extends IndividualAbstract {
 					// no need to finish this path since already correct
 					// but don't forget to store the complete path itself:
 					completedTruckPaths.add(pathToComplete);
+					i++;
 					continue; 
 				}
 				
@@ -193,6 +194,10 @@ public class IndividualHazmat extends IndividualAbstract {
 					a = b;
 					b = path.poll(); 
 					Arc currArc = PopulationHazmat.mygraph.getArc(a.get_numero(), b.get_numero());
+					
+					//System.out.println(a.get_numero() + " --> " + b.get_numero() + " costs "
+					//		+ currArc.returnCost());
+					
 					// update 1st objective for first arc
 					this.objectiveSpace[0] += currArc.returnCost();
 					// for update of 2nd and 3rd objective, update the risk per arc
@@ -201,7 +206,13 @@ public class IndividualHazmat extends IndividualAbstract {
 								+ currArc.getRisk(this.associatedCommodities.get(i).getNum()));
 				}
 				i++;
+				
+				//System.out.println(" obj[0] -----> " + this.objectiveSpace[0]);
+				
 			} // now, 1st objective already computed, 2nd, and 3rd still missing
+			
+			//System.out.println("evaluated of 1st objective ended...");
+			
 			
 			// go through risksumsPerRegion and compute remaining objectives as sum and max resp.
 			for (int arcID=0; arcID < risksumsPerArc.size(); arcID++) {
