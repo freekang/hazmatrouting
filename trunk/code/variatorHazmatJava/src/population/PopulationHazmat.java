@@ -58,9 +58,9 @@ public class PopulationHazmat extends PopulationAbstract {
 	double bitFlipProbability = 0.1;
 	
 	/** File name where graph instance is defined */
-	String graph_definition_file = "graph.dat";
+	String graph_definition_file = "graph_ns2_1_New.dat";
 	
-	static Graph mygraph;
+	public static Graph mygraph;
 			
 	/** Initializes the population with <code>alpha</code> individuals that have random decision space representations. */
 	public void initialize() {

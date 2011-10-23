@@ -37,7 +37,7 @@ package population;
  */
 public abstract class IndividualAbstract {
 	
-	double[] objectiveSpace;
+	public double[] objectiveSpace;
 	
 	/** Calculates the objective space values of this individual. The objective space
 	 * values have to be defined such that lower values are better, because
