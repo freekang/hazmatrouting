@@ -259,8 +259,9 @@ public class Graph {
 					 
 					 /** 1. find the minimum cost element in weight (visitedNodes) */
 					 
-					 Double min = 10000.;
-					 int indexMin = -1;
+					 
+					 int indexMin = visitedNodes.get(0).get_numero();
+					 Double min = (Double) weight.get(indexMin); 
 					 // System.out.println("Je suis la shortest path5");	
 					 for (int i = 0; i<visitedNodes.size(); i++) {
 						 int numNode = visitedNodes.get(i).get_numero();
@@ -336,8 +337,8 @@ public class Graph {
 				 //System.out.println("The optimal path: ");
 				 //for (int i = 0; i<sPath.size(); i++) {
 				 //if(i == sPath.size()-1)
-				 //	 System.out.println(sPath.get(i)+"	");
-				 // else
+				 // System.out.println(sPath.get(i)+"	");
+				 //else
 				 //	 System.out.print(sPath.get(i)+"	");
 				 // }
 				 //System.out.println("Cost = " + weight.get(d.get_numero()));
