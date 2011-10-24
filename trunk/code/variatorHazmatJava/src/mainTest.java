@@ -111,6 +111,21 @@ public class mainTest {
 		   System.out.println();
 		   
 		      
+		   
+		   // test for Data_generated.dat:
+		   
+		   //59 --> 119
+		   G = new Graph();
+		   G.readInstance("Data_generated.dat");	
+		   c = G.returnListCommodities().get(0);
+		   indexO = c.getSource();
+		   o = G.returnNode(59);
+		   indexD = c.getDest();
+		   d = G.returnNode(indexD);
+		   System.out.println("Commodite 0: Origine = "+o.get_numero()+", Dest = "+d.get_numero());	
+		   sPath= G.shortestPath(o,d);
+		   System.out.println(sPath);
+		   
 	   }
 
 }
