@@ -270,8 +270,8 @@ public class IndividualHazmat extends IndividualAbstract {
 		* For the moment, the implementation follows exactly the abstract at CTW'2011
 		* where *every* truck path is mutated.
 		*/
-		//for (LinkedList<Node> path: this.truckPaths) {
-		LinkedList<Node> path = this.truckPaths.firstElement();
+		for (LinkedList<Node> path: this.truckPaths) {
+		//LinkedList<Node> path = this.truckPaths.firstElement();
 		
 			boolean b = Variator.randomGenerator.nextBoolean();
 			
@@ -292,7 +292,7 @@ public class IndividualHazmat extends IndividualAbstract {
 				}
 			}
 			
-		//}
+		}
 		/* since the representation of the individual changed, ensure a new
 		 * evaluation next time: */
 		this.alreadyEvaluated = false;
