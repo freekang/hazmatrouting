@@ -1,0 +1,106 @@
+Efficient Path:: 
+ - i1 - i70 - i70 - i112 - i112 - i120 of cost 6
+Efficient Path:: 
+ - i1 - i55 - i55 - i97 - i97 - i112 - i112 - i120 of cost 7
+Efficient Path:: 
+ - i1 - i18 - i18 - i27 - i27 - i28 - i28 - i112 - i112 - i120 of cost 9
+Efficient Path:: 
+ - i1 - i113 - i113 - i120 of cost 10
+Efficient Path:: 
+ - i1 - i116 - i116 - i120 of cost 10
+Efficient Path:: 
+ - i1 - i103 - i103 - i114 - i114 - i120 of cost 13
+Efficient Path:: 
+ - i1 - i70 - i70 - i109 - i109 - i120 of cost 14
+Efficient Path:: 
+ - i1 - i70 - i70 - i111 - i111 - i120 of cost 14
+Efficient Path:: 
+ - i1 - i56 - i56 - i74 - i74 - i114 - i114 - i120 of cost 14
+Efficient Path:: 
+ - i1 - i99 - i99 - i114 - i114 - i120 of cost 14
+Efficient Path:: 
+ - i1 - i101 - i101 - i114 - i114 - i120 of cost 14
+Efficient Path:: 
+ - i1 - i104 - i104 - i114 - i114 - i120 of cost 14
+Efficient Path:: 
+ - i1 - i55 - i55 - i97 - i97 - i109 - i109 - i120 of cost 15
+Efficient Path:: 
+ - i1 - i55 - i55 - i97 - i97 - i111 - i111 - i120 of cost 15
+Efficient Path:: 
+ - i1 - i56 - i56 - i74 - i74 - i110 - i110 - i120 of cost 16
+Efficient Path:: 
+ - i1 - i70 - i70 - i74 - i74 - i114 - i114 - i120 of cost 16
+Efficient Path:: 
+ - i1 - i3 - i3 - i27 - i27 - i28 - i28 - i109 - i109 - i120 of cost 17
+Efficient Path:: 
+ - i1 - i18 - i18 - i27 - i27 - i28 - i28 - i109 - i109 - i120 of cost 17
+Efficient Path:: 
+ - i1 - i2 - i2 - i11 - i11 - i111 - i111 - i120 of cost 17
+Efficient Path:: 
+ - i1 - i3 - i3 - i27 - i27 - i28 - i28 - i111 - i111 - i120 of cost 17
+Efficient Path:: 
+ - i1 - i18 - i18 - i27 - i27 - i28 - i28 - i111 - i111 - i120 of cost 17
+Efficient Path:: 
+ - i1 - i70 - i70 - i74 - i74 - i110 - i110 - i120 of cost 18
+Efficient Path:: 
+ - i1 - i70 - i70 - i118 - i118 - i120 of cost 20
+Efficient Path:: 
+ - i1 - i91 - i91 - i106 - i106 - i120 of cost 21
+Efficient Path:: 
+ - i1 - i92 - i92 - i106 - i106 - i120 of cost 21
+Efficient Path:: 
+ - i1 - i94 - i94 - i106 - i106 - i120 of cost 21
+Efficient Path:: 
+ - i1 - i95 - i95 - i106 - i106 - i120 of cost 21
+Efficient Path:: 
+ - i1 - i8 - i8 - i108 - i108 - i120 of cost 21
+Efficient Path:: 
+ - i1 - i8 - i8 - i118 - i118 - i120 of cost 21
+Efficient Path:: 
+ - i1 - i70 - i70 - i115 - i115 - i120 of cost 22
+Efficient Path:: 
+ - i1 - i2 - i2 - i11 - i11 - i108 - i108 - i120 of cost 23
+Efficient Path:: 
+ - i1 - i103 - i103 - i117 - i117 - i120 of cost 26
+Efficient Path:: 
+ - i1 - i99 - i99 - i117 - i117 - i120 of cost 27
+Efficient Path:: 
+ - i1 - i101 - i101 - i117 - i117 - i120 of cost 27
+Efficient Path:: 
+ - i1 - i104 - i104 - i117 - i117 - i120 of cost 27
+Efficient Path:: 
+ - i1 - i45 - i45 - i107 - i107 - i120 of cost 28
+Efficient Path:: 
+ - i1 - i47 - i47 - i107 - i107 - i120 of cost 28
+Efficient Path:: 
+ - i1 - i103 - i103 - i107 - i107 - i120 of cost 28
+Efficient Path:: 
+ - i1 - i56 - i56 - i102 - i102 - i117 - i117 - i120 of cost 28
+Efficient Path:: 
+ - i1 - i85 - i85 - i117 - i117 - i120 of cost 29
+Efficient Path:: 
+ - i1 - i86 - i86 - i117 - i117 - i120 of cost 29
+Efficient Path:: 
+ - i1 - i89 - i89 - i117 - i117 - i120 of cost 29
+Efficient Path:: 
+ - i1 - i53 - i53 - i98 - i98 - i117 - i117 - i120 of cost 29
+Efficient Path:: 
+ - i1 - i53 - i53 - i105 - i105 - i117 - i117 - i120 of cost 29
+Efficient Path:: 
+ - i1 - i119 - i119 - i120 of cost 29
+Efficient Path:: 
+ - i1 - i103 - i103 - i119 - i119 - i120 of cost 29
+Efficient Path:: 
+ - i1 - i99 - i99 - i115 - i115 - i120 of cost 30
+Efficient Path:: 
+ - i1 - i101 - i101 - i115 - i115 - i120 of cost 30
+Efficient Path:: 
+ - i1 - i3 - i3 - i27 - i27 - i46 - i46 - i107 - i107 - i120 of cost 32
+Efficient Path:: 
+ - i1 - i18 - i18 - i27 - i27 - i46 - i46 - i107 - i107 - i120 of cost 32
+Efficient Path:: 
+ - i1 - i53 - i53 - i98 - i98 - i115 - i115 - i120 of cost 32
+Efficient Path:: 
+ - i1 - i53 - i53 - i102 - i102 - i115 - i115 - i120 of cost 32
+Efficient Path:: 
+ - i1 - i55 - i55 - i102 - i102 - i115 - i115 - i120 of cost 32
