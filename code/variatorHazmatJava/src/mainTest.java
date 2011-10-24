@@ -124,6 +124,16 @@ public class mainTest {
 		   d = G.returnNode(indexD);
 		   System.out.println("Commodite 0: Origine = "+o.get_numero()+", Dest = "+d.get_numero());	
 		   sPath= G.shortestPath(o,d);
+		   
+		 System.out.println("The optimal path: ");
+		 for (int i = 0; i<sPath.size(); i++) {
+			 if(i == sPath.size()-1)
+				 System.out.println(sPath.get(i).get_numero()+"	");
+			 else
+				 System.out.print(sPath.get(i).get_numero()+"	");
+		 }
+		   
+		   
 		   System.out.println(sPath);
 		   
 	   }
