@@ -1,106 +1,164 @@
-Efficient Path:: 
- - i1 - i70 - i70 - i112 - i112 - i120 of cost 6
-Efficient Path:: 
- - i1 - i55 - i55 - i97 - i97 - i112 - i112 - i120 of cost 7
-Efficient Path:: 
- - i1 - i18 - i18 - i27 - i27 - i28 - i28 - i112 - i112 - i120 of cost 9
-Efficient Path:: 
- - i1 - i113 - i113 - i120 of cost 10
-Efficient Path:: 
- - i1 - i116 - i116 - i120 of cost 10
-Efficient Path:: 
- - i1 - i103 - i103 - i114 - i114 - i120 of cost 13
-Efficient Path:: 
- - i1 - i70 - i70 - i109 - i109 - i120 of cost 14
-Efficient Path:: 
- - i1 - i70 - i70 - i111 - i111 - i120 of cost 14
-Efficient Path:: 
- - i1 - i56 - i56 - i74 - i74 - i114 - i114 - i120 of cost 14
-Efficient Path:: 
- - i1 - i99 - i99 - i114 - i114 - i120 of cost 14
-Efficient Path:: 
- - i1 - i101 - i101 - i114 - i114 - i120 of cost 14
-Efficient Path:: 
- - i1 - i104 - i104 - i114 - i114 - i120 of cost 14
-Efficient Path:: 
- - i1 - i55 - i55 - i97 - i97 - i109 - i109 - i120 of cost 15
-Efficient Path:: 
- - i1 - i55 - i55 - i97 - i97 - i111 - i111 - i120 of cost 15
-Efficient Path:: 
- - i1 - i56 - i56 - i74 - i74 - i110 - i110 - i120 of cost 16
-Efficient Path:: 
- - i1 - i70 - i70 - i74 - i74 - i114 - i114 - i120 of cost 16
-Efficient Path:: 
- - i1 - i3 - i3 - i27 - i27 - i28 - i28 - i109 - i109 - i120 of cost 17
-Efficient Path:: 
- - i1 - i18 - i18 - i27 - i27 - i28 - i28 - i109 - i109 - i120 of cost 17
-Efficient Path:: 
- - i1 - i2 - i2 - i11 - i11 - i111 - i111 - i120 of cost 17
-Efficient Path:: 
- - i1 - i3 - i3 - i27 - i27 - i28 - i28 - i111 - i111 - i120 of cost 17
-Efficient Path:: 
- - i1 - i18 - i18 - i27 - i27 - i28 - i28 - i111 - i111 - i120 of cost 17
-Efficient Path:: 
- - i1 - i70 - i70 - i74 - i74 - i110 - i110 - i120 of cost 18
-Efficient Path:: 
- - i1 - i70 - i70 - i118 - i118 - i120 of cost 20
-Efficient Path:: 
- - i1 - i91 - i91 - i106 - i106 - i120 of cost 21
-Efficient Path:: 
- - i1 - i92 - i92 - i106 - i106 - i120 of cost 21
-Efficient Path:: 
- - i1 - i94 - i94 - i106 - i106 - i120 of cost 21
-Efficient Path:: 
- - i1 - i95 - i95 - i106 - i106 - i120 of cost 21
-Efficient Path:: 
- - i1 - i8 - i8 - i108 - i108 - i120 of cost 21
-Efficient Path:: 
- - i1 - i8 - i8 - i118 - i118 - i120 of cost 21
-Efficient Path:: 
- - i1 - i70 - i70 - i115 - i115 - i120 of cost 22
-Efficient Path:: 
- - i1 - i2 - i2 - i11 - i11 - i108 - i108 - i120 of cost 23
-Efficient Path:: 
- - i1 - i103 - i103 - i117 - i117 - i120 of cost 26
-Efficient Path:: 
- - i1 - i99 - i99 - i117 - i117 - i120 of cost 27
-Efficient Path:: 
- - i1 - i101 - i101 - i117 - i117 - i120 of cost 27
-Efficient Path:: 
- - i1 - i104 - i104 - i117 - i117 - i120 of cost 27
-Efficient Path:: 
- - i1 - i45 - i45 - i107 - i107 - i120 of cost 28
-Efficient Path:: 
- - i1 - i47 - i47 - i107 - i107 - i120 of cost 28
-Efficient Path:: 
- - i1 - i103 - i103 - i107 - i107 - i120 of cost 28
-Efficient Path:: 
- - i1 - i56 - i56 - i102 - i102 - i117 - i117 - i120 of cost 28
-Efficient Path:: 
- - i1 - i85 - i85 - i117 - i117 - i120 of cost 29
-Efficient Path:: 
- - i1 - i86 - i86 - i117 - i117 - i120 of cost 29
-Efficient Path:: 
- - i1 - i89 - i89 - i117 - i117 - i120 of cost 29
-Efficient Path:: 
- - i1 - i53 - i53 - i98 - i98 - i117 - i117 - i120 of cost 29
-Efficient Path:: 
- - i1 - i53 - i53 - i105 - i105 - i117 - i117 - i120 of cost 29
-Efficient Path:: 
- - i1 - i119 - i119 - i120 of cost 29
-Efficient Path:: 
- - i1 - i103 - i103 - i119 - i119 - i120 of cost 29
-Efficient Path:: 
- - i1 - i99 - i99 - i115 - i115 - i120 of cost 30
-Efficient Path:: 
- - i1 - i101 - i101 - i115 - i115 - i120 of cost 30
-Efficient Path:: 
- - i1 - i3 - i3 - i27 - i27 - i46 - i46 - i107 - i107 - i120 of cost 32
-Efficient Path:: 
- - i1 - i18 - i18 - i27 - i27 - i46 - i46 - i107 - i107 - i120 of cost 32
-Efficient Path:: 
- - i1 - i53 - i53 - i98 - i98 - i115 - i115 - i120 of cost 32
-Efficient Path:: 
- - i1 - i53 - i53 - i102 - i102 - i115 - i115 - i120 of cost 32
-Efficient Path:: 
- - i1 - i55 - i55 - i102 - i102 - i115 - i115 - i120 of cost 32
+Number of efficient paths = 53
+Etiquette efficace de chemin: 
+ - i1 - i70 - i70 - i112 - i112 - i120
+The cost of the path:6, the risk = 23 and MaxRisk is associated to the arc (i1,i70) of risk 9
+Etiquette efficace de chemin: 
+ - i1 - i55 - i55 - i97 - i97 - i112 - i112 - i120
+The cost of the path:7, the risk = 38 and MaxRisk is associated to the arc (i55,i97) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i18 - i18 - i27 - i27 - i28 - i28 - i112 - i112 - i120
+The cost of the path:9, the risk = 53 and MaxRisk is associated to the arc (i1,i18) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i113 - i113 - i120
+The cost of the path:10, the risk = 28 and MaxRisk is associated to the arc (i1,i113) of risk 17
+Etiquette efficace de chemin: 
+ - i1 - i116 - i116 - i120
+The cost of the path:10, the risk = 28 and MaxRisk is associated to the arc (i1,i116) of risk 17
+Etiquette efficace de chemin: 
+ - i1 - i103 - i103 - i114 - i114 - i120
+The cost of the path:13, the risk = 37 and MaxRisk is associated to the arc (i1,i103) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i70 - i70 - i109 - i109 - i120
+The cost of the path:14, the risk = 28 and MaxRisk is associated to the arc (i109,i120) of risk 10
+Etiquette efficace de chemin: 
+ - i1 - i70 - i70 - i111 - i111 - i120
+The cost of the path:14, the risk = 28 and MaxRisk is associated to the arc (i111,i120) of risk 10
+Etiquette efficace de chemin: 
+ - i1 - i56 - i56 - i74 - i74 - i114 - i114 - i120
+The cost of the path:14, the risk = 43 and MaxRisk is associated to the arc (i1,i56) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i99 - i99 - i114 - i114 - i120
+The cost of the path:14, the risk = 35 and MaxRisk is associated to the arc (i99,i114) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i101 - i101 - i114 - i114 - i120
+The cost of the path:14, the risk = 35 and MaxRisk is associated to the arc (i101,i114) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i104 - i104 - i114 - i114 - i120
+The cost of the path:14, the risk = 35 and MaxRisk is associated to the arc (i104,i114) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i55 - i55 - i97 - i97 - i109 - i109 - i120
+The cost of the path:15, the risk = 43 and MaxRisk is associated to the arc (i55,i97) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i55 - i55 - i97 - i97 - i111 - i111 - i120
+The cost of the path:15, the risk = 43 and MaxRisk is associated to the arc (i55,i97) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i56 - i56 - i74 - i74 - i110 - i110 - i120
+The cost of the path:16, the risk = 44 and MaxRisk is associated to the arc (i1,i56) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i70 - i70 - i74 - i74 - i114 - i114 - i120
+The cost of the path:16, the risk = 33 and MaxRisk is associated to the arc (i114,i120) of risk 10
+Etiquette efficace de chemin: 
+ - i1 - i3 - i3 - i27 - i27 - i28 - i28 - i109 - i109 - i120
+The cost of the path:17, the risk = 71 and MaxRisk is associated to the arc (i1,i3) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i18 - i18 - i27 - i27 - i28 - i28 - i109 - i109 - i120
+The cost of the path:17, the risk = 58 and MaxRisk is associated to the arc (i1,i18) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i2 - i2 - i11 - i11 - i111 - i111 - i120
+The cost of the path:17, the risk = 32 and MaxRisk is associated to the arc (i11,i111) of risk 12
+Etiquette efficace de chemin: 
+ - i1 - i3 - i3 - i27 - i27 - i28 - i28 - i111 - i111 - i120
+The cost of the path:17, the risk = 71 and MaxRisk is associated to the arc (i1,i3) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i18 - i18 - i27 - i27 - i28 - i28 - i111 - i111 - i120
+The cost of the path:17, the risk = 58 and MaxRisk is associated to the arc (i1,i18) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i70 - i70 - i74 - i74 - i110 - i110 - i120
+The cost of the path:18, the risk = 34 and MaxRisk is associated to the arc (i110,i120) of risk 11
+Etiquette efficace de chemin: 
+ - i1 - i70 - i70 - i118 - i118 - i120
+The cost of the path:20, the risk = 19 and MaxRisk is associated to the arc (i1,i70) of risk 9
+Etiquette efficace de chemin: 
+ - i1 - i91 - i91 - i106 - i106 - i120
+The cost of the path:21, the risk = 29 and MaxRisk is associated to the arc (i91,i106) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i92 - i92 - i106 - i106 - i120
+The cost of the path:21, the risk = 29 and MaxRisk is associated to the arc (i92,i106) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i94 - i94 - i106 - i106 - i120
+The cost of the path:21, the risk = 29 and MaxRisk is associated to the arc (i94,i106) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i95 - i95 - i106 - i106 - i120
+The cost of the path:21, the risk = 29 and MaxRisk is associated to the arc (i95,i106) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i8 - i8 - i108 - i108 - i120
+The cost of the path:21, the risk = 39 and MaxRisk is associated to the arc (i1,i8) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i8 - i8 - i118 - i118 - i120
+The cost of the path:21, the risk = 31 and MaxRisk is associated to the arc (i1,i8) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i70 - i70 - i115 - i115 - i120
+The cost of the path:22, the risk = 23 and MaxRisk is associated to the arc (i1,i70) of risk 9
+Etiquette efficace de chemin: 
+ - i1 - i2 - i2 - i11 - i11 - i108 - i108 - i120
+The cost of the path:23, the risk = 36 and MaxRisk is associated to the arc (i108,i120) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i103 - i103 - i117 - i117 - i120
+The cost of the path:26, the risk = 23 and MaxRisk is associated to the arc (i1,i103) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i99 - i99 - i117 - i117 - i120
+The cost of the path:27, the risk = 21 and MaxRisk is associated to the arc (i1,i99) of risk 12
+Etiquette efficace de chemin: 
+ - i1 - i101 - i101 - i117 - i117 - i120
+The cost of the path:27, the risk = 21 and MaxRisk is associated to the arc (i1,i101) of risk 12
+Etiquette efficace de chemin: 
+ - i1 - i104 - i104 - i117 - i117 - i120
+The cost of the path:27, the risk = 21 and MaxRisk is associated to the arc (i1,i104) of risk 12
+Etiquette efficace de chemin: 
+ - i1 - i45 - i45 - i107 - i107 - i120
+The cost of the path:28, the risk = 36 and MaxRisk is associated to the arc (i45,i107) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i47 - i47 - i107 - i107 - i120
+The cost of the path:28, the risk = 36 and MaxRisk is associated to the arc (i47,i107) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i103 - i103 - i107 - i107 - i120
+The cost of the path:28, the risk = 36 and MaxRisk is associated to the arc (i103,i107) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i56 - i56 - i102 - i102 - i117 - i117 - i120
+The cost of the path:28, the risk = 36 and MaxRisk is associated to the arc (i1,i56) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i85 - i85 - i117 - i117 - i120
+The cost of the path:29, the risk = 31 and MaxRisk is associated to the arc (i85,i117) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i86 - i86 - i117 - i117 - i120
+The cost of the path:29, the risk = 34 and MaxRisk is associated to the arc (i86,i117) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i89 - i89 - i117 - i117 - i120
+The cost of the path:29, the risk = 34 and MaxRisk is associated to the arc (i89,i117) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i53 - i53 - i98 - i98 - i117 - i117 - i120
+The cost of the path:29, the risk = 30 and MaxRisk is associated to the arc (i53,i98) of risk 12
+Etiquette efficace de chemin: 
+ - i1 - i53 - i53 - i105 - i105 - i117 - i117 - i120
+The cost of the path:29, the risk = 30 and MaxRisk is associated to the arc (i53,i105) of risk 12
+Etiquette efficace de chemin: 
+ - i1 - i119 - i119 - i120
+The cost of the path:29, the risk = 11 and MaxRisk is associated to the arc (i1,i119) of risk 10
+Etiquette efficace de chemin: 
+ - i1 - i103 - i103 - i119 - i119 - i120
+The cost of the path:29, the risk = 24 and MaxRisk is associated to the arc (i1,i103) of risk 14
+Etiquette efficace de chemin: 
+ - i1 - i99 - i99 - i115 - i115 - i120
+The cost of the path:30, the risk = 22 and MaxRisk is associated to the arc (i1,i99) of risk 12
+Etiquette efficace de chemin: 
+ - i1 - i101 - i101 - i115 - i115 - i120
+The cost of the path:30, the risk = 22 and MaxRisk is associated to the arc (i1,i101) of risk 12
+Etiquette efficace de chemin: 
+ - i1 - i3 - i3 - i27 - i27 - i46 - i46 - i107 - i107 - i120
+The cost of the path:32, the risk = 73 and MaxRisk is associated to the arc (i1,i3) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i18 - i18 - i27 - i27 - i46 - i46 - i107 - i107 - i120
+The cost of the path:32, the risk = 60 and MaxRisk is associated to the arc (i46,i107) of risk 20
+Etiquette efficace de chemin: 
+ - i1 - i53 - i53 - i98 - i98 - i115 - i115 - i120
+The cost of the path:32, the risk = 31 and MaxRisk is associated to the arc (i53,i98) of risk 12
+Etiquette efficace de chemin: 
+ - i1 - i53 - i53 - i102 - i102 - i115 - i115 - i120
+The cost of the path:32, the risk = 32 and MaxRisk is associated to the arc (i53,i102) of risk 13
+Etiquette efficace de chemin: 
+ - i1 - i55 - i55 - i102 - i102 - i115 - i115 - i120
+The cost of the path:32, the risk = 32 and MaxRisk is associated to the arc (i55,i102) of risk 13
+
+----------------------------------------------------------------------
+ The MaxRisk on all arcs is associated to the arc (i1,i3) of risk 20
+----------------------------------------------------------------------
