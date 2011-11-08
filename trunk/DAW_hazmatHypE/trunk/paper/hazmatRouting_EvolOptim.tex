@@ -74,6 +74,18 @@
 
 % \biboptions{}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% our packages and definitions: %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{url} 
+\usepackage{color}
+% \usepackage{dsfont}
+
+\newcommand{\TODO}[1]{{\color{red}TODO: #1}}
+\newcommand{\TODON}[1]{{\color{blue}TODO: #1}}
+\newcommand{\COMMENTD}[1]{{\color{green}Dimo: #1}}
+\newcommand{\COMMENTN}[1]{{\color{green}Nora: #1}}
+
 
 \journal{DAM}
 
@@ -250,15 +262,23 @@ The proposed model is defined as follows:
 
 \section{Evolutionary multiobjective optimization}
 \label{S_MEO}
-Evolutionary algorithms (EAs) and Evolutionary Multiobjective Optimization (EMO) algorithms in particular are general-purpose randomized search heuristics and as such well suited for problems where the objective function(s) can be highly non-linear, noisy, or even given only implicitly, e.g., by expensive simulations \citep{deb2001a,cvl2007a}. Since the third objective in the above problem formulation is nonlinear, we propose to use an EMO algorithm for the multiobjective risk-equity constrained routing problem here. Our EMO algorithm follows the standard iterative/generational cycle of an EA of mating selection, variation, objective function evaluation, and environmental selection and is build upon the state-of-the-art selection scheme in HypE \citep{bz2011a} as implemented in the PISA platform \citep{bltz2003a}. The variation operators as well as the representation of the solutions, however, have to be adapted to the problem at hand in the following way in order to fulfill the problem's constraints at all times.
+Evolutionary algorithms (EAs) and Evolutionary Multiobjective Optimization (EMO) algorithms in particular are general-purpose randomized search heuristics and as such well suited for problems where the objective function(s) can be highly non-linear, noisy, or even given only implicitly, e.g., by expensive simulations \citep{deb2001a,cvl2007a}. Since the third objective in the above problem formulation is nonlinear, we propose to use an EMO algorithm for the multiobjective risk-equity constrained routing problem here. Our EMO algorithm follows the standard iterative/generational cycle of an EA of mating selection, variation, objective function evaluation, and environmental selection and is build upon the state-of-the-art selection scheme in HypE \citep{bz2011a} as implemented in the PISA platform \citep{bltz2003a}. The variation operators as well as the representation of the solutions, however, have to be adapted to the problem at hand in the following way in order to fulfill the problem's constraints at all times\footnote{The source code of the corresponding PISA hazmat variator is going to be available on the official PISA web page \url{http://www.tik.ee.ethz.ch/pisa/} and until then can be downloaded on the preliminary web page \url{http://code.google.com/p/hazmatrouting/downloads/detail?name=hazmatvariator.zip} \TODO{make available via the Google code account}}.
 
 \subsection{Representation}
-We choose a variable length representation as it has been theoretically shown to be a good choice for multiobjective shortest paths problems \citep{horo2009a}: A solution is thereby represented by a list of paths of variable lengths with one path per truck. For the moment, we consider a fixed amount of trucks for each commodity and therefore a fixed number of paths through the network. In order to have every variable length path represent an uninterrupted path from source to destination at any time (see the constraints in (\ref{eq:flow})), we ensure all paths to always start with the source $s^c$ for the corresponding commodity $c$, ensure with the variation operator that all neighbored vertices in the path are connected by an arc, and complete each path by the shortest path between the path's actual end node and the commodity's destination node $t^c$.
+We choose a variable length representation as it has been theoretically shown to be a good choice for multiobjective shortest paths problems \citep{horo2009a}: A solution is thereby represented by a list of paths of variable lengths with one path per truck. We decided to consider a fixed amount of trucks for each commodity and therefore a fixed number of paths through the network although, in principle, the number of trucks could change during the algorithm run if an appropriate mutation operator is designed. The left hand side of Fig.~\ref{fig:paths} shows an exemplary solution with two trucks for commodity 1 and one truck for commodity 2.
 
-\subsection{Initialization}
+In order to have every variable length path represent an uninterrupted path from source to destination at any time (see the constraints in (\ref{eq:flow})), we ensure all paths to always start with the source $s^c$ for the corresponding commodity $c$, ensure during initialization and variation that all neighbored vertices in the path are connected by an arc (see Sec.~\ref{sec:init} and \ref{sec:variation}), and complete each path by the shortest path between the path's actual end node and the commodity's destination node $t^c$. The right hand side of Fig.~\ref{fig:paths} shows the entire source--destination paths corresponding to the representation in the left part of the figure. 
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{figs/truckpaths}%
+\caption{\label{fig:paths} Illustration of the variable-length representation of a solution (left) with its two paths for commodity 1 and one path for commodity 2 in opposition to the resulting full source--destination paths where the last part is the shortest path between the variable-length path's end node and the destination node for this commodity (right). The source and destination nodes for commodity 1 are 0 and 6 and for the second commodity the source is node 1 and the destination is node 7. The smaller numbers along the arcs depict the costs.}
+\end{figure}
+
+
+\subsection{Initialization}\label{sec:init}
 Initially, we start with a single solution where the paths $p$ for all trucks are empty ($p=(s^c)$). This corresponds to the situation where all trucks choose the shortest $s^c$--$t^c$ path for their assigned commodity---implying the smallest possible overall cost but a high risk along the used route(s). Nevertheless, the initial solution is already Pareto-optimal and is expected to be a good starting point for the algorithm.
 
-\subsection{Variation}
+\subsection{Variation}\label{sec:variation}
 As mutation operator, we suggest to shorten or lengthen the path of one or several trucks. In order to generate a new solution $s'$ from $s$, for each truck path, we draw a binary value $b\in\{0,1\}$ uniformly at random and create the new path $p'$ from the old one $p=(v_1=s^c,v_2,\ldots, v_l)$ as in \citep{horo2009a}:
 \begin{itemize}
 	\item if $b = 0$ and $l=:\textnormal{length}(p)\geq 2$, set $p' = (s^c, \ldots, v_{l-1})$	
