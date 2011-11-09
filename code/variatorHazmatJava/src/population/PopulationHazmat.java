@@ -57,6 +57,15 @@ public class PopulationHazmat extends PopulationAbstract {
 	/** The probability during mutation of an individual that the current bit is flipped. */
 	double bitFlipProbability = 0.1;
 	
+	/** Integer value indicating the type of initialization:
+	 *    0: all individuals are created with the trucks taking the shortest (cost) path
+	 *    1: all individuals are created randomly in the sense that a random node is chosen
+	 *       as end node of the representation and the shortest path between the source node
+	 *       and this randomly chosen node resembles the individual's representation. */
+	public static int INITTYPE_COST = 0;
+	public static int INITTYPE_RAND = 1; 
+	int initializationType = INITTYPE_COST;
+	
 	/** File name where graph instance is defined */
 	String graph_definition_file = "graph_ns2_1_New.dat";
 	
@@ -73,6 +82,13 @@ public class PopulationHazmat extends PopulationAbstract {
 		IndividualHazmat newIndividual;
 		for (int i = 0; i < alpha; i++) {
 			newIndividual = new IndividualHazmat();
+			
+			if (initializationType == INITTYPE_RAND) {
+				newIndividual.initRandom();
+			}
+			else {
+				newIndividual.initCost();
+			}
 			globalPopulation.add(newIndividual);
 		}
 		Variator.debugPrint("Initial population constructed.");
@@ -195,6 +211,20 @@ public class PopulationHazmat extends PopulationAbstract {
 		else if (paramName.equals("bitflip_probability")){
 			try {
 				bitFlipProbability = Double.parseDouble(paramValue);
+				return true;
+			}
+			catch (Exception ex) {
+				return false;
+			}
+		}
+		else if (paramName.equals("initialization_type")){
+			try {
+				if (paramValue.equals("rand") || paramValue.equals("random")) {
+					initializationType = INITTYPE_RAND;
+				}
+				else {
+					initializationType = INITTYPE_COST;
+				}
 				return true;
 			}
 			catch (Exception ex) {
