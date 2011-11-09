@@ -48,11 +48,12 @@ public class IndividualHazmat extends IndividualAbstract {
 	Vector<Commodity> associatedCommodities; // list of associated commodities of each truck
 	boolean alreadyEvaluated;
 	
-	/** Standard class constructor, initializes the decision space representation randomly
-	 * based on the graph instance in PopulationHazmat.mygraph.
+	/** Standard class constructor
 	 * 
-	 * In a first implementation, a fixed number of trucks per commodity is send through
-	 * the network.
+	 * Note that no initialization of the truck paths is taking place here!
+	 * 
+	 * Before using the individual further, the initialization should be performed via the
+	 * methods 'initCost' and 'initRandom'.
 	 * 
 	 */
 	public IndividualHazmat(){
@@ -60,19 +61,6 @@ public class IndividualHazmat extends IndividualAbstract {
 		this.associatedCommodities = new Vector<Commodity>();
 		this.alreadyEvaluated = false;
 		
-		for (Commodity commodity: PopulationHazmat.mygraph.listCom) {
-			/* create "empty" path, consisting of only the source node for this commodity */
-			LinkedList<Node> emptyPath = new LinkedList<Node>();
-			emptyPath.add(PopulationHazmat.mygraph.returnNode(commodity.getSource()));
-
-			for (int i=0; i < commodity.getNbTrucks(); i++) {
-				this.truckPaths.add(emptyPath);
-				this.associatedCommodities.add(commodity);
-			}
-		}
-		
-		this.objectiveSpace = new double[3];
-		this.eval();
 	}
 	
 	/** Class constructor which initializes the decision and objective space representations with the given values.
@@ -120,6 +108,62 @@ public class IndividualHazmat extends IndividualAbstract {
 		//System.out.println(this.objectiveSpace);
 		
 		
+	}
+
+	/** Initializes the individual with all truck paths containing only the source node of
+	 * the corresponding commodity. */
+	public void initCost() {
+		for (Commodity commodity: PopulationHazmat.mygraph.listCom) {
+			/* create "empty" path, consisting of only the source node for this commodity */
+			LinkedList<Node> emptyPath = new LinkedList<Node>();
+			emptyPath.add(PopulationHazmat.mygraph.returnNode(commodity.getSource()));
+
+			for (int i=0; i < commodity.getNbTrucks(); i++) {
+				this.truckPaths.add(emptyPath);
+				this.associatedCommodities.add(commodity);
+			}
+		}
+		
+		this.objectiveSpace = new double[3];
+		this.eval();
+	}
+	
+	/** Initializes the individual by randomly choosing a node for each truck path and
+	 * setting the truck path as the shortes path between the corresponding source node and the
+	 * chosen random node. */
+	public void initRandom() {
+		for (Commodity commodity: PopulationHazmat.mygraph.listCom) {
+			/* store source node of this commodity */
+			Node source = PopulationHazmat.mygraph.returnNode(commodity.getSource());
+			
+			for (int i=0; i < commodity.getNbTrucks(); i++) {
+				/* start with an empty path for this truck */
+				LinkedList<Node> randomPath = new LinkedList<Node>();
+				
+				/* select a random node id which is not the source */
+				int randomNodeID = Variator.randomGenerator.nextInt(PopulationHazmat.mygraph.nbNodes);
+				while (randomNodeID == source.get_numero()) {
+					randomNodeID = Variator.randomGenerator.nextInt(PopulationHazmat.mygraph.nbNodes);
+				}
+				
+				/* compute shortest path between source and randomNode */
+				Node randomNode = PopulationHazmat.mygraph.returnNode(randomNodeID);
+				ArrayList<Node> shortestPath = PopulationHazmat.mygraph.shortestPath(source, randomNode);
+				
+				/* add the resulting shortest path to emptyPath */
+				for (Node n: shortestPath) {
+					randomPath.add(n);
+				}
+				
+				/* Finally, add the new path to this.truckPaths and update associatedCommodities
+				 * as well */
+				this.truckPaths.add(randomPath);
+				this.associatedCommodities.add(commodity);
+			}
+		}
+		
+		this.objectiveSpace = new double[3];
+		this.eval();
 	}
 	
 	/** Calculates the objective space values of this individual. The two objectives are number of
