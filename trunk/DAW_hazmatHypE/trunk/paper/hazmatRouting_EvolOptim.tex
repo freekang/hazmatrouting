@@ -267,7 +267,7 @@ The proposed model is defined as follows:
 
 \section{Evolutionary multiobjective optimization}
 \label{S_MEO}
-Evolutionary algorithms (EAs) and Evolutionary Multiobjective Optimization (EMO) algorithms in particular are general-purpose randomized search heuristics and as such well suited for problems where the objective function(s) can be highly non-linear, noisy, or even given only implicitly, e.g., by expensive simulations \citep{deb2001a,cvl2007a}. Since the third objective in the above problem formulation is nonlinear, we propose to use an EMO algorithm for the multiobjective risk-equity constrained routing problem here. Our EMO algorithm follows the standard iterative/generational cycle of an EA of mating selection, variation, objective function evaluation, and environmental selection and is build upon the state-of-the-art selection scheme in HypE \citep{bz2011a} as implemented in the PISA platform \citep{bltz2003a}. The variation operators as well as the representation of the solutions, however, have to be adapted to the problem at hand in the following way in order to fulfill the problem's constraints at all times\footnote{The source code of the corresponding PISA hazmat variator is going to be available on the official PISA web page \url{http://www.tik.ee.ethz.ch/pisa/} and until then can be downloaded on the preliminary web page \url{http://code.google.com/p/hazmatrouting/downloads/detail?name=hazmatvariator.zip} \TODO{make available via the Google code account}}.
+Evolutionary algorithms (EAs) and Evolutionary Multiobjective Optimization (EMO) algorithms in particular are general-purpose randomized search heuristics and as such well suited for problems where the objective function(s) can be highly non-linear, noisy, or even given only implicitly, e.g., by expensive simulations \citep{deb2001a,cvl2007a}. Since the third objective in the above problem formulation is nonlinear, we propose to use an EMO algorithm for the multiobjective risk-equity constrained routing problem here. Our EMO algorithm follows the standard iterative/generational cycle of an EA of mating selection, variation, objective function evaluation, and environmental selection and is build upon the state-of-the-art selection scheme in HypE \citep{bz2011a} as implemented in the PISA platform \citep{bltz2003a}. The variation operators as well as the representation of the solutions, however, have to be adapted to the problem at hand in the following way in order to fulfill the problem's constraints at all times\footnote{The source code of the corresponding PISA hazmat variator is going to be available on the official PISA web page \url{http://www.tik.ee.ethz.ch/pisa/} and until then can be downloaded on the preliminary web page \url{http://researchers.lille.inria.fr/~brockhof/downloads/hazmatvariator20111110.zip}}.
 
 \subsection{Representation}
 We choose a variable length representation as it has been theoretically shown to be a good choice for multiobjective shortest paths problems \citep{horo2009a}: A solution is thereby represented by a list of paths of variable lengths with one path per truck. We decided to consider a fixed amount of trucks for each commodity and therefore a fixed number of paths through the network although, in principle, the number of trucks could change during the algorithm run if an appropriate mutation operator is designed. The left hand side of Fig.~\ref{fig:paths} shows an exemplary solution with two trucks for commodity 1 and one truck for commodity 2.
@@ -281,6 +281,14 @@ In order to have every variable length path represent an uninterrupted path from
 
 
 \subsection{Initialization}\label{sec:init}
+\begin{itemize}
+	\item Typically, the initialization of EAs is random (often uniformly at random in the search space)
+	\item here, a uniform initialization is more complicated if not impossible due to the non-standard search space (how do you define a uniform probability distribution on paths thorough a network?)
+	\item hence, a simple random initialization procedure is proposed: explain idea
+	\item in addition, we have the opportunity to use the shortest paths within the network to have another initialization: all truck paths are initialized with the shortest path, i.e., in the representation, only the source node is chosen in the beginning
+	\item advantage: we know that this initialization immediatly gives us a (weak) Pareto-optimal point, namely the one with the smallest cost (objective 
+\end{itemize}
+
 Initially, we start with a single solution where the paths $p$ for all trucks are empty ($p=(s^c)$). This corresponds to the situation where all trucks choose the shortest $s^c$--$t^c$ path for their assigned commodity---implying the smallest possible overall cost but a high risk along the used route(s). Nevertheless, the initial solution is already Pareto-optimal and is expected to be a good starting point for the algorithm.
 
 \subsection{Variation}\label{sec:variation}
@@ -291,6 +299,8 @@ As mutation operator, we suggest to shorten or lengthen the path of one or sever
 	\item otherwise, use the same path $p$ also in the new solution $s'$.
 \end{itemize}
 
+\subsection{Implementation in PISA}
+The proposed algorithm has been implemented within the multiobjective optimization framework PISA \citep{bltz2003a} and is going to be made available via the official PISA web page\footnote{Until the source code is available via the PISA web page \url{http://www.tik.ee.ethz.ch/pisa/}, we make it temporarily available at \url{http://researchers.lille.inria.fr/~brockhof/downloads/hazmatvariator20111110.zip} as supplementary material for the review process.}.
 
 \section{Experimental analysis}
 
