@@ -1,8 +1,8 @@
 seed 23
 numberOfRuns 10
-numberOfGenerations 100
+numberOfGenerations 1000
 outputType all
-outputSet 10
+outputSet 100
 debug on
 interactive 0
 interactiontype gau
