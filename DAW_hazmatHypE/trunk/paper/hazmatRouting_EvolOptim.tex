@@ -176,21 +176,16 @@ The majority of all hazmat routing studies deal with a single-objective scenario
 \section{The multiobjective risk-equity constrained routing problem}
 \label{S_RECRP}
 
-Let the transportation network be represented as a directed graph $G = (N, A)$, with $N$ being the set of nodes and $A$ the set of arcs. Let $C$ be the set of commodities, given as a set of point-to-point demands to transport a certain amount of hazmats. For any commodity $c\in C$, let $s^c$ and $t^c$ be the source node and the destination node respectively, and let $d^c$ be the amount of hazmat to be shipped from $s^c$ to $t^c$. We assume that the risk is computed on each arc of the network and is proportional to the arc length and the population density around this arc, and we define $r_{ij}^c$ as the risk imposed on the population when the arc $(i, j) \in A$ is used for the transportation of one unit of hazardous materials of type $c$. With each arc $(i,j) \in A$ a cost $c_{ij}$ is associated, equivalent to the length of arc $(i,j)$.
+Let the transportation network be represented as a directed graph $G = (N, A)$, with $N$ being the set of nodes and $A$ the set of arcs. Let $C$ be the set of commodities, given as a set of point-to-point demands to transport a certain amount of hazmats. For any commodity $c\in C$, let $s^c$ and $t^c$ be the source node and the destination node respectively, and let $V^c$ be the number of available trucks for the transportation of commodity $c$. Each commodity is associated with a unique type of hazmat. We assume that the risk is computed on each arc of the network and is proportional to the number of trucks traversing such an arc. Although such a proportionality is not always given in pracice, our assumption is a good approximation if the trucks are of the same type and/or the load is very similar as it is the case for standardized castor containers for radioactive material\footnote{Note that changing the proposed model towards different types of trucks with different types of loads and therefore different resulting risks is straightforward and is expected to cause no additional difficulties for the proposed evolutionary algorithm.}. With each arc $(i,j) \in A$, we also associate a cost $c_{ij}^c$, induced by the travel of a truck of commodity $c$ on this arc.
 
-\subsection{Multiple objective functions}
-\label{SS_MOF}
+\subsection{Multiple objective functions} \label{SS_MOF}
+The problem of transporting hazmat is multiobjective in nature: one usually wants to minimize the \textit{total cost} of transportation, the \textit{total risk} of transportation and the {\em distributed risk}, which can be defined as a measure of risk that is shared among different arcs or different paths. The three objective functions are typically conflicting pairwisely. For example if all trucks take the shortest path from the source to the destination of their associated commodity, the cost objective is optimized but at the same time, the distributed risk is definitely suboptimal---spreading the risk over separate routes, on the other hand, will result in higher costs due to longer routes for some of the trucks.
 
-
-The problem of transporting hazmat is multiobjective in nature: one usually wants to minimize the \textit{total cost} of transportation, the \textit{total risk} of transportation and the {\em distributed risk}, which can be defined as a measure of risk that is shared among different arcs or different paths. 
-
-\subsection{An optimization model}
-\label{SS_AOM}
-
+\subsection{An optimization model} \label{SS_AOM}
 We introduce a flow variable $f_{ij}^c$ defining the portion of commodity $c$ being transported on arc $(i,j)$. These variables are subject to flow conservation constraints:
-
-$$\sum_{j \in \delta^+(i)} f_{ij}^c -  \sum_{j \in \delta^-(i)} f_{ji}^c = b_i^c, \forall i \in N,  c \in  C$$
-
+\[
+	\sum_{j \in \delta^+(i)} f_{ij}^c -  \sum_{j \in \delta^-(i)} f_{ji}^c = b_i^c, \forall i \in N,  c \in  C
+\]
 where $\delta^-(i)$ and $\delta^+(i)$ are the forward and backward star of $i$, i.e., $\delta^-(i) = \{j \in N: (j,i)\in A\}$ and $\delta^+(i) = \{j \in N: (i,j)\in A\}$, and $b_i^c=\left\{
 \begin{array}{rl}
                      1 & \textrm{ if } i=s^c\\
