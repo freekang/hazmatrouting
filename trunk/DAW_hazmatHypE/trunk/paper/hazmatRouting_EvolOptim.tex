@@ -132,8 +132,7 @@
 
 
 \begin{abstract}
-
-
+tbw
 \end{abstract}
 
 \begin{keyword}
@@ -141,8 +140,11 @@ Evolutionary multiobjective optimization, Transportation of hazardous materials,
 \end{keyword}
 
 \end{frontmatter}
-\section{Introduction}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The transportation of hazardous materials ({\em hazmat} from now on) has received a large interest in recent years, which results from the increase in public awareness of the dangers of hazmats and the enormous amount of hazmats being transported \cite{CAR08}. The main target of this problem is to select routes from a given origin-destination pair of nodes such that the risk for the surrounding population and the environment is minimized---without producing excessive economic costs. 
 %
 When solving such a problem by minimizing both cost and the total risk, typically several vehicles share the same (short) routes which results in high risks associated to regions surrounding these paths whereas other regions are not affected. In this case, one may wish to distribute the risk in an equitable way over the population and the environment. Several studies consider this additional minimization of the equity risk, but most of them consist of a \emph{single} origin-destination hazmat routing for a specific hazmat, transport mode and vehicle type (see for example \cite{AKG02, CAR08}).
@@ -176,93 +178,28 @@ The majority of all hazmat routing studies deal with a single-objective scenario
 \section{The multiobjective risk-equity constrained routing problem}
 \label{S_RECRP}
 
-Let the transportation network be represented as a directed graph $G = (N, A)$, with $N$ being the set of nodes and $A$ the set of arcs. Let $C$ be the set of commodities, given as a set of point-to-point demands to transport a certain amount of hazmats. For any commodity $c\in C$, let $s^c$ and $t^c$ be the source node and the destination node respectively, and let $V^c$ be the number of available trucks for the transportation of commodity $c$. Each commodity is associated with a unique type of hazmat. We assume that the risk is computed on each arc of the network and is proportional to the number of trucks traversing such an arc. Although such a proportionality is not always given in pracice, our assumption is a good approximation if the trucks are of the same type and/or the load is very similar as it is the case for standardized castor containers for radioactive material\footnote{Note that changing the proposed model towards different types of trucks with different types of loads and therefore different resulting risks is straightforward and is expected to cause no additional difficulties for the proposed evolutionary algorithm.}. With each arc $(i,j) \in A$, we also associate a cost $c_{ij}^c$, induced by the travel of a truck of commodity $c$ on this arc.
+Let the transportation network be represented as a directed graph $G = (N, A)$, with $N$ being the set of nodes and $A$ the set of arcs. Let $C$ be the set of commodities, given as a set of point-to-point demands to transport a certain amount of hazmats. For any commodity $c\in C$, let $s^c$ and $t^c$ be the source node and the destination node respectively, and let $V^c$ be the number of available trucks for the transportation of commodity $c$. Each commodity is associated with a unique type of hazmat. We assume that the risk is computed on each arc of the network and is proportional to the number of trucks traversing such an arc. Although such a proportionality is not always given in pracice, our assumption is a good approximation if the trucks are of the same type and/or the load is very similar as it is the case for standardized castor containers for radioactive material\footnote{Note that changing the proposed model towards different types of trucks with different types of loads and therefore different resulting risks is straightforward and is expected to cause no additional difficulties for the proposed evolutionary algorithm.}. With each arc $(i,j) \in A$, we also associate a cost $c_{ij}$, induced by the travel of a truck on this arc.
 
 \subsection{Multiple objective functions} \label{SS_MOF}
 The problem of transporting hazmat is multiobjective in nature: one usually wants to minimize the \textit{total cost} of transportation, the \textit{total risk} of transportation and the {\em distributed risk}, which can be defined as a measure of risk that is shared among different arcs or different paths. The three objective functions are typically conflicting pairwisely. For example if all trucks take the shortest path from the source to the destination of their associated commodity, the cost objective is optimized but at the same time, the distributed risk is definitely suboptimal---spreading the risk over separate routes, on the other hand, will result in higher costs due to longer routes for some of the trucks.
 
-\subsection{An optimization model} \label{SS_AOM}
-We introduce a flow variable $f_{ij}^c$ defining the portion of commodity $c$ being transported on arc $(i,j)$. These variables are subject to flow conservation constraints:
-\[
-	\sum_{j \in \delta^+(i)} f_{ij}^c -  \sum_{j \in \delta^-(i)} f_{ji}^c = b_i^c, \forall i \in N,  c \in  C
-\]
-where $\delta^-(i)$ and $\delta^+(i)$ are the forward and backward star of $i$, i.e., $\delta^-(i) = \{j \in N: (j,i)\in A\}$ and $\delta^+(i) = \{j \in N: (i,j)\in A\}$, and $b_i^c=\left\{
-\begin{array}{rl}
-                     1 & \textrm{ if } i=s^c\\
-                    -1 & \textrm{ if } i=t^c\\
-                     0 & \textrm{ otherwise.}\\
-\end{array}\right.$
-
-The first objective is a cost function given as follows:
-
-$$\min \sum_{c \in C} \sum_{(i,j) \in A} c_{ij} f_{ij}^c$$
-
-
-The second objective is the minimization of the total risk
-
-$$
-\min \sum_{c \in C} \sum_{(i,j) \in A} r_{ij}^c f_{ij}^c
-$$
-
-We define the risk $w_{ij}$ imposed on the population around the arc $(i,j)$ as a linear combination of the flow variables: 
-
-$$w_{ij} = \sum_{c \in C} r_{ij}^c f_{ij}^c$$
-
-and add a new variable $z = \max_{(i,j) \in A} w_{ij}$, which therefore is subject to the constraints
-
-$$
-z \geq \sum_{c \in C} r_{ij}^c f_{ij}^c, \forall (i,j) \in A
-$$
-
-% We define the risk $w_p$ imposed on the population around the path $p$ as a linear combination of the flow variables: 
-% 
-% $$w_p = \sum_{c \in C} \sum_{(i,j) \in p} r_{ij}^c f_{ij}^c$$
-% 
-% and add a new variable $y = \max_{p \in \mathcal{P}} w_p$, which therefore is subject to the constraints
-% 
-% $$
-% y \geq \sum_{c \in C} \sum_{(i,j) \in p} r_{ij}^c f_{ij}^c, \forall p \in \mathcal{P}
-% $$
-% 
-% where $\mathcal{P}$ is the set of paths.
-
-
-
-% 
-% 
-% 
-% The third and fourth objectives will then be:
-% $$\min \max_{(i,j)\in A} r_{ij} f_{ij}^c$$, and 
-% $$\min \max_{p \in \mathcal{P}} \sum_{(i,j) \in p} r_{ij} f_{ij} $$ 
-% 
-% where 
-
-% We introduce the integer variable $y_{ij}^c$ for the number of trucks that use arc $(i,j)$ for transporting commodity $c$. We assume a fixed number of trucks and that all trucks have the same load. 
-
-
-
-The proposed model is defined as follows:
+\subsection{The optimization model} \label{SS_AOM}
+We introduce the integer variable $y_{ij}^c$ for the number of trucks that use arc $(i,j)\in A$ for transporting commodity $c$. As mentioned above, we assume a fixed number of trucks for each commodity and that all trucks associated to a certain commodity have the same load. The proposed model is defined as follows:
 \begin{eqnarray}
-   \min  &  \sum_{c \in C} \sum_{(i,j) \in A} c_{ij} f_{ij}^c & \label{eq:obj1}\\
-   \min  &  \sum_{c \in C} \sum_{(i,j) \in A} r_{ij}^c f_{ij}^c & \label{eq:obj2}\\
-   \min  & z & \label{eq:obj3}\\
-   %\min  & y & \label{eq:obj4}\\
-    s.t. & \sum_{j \in \delta^+(i)} f_{ij}^c -  \sum_{j \in \delta^-(i)} f_{ji}^c = d_i^c\quad         & \forall i \in N,  c \in  C \label{eq:flow} \\
-    & z \geq \sum_{c \in C} r_{ij}^c f_{ij}^c & \forall (i,j) \in A \\
-%     & y \geq \sum_{c \in C} \sum_{(i,j) \in p} r_{ij}^c f_{ij}^c & \forall p \in \mathcal{P}
-%          & y_{ij}^c \in \{0, 1, 2, \ldots\}                                                            & \forall (i,j)\in A, c\in C\label{eq:integerY}.
+   \min  & \sum_{c \in C}\limits \sum_{(i,j) \in A}\limits c_{ij} y_{ij}^c & \label{eq:obj1}\\
+   \min  & \sum_{c \in C}\limits \sum_{(i,j) \in A}\limits r_{ij}^{c} y_{ij}^c & \label{eq:obj2}\\
+   \min  & \max_{(i,j)\in A}\limits \big\{ \sum_{c \in C}\limits r_{ij}^{c} y_{ij}^c \big\} & \label{eq:obj3}\\
+    s.t. & \sum_{j \in \delta^+(i)} y_{ij}^c -  \sum_{j \in \delta^-(i)} y_{ji}^c = q_i^c\quad         & \forall i \in N,  c \in  C \label{eq:flow} \\
+         & y_{ij}^c \in \{0, 1, 2, \ldots\}                                                            & \forall (i,j)\in A, c\in C\label{eq:integerY}.
 \end{eqnarray}
 
-% The first objective in (\ref{eq:obj1}) is a cost function and is to be minimized. The second objective, given by (\ref{eq:obj2}), minimizes the total risk on all regions and objective (\ref{eq:obj3}) minimizes the maximum risk imposed on all regions. Constraints (\ref{eq:flow}) are conservation constraints, where $\delta^-(i) = \{j \in N: (j,i)\in A\}$ and $\delta^+(i) = \{j \in N: (i,j)\in A\}$ are the direct successors and predecessors of node $i$, and $q_i^c=V^c$ if  $i=s^c$, $q_i^c=-V^c$ if  $i=t^c$ and $q_i^c=0$ otherwise.
-
-% \begin{Rq}
-% The number of constaints $nbC = |N| + |A| + |\mathcal{P}|$ is exponontial, so the classical optimization softwares such as CPLEX can not be used.
-% \end{Rq}
+The first objective in (\ref{eq:obj1}) is a cost function and is to be minimized. The second objective, given by (\ref{eq:obj2}), minimizes the total risk over all arcs and objective (\ref{eq:obj3}) minimizes the maximum risk imposed on all arcs. The constraints in (\ref{eq:flow}) are conservation constraints, where $\delta^-(i) = \{j \in N: (j,i)\in A\}$ and $\delta^+(i) = \{j \in N: (i,j)\in A\}$ are the direct successors and predecessors of node $i$, and $q_i^c=V^c$ if  $i=s^c$, $q_i^c=-V^c$ if  $i=t^c$ and $q_i^c=0$ otherwise. Note that while the first two objectives are linear in the variables, the maximum in the third objective makes it highly non-linear---the main reason why we propose to use an evolutionary algorithm to deal with the above hazmat routing problem.
 
 
-\section{Evolutionary multiobjective optimization}
-\label{S_MEO}
-Evolutionary algorithms (EAs) and Evolutionary Multiobjective Optimization (EMO) algorithms in particular are general-purpose randomized search heuristics and as such well suited for problems where the objective function(s) can be highly non-linear, noisy, or even given only implicitly, e.g., by expensive simulations \citep{deb2001a,cvl2007a}. Since the third objective in the above problem formulation is nonlinear, we propose to use an EMO algorithm for the multiobjective risk-equity constrained routing problem here. Our EMO algorithm follows the standard iterative/generational cycle of an EA of mating selection, variation, objective function evaluation, and environmental selection and is build upon the state-of-the-art selection scheme in HypE \citep{bz2011a} as implemented in the PISA platform \citep{bltz2003a}. The variation operators as well as the representation of the solutions, however, have to be adapted to the problem at hand in the following way in order to fulfill the problem's constraints at all times\footnote{The source code of the corresponding PISA hazmat variator is going to be available on the official PISA web page \url{http://www.tik.ee.ethz.ch/pisa/} and until then can be downloaded on the preliminary web page \url{http://researchers.lille.inria.fr/~brockhof/downloads/hazmatvariator20111110.zip}}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Evolutionary multiobjective optimization} \label{S_MEO}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Evolutionary algorithms (EAs) and Evolutionary Multiobjective Optimization (EMO) algorithms in particular are general-purpose randomized search heuristics and as such well suited for problems where the objective function(s) can be highly non-linear, noisy, or even given only implicitly, e.g., by expensive simulations \citep{deb2001a,cvl2007a}. Since the third objective in the above problem formulation is nonlinear, we propose to use an EMO algorithm for the multiobjective risk-equity constrained routing problem here. Our EMO algorithm follows the standard iterative/generational cycle of an EA of mating selection, variation, objective function evaluation, and environmental selection and is build upon the state-of-the-art selection scheme in HypE \citep{bz2011a} as implemented in the PISA platform \citep{bltz2003a}. The variation operators as well as the representation of the solutions, however, have to be adapted to the problem at hand in the following way in order to fulfill the problem's constraints at all times\footnote{The source code of the corresponding PISA hazmat variator is going to be available on the official PISA web page \url{http://www.tik.ee.ethz.ch/pisa/} and until then can be downloaded on the preliminary web page \url{http://researchers.lille.inria.fr/~brockhof/downloads/hazmatvariator20111110.zip}}. Moreover, two different initialization schemes are proposed to deal with the specific variable length representation.
 
 \subsection{Representation}
 We choose a variable length representation as it has been theoretically shown to be a good choice for multiobjective shortest paths problems \citep{horo2009a}: A solution is thereby represented by a list of paths of variable lengths with one path per truck. We decided to consider a fixed amount of trucks for each commodity and therefore a fixed number of paths through the network although, in principle, the number of trucks could change during the algorithm run if an appropriate mutation operator is designed. The left hand side of Fig.~\ref{fig:paths} shows an exemplary solution with two trucks for commodity 1 and one truck for commodity 2.
@@ -276,15 +213,18 @@ In order to have every variable length path represent an uninterrupted path from
 
 
 \subsection{Initialization}\label{sec:init}
-\begin{itemize}
-	\item Typically, the initialization of EAs is random (often uniformly at random in the search space)
-	\item here, a uniform initialization is more complicated if not impossible due to the non-standard search space (how do you define a uniform probability distribution on paths thorough a network?)
-	\item hence, a simple random initialization procedure is proposed: explain idea
-	\item in addition, we have the opportunity to use the shortest paths within the network to have another initialization: all truck paths are initialized with the shortest path, i.e., in the representation, only the source node is chosen in the beginning
-	\item advantage: we know that this initialization immediatly gives us a (weak) Pareto-optimal point, namely the one with the smallest cost (objective 
-\end{itemize}
+Often, the population of a (multiobjective) evolutionary algorithm is initialized with solutions that are drawn uniformly at random within the search space. Although it is not easy to define a uniformity measure in our case of variable-length representation, we still propose a random initialization scheme for our evolutionary algorithm. In addition, the specific problem formulation allows another initialization where a Pareto-optimal solution is inserted in the initial population. In the following, we present both approaches in more detail and see later on how they compare with respect to the overall performance of the algorithm.
 
-Initially, we start with a single solution where the paths $p$ for all trucks are empty ($p=(s^c)$). This corresponds to the situation where all trucks choose the shortest $s^c$--$t^c$ path for their assigned commodity---implying the smallest possible overall cost but a high risk along the used route(s). Nevertheless, the initial solution is already Pareto-optimal and is expected to be a good starting point for the algorithm.
+\subsubsection{A Simple Random Initialization}
+Based on the idea of representing a solution by the beginning of the truck paths which are completed by the shortest path to the destination nodes, we propose the following random initialization:
+\begin{enumerate}
+	\item Choose for each truck a node in the network uniformly at random among all nodes which are not the source.
+	\item Initialize the truck paths with the shortest path from the associated source node to the randomly selected node.
+\end{enumerate}
+Note that this initialization scheme is not fully random as the initialization results in truck paths which are constructed by concatenating two shortest paths---the shortest path from the source node to the one randomly selected and the shortest path from the random node to the destination, which is added due to the representation described above.
+
+\subsubsection{A Cost-Optimal Initialization}
+The chosen representation allows us another initialization which starts each algorithm run from a population consisting of copies of a single cost-optimal solution. To this end, we initialize the paths $p$ for all trucks as empty, containing only the corresponding source node ($p=(s^c)$). With the above proposed representation, this corresponds to the situation where all trucks choose the shortest $s^c$--$t^c$ path for their assigned commodity---implying the smallest possible overall cost but a possibly high risk along the used route(s). Nevertheless, since no other solution can have a smaller cost, the initial solution is already (weakly) Pareto-optimal and is expected to be a good starting point for the algorithm. In the following experiments, we will see when each of the two initialization schemes is favourable.
 
 \subsection{Variation}\label{sec:variation}
 As mutation operator, we suggest to shorten or lengthen the path of one or several trucks. In order to generate a new solution $s'$ from $s$, for each truck path, we draw a binary value $b\in\{0,1\}$ uniformly at random and create the new path $p'$ from the old one $p=(v_1=s^c,v_2,\ldots, v_l)$ as in \citep{horo2009a}:
@@ -295,11 +235,23 @@ As mutation operator, we suggest to shorten or lengthen the path of one or sever
 \end{itemize}
 
 \subsection{Implementation in PISA}
-The proposed algorithm has been implemented within the multiobjective optimization framework PISA \citep{bltz2003a} and is going to be made available via the official PISA web page\footnote{Until the source code is available via the PISA web page \url{http://www.tik.ee.ethz.ch/pisa/}, we make it temporarily available at \url{http://researchers.lille.inria.fr/~brockhof/downloads/hazmatvariator20111110.zip} as supplementary material for the review process.}.
+The proposed algorithm has been implemented within the multiobjective optimization framework PISA \citep{bltz2003a} and is going to be made available via the official PISA web page\footnote{Until the source code is available via the PISA web page \url{http://www.tik.ee.ethz.ch/pisa/}, we made it temporarily available at \url{http://researchers.lille.inria.fr/~brockhof/downloads/hazmatvariator20111110.zip} as supplementary material for the review process.}.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The following experiments have two goals:
+- show that the algorithm works in principle on practical examples in manageable time
+- check which of the two initialization schemes is 
+In addition, a few more experiments show that the standard parameters of the algorithm behaves as with other test problems: population size, environmental selection (change from HypE to NSGA-II)
 
-We concentrated our analysis on a real-world case study \cite{bianco09}. We considered the road network of the Lazio region (located in the middle of Italy), and, in particular, its main transport roads. The network is composed of 311 nodes and 441 links. The risk $r_{ij}^c, \forall (i,j) \in A, c \in C$ is evaluated as the societal risk computed as the number of people living inside the exposure zone around link $(i,j)$ (whose size depends on the hazmat type $c$ times the accident probability involving the vehicle. We considered from 2 to 10 origin-destination pairs on the network, each one associated with a number of commodities ranging from 1 to 3, for an overall number of shipments (commodities) between 2 and 30 (we recall that in our model each commodity is associated with one origin-destination pair). With each one of the latter scenarios we associated 10 instances; each instance has been generated by assigning uniformly at random a demand from 100 to 1000 tons to each shipment.
+As a test case, we chose to use a real-world case study based on the work of \citet{bianco09}. The network used here consists of 311 nodes and 441 arcs and represents the main transport roads in Italy's Lazio region which amongst other cities includes the capital Rome.
+
+The risks $r_{ij}^c$ for each arc $(i,j) \in A$ and commodity $c \in C$ are evaluated as the societal risk computed as the number of people living inside the exposure zone around link $(i,j)$ (whose size depends on the hazmat type $c$ times the accident probability involving the vehicle), for details see  \citep{bianco09}.
+
+
+%We concentrated our analysis on a real-world case study \citep{bianco09}. We considered the road network of the Lazio region (located in the middle of Italy), and, in particular, its main transport roads. The network is composed of 311 nodes and 441 links. The risks $r_{ij}^c$ for each arc $(i,j) \in A$ and commodity $c \in C$ are evaluated as the societal risk computed as the number of people living inside the exposure zone around link $(i,j)$ (whose size depends on the hazmat type $c$ times the accident probability involving the vehicle), for details see  \citep{bianco09}. We considered from 2 to 10 origin-destination pairs on the network, each one associated with a number of commodities ranging from 1 to 3, for an overall number of shipments (commodities) between 2 and 30 (we recall that in our model each commodity is associated with one origin-destination pair). With each one of the latter scenarios we associated 10 instances; each instance has been generated by assigning uniformly at random a demand from 100 to 1000 tons to each shipment.
 
 
 \subsection{Random Initialization Versus Cost-Optimal Initialization}
@@ -319,8 +271,19 @@ We concentrated our analysis on a real-world case study \cite{bianco09}. We cons
 \TODO{add plots and describe what we compare (efficient cost/risk paths multiplied by the number of trucks); result: EA is better}
 
 
-\section{Conclusions}
-\label{S_FW}
+\subsection{The Feasibility of the EMO Approach}
+\begin{itemize}
+	\item of course no guarantee that the solutions are Pareto-optimal
+	\item however, in reasonable time (e.g. ??hrs for 10 runs with 1000 generations each) results with several non-dominated solutions the decision maker can interpret and with which she can get an idea about the trade-offs between the objectives
+	\item if DM wants good results fast, cost-efficient initialization is favourable, otherwise, random initialization gives better spread of the solutions
+	\item if needed, approach can be combined easily with preference articulation techniques such as the weighted hypervolume indicator which allows to steer the search towards user-defined regions of the objective space (show 1 plot with W-HypE).
+	\item approach is very general and can easily deal with slightly modified problems: e.g. different truck loads (only the objective function code needs to be changed)
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions} \label{S_FW}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The transportation of hazmats is an important optimization problem in the field of sustainable development and in particular the equitable distribution of risks is of high interest. Within this study, we formalize this transportation problem as the minimization of three objectives and propose to use an evolutionary algorithm to cope with the non-linear equity risk objective.
 
 The third objective function of our problem can be rewritten by minimizing the additional variable $z$ as third objective and adding the constraints $\forall q \in Q: z \geq \sum_{c \in C} \sum_{(i,j) \in A} r_{ij}^{cq} f_{ij}^c$. Although this equivalent formulation makes the problem linear (with additional linear constraints), classical algorithms are expected to have difficulties with this formulation as well and our algorithm is supposed to be more efficient in the current formulation due to the fewer number of constraints. Note that, for the moment, the proposed EMO algorithm exists on paper only and an actual implementation has to prove in the future which additional algorithm components (such as problem-specific initialization, recombination operators, or other exact optimization (sub-)procedures) are necessary to generate solutions of sufficient quality and whether adaptively changing the number and capacity of trucks is beneficial.
