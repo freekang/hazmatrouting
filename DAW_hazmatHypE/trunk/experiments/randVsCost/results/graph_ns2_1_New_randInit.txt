@@ -1,13 +1,13 @@
 start commandLine
-..\hazmatvariator\hazmat_param_graph_ns2_1_New_randInit.txt ..\PISAvariator3D_ ..\hype_win\hype_param.txt ..\PISAselector3D_ monParam.txt ..\results\graph_ns2_1_New_randInit 0.1
+..\hazmatvariator\hazmat_param_graph_ns2_1_New_randInit.txt ..\PISAvariator3D_2_ ..\hype_win\hype_param_graph_ns2_New.txt ..\PISAselector3D_2_ monParam.txt ..\results\graph_ns2_1_New_randInit 0.1
 end commandLine
 
 start monParameter
 seed 23
 numberOfRuns 10
-numberOfGenerations 1000
+numberOfGenerations 2000
 outputType all
-outputSet 100
+outputSet 250
 debug on
 interactive 0
 interactiontype gau
@@ -25,9 +25,9 @@ dim 3
 end varCommonParameter
 
 start varParameter
-seed 123597412
-maximum_generations 1000
-output_file_name ../results/graph_ns2_1_New_randInit_generation1000.txt
+seed 770938812
+maximum_generations 2000
+output_file_name ../results/graph_ns2_1_New_randInit_generation2000.txt
 debug_print true
 recombination_probability 0.1
 mutation_probability 1
@@ -44,7 +44,7 @@ dim 3
 end selCommonParameter
 
 start selParameter
-seed 123597412
+seed 2037115396
 tournament 5
 mating 1
 bound 100000000

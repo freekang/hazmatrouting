@@ -1,4 +1,4 @@
-seed 2037115396
+seed 123597412
 tournament 5
 mating 1
 bound 100000000
