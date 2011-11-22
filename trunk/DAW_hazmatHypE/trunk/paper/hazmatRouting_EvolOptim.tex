@@ -210,7 +210,7 @@ In order to have every variable length path represent an uninterrupted path from
 
 \begin{figure}%
 \includegraphics[width=\columnwidth]{figs/truckpaths}%
-\caption{\label{fig:paths} Illustration of the variable-length representation of a solution (left) with its two paths for commodity 1 and one path for commodity 2 in opposition to the resulting full source--destination paths where the last part is the shortest path between the variable-length path's end node and the destination node for this commodity (right). The source and destination nodes for commodity 1 are 0 and 6 and for the second commodity the source is node 1 and the destination is node 7. The smaller numbers along the arcs depict the costs.}
+\caption{\label{fig:paths} Illustration of the variable-length representation of a solution (left) with its two paths for commodity 1 and one path for commodity 2 in opposition to the resulting full source--destination paths where the last part is the shortest path between the variable-length path's end node and the destination node for this commodity (right). The source and destination nodes for commodity 1 are 0 and 6 and for the second commodity the source is node 1 and the destination is node 7. The smaller numbers along the arcs of the graph in the middle depict the costs of the instance.}
 \end{figure}
 
 
@@ -223,7 +223,7 @@ Based on the idea of representing a solution by the beginning of the truck paths
 	\item Choose for each truck a node in the network uniformly at random among all nodes which are not the source.
 	\item Initialize the truck paths with the shortest path from the associated source node to the randomly selected node.
 \end{enumerate}
-Note that this initialization scheme is not fully random as the initialization results in truck paths which are constructed by concatenating two shortest paths---the shortest path from the source node to the one randomly selected and the shortest path from the random node to the destination, which is added due to the representation described above.
+Note that this initialization scheme is, though random, does not produce fully random paths. The initialization results in truck paths which are constructed by concatenating two shortest paths---the shortest path from the source node to the one randomly selected and the shortest path from the random node to the destination, which is added due to the representation described above.
 
 \subsubsection{A Cost-Optimal Initialization}
 The chosen representation allows us another initialization which starts each algorithm run from a population consisting of copies of a single cost-optimal solution. To this end, we initialize the paths $p$ for all trucks as empty, containing only the corresponding source node ($p=(s^c)$). With the above proposed representation, this corresponds to the situation where all trucks choose the shortest $s^c$--$t^c$ path for their assigned commodity---implying the smallest possible overall cost but a possibly high risk along the used route(s). Nevertheless, since no other solution can have a smaller cost, the initial solution is already (weakly) Pareto-optimal and is expected to be a good starting point for the algorithm. In the following experiments, we will see when each of the two initialization schemes is favourable.
