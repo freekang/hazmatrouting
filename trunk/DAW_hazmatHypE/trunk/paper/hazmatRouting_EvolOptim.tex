@@ -298,9 +298,20 @@ Except otherwise stated, we used the following parameter setting. We perform 10 
 \TODO{add plots and describe what we compare (efficient cost/risk paths multiplied by the number of trucks); result: EA is better}
 
 \subsection{Changing the Population Size}
-In a second experiment, we show that changing the population size of the algorithm in standard ranges does not change the algorithm outcome drastically.
-\TODO{write}
+In a second experiment, we show that changing the population size of the algorithm in standard ranges does not change the algorithm outcome drastically. To this end, Fig.~\ref{fig:popsizes} shows the nondominated solutions of 10 independent runs after 100,000 function evaluations for three different versions of HypE where the population size changes from 50 over 100 to 200. From the visual inspection of the resulting solutions, we cannot make a statement about which population size to favour. When comparing the hypervolume values of the resulting populations, however, an effect is visible. Figure~\ref{fig:algoComparison} shows the corresponding box plots of the hypervolume values and one-sided Wilcoxon rank sum tests on the populations' hypervolume indicator values reveil statistical significant differences between two of the three possible algorithm pairs. With a $p$-value of $0.02163$, the null hypothesis of no differences between a population size of 50 and a population size of 100 has to be rejected in favor of stating that the algorithm variant with population size 50 is superior to the one with population size 100. For the comparison between population size 50 and population size 200, the $p$-value equals $0.0144$ with the population size 50 being better whereas the comparison between population size 100 and population size 200 does not reveal a statistical difference (the $p$-values of the one-sided Wilcoxon tests are $0.2179$ and $0.8035$ respectively).
 
+To conclude, we can state that in the current setting of 100,000 function evaluations, a smaller population size is favorable. This is supported by the previously stated observation that the population of the algorithm did not fully converge to the Pareto front after 100,000 function evaluations: in this case, the variant with smaller population size could converge longer as more iterations are performed within the same function evaluations budget. However, also with longer runs, we recommend to keep the population size of the algorithm not too large as the HypE implementation in PISA becomes too costly if the population size grows too fast (10 runs with 2000 iterations and population size 200 need around 20 hours to complete on an Intel Core2 Duo with 2.8GHz.).
+
+\begin{figure}%
+	\includegraphics[width=\columnwidth]{../experiments/randVsCost/diffPopsizes}%
+	\caption{\label{fig:popsizes} Nondominated solutions of 10 independent runs after 100,000 function evaluations for HypE with a population size of 50 ($\times$), 100 ($\circ$), and 200 ($\square$) respectively.}
+\end{figure}
+
+\begin{figure}%
+	\centering
+	\includegraphics[width=0.5\columnwidth]{../experiments/randVsCost/hypervolumes/algoComparison}%
+	\caption{\label{fig:algocomparison} Boxplots of the hypervolume values of 10 independent runs after 100,000 function evaluations of HypE with a population size of 50, 100, and 200, as well as for NSGA-II.}
+\end{figure}
 
 \subsection{Changing the Environmental Selection}
 With a last experiment, we show the influence of the algorithm's environmental selection scheme on the performance and in particular how this can be used to steer the search towards specific regions of the Pareto front.
