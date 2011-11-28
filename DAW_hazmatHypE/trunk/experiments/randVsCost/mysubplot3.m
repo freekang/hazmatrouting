@@ -9,7 +9,7 @@ plot3(C(:,1),C(:,2),C(:,3), 's');
 xlabel('cost')
 ylabel('total risk')
 zlabel('equity risk')
-
+view(45,30);
 
 subplot(2,2,2)
 plot(A(:,1),A(:,2), 'x');
