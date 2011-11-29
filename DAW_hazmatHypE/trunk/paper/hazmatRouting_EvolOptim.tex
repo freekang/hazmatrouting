@@ -283,19 +283,6 @@ As a test case for all the experiments, we chose to use a real-world case study 
 \subsection{Experimental Settings}
 Except otherwise stated, we used the following parameter setting. We perform 10 independent runs of HypE for 2000 generations with a population size of 50, i.e., each algorithm run has a budget of 100,000 function evaluations. The reference point for the hypervolume indicator was chosen as $(10^8, 10^8, 10^8)$ for the instances with 2 and 3 commodities and as $(10^9, 10^9, 10^9)$ for all instances with 4 commodities. The reference point has been chosen according to the objective function values of the random initial populations, such that all initial solutions have a positive contribution to the hypervolume indicator. Note that the reason for using the same values in all objectives is the used PISA implementation of HypE. In all cases, the hypervolume computation is exact.
 
-\begin{table}
-\centering
-\caption{\label{tab:referencepoints} Used reference points within the environmental selection of HypE}
-\vspace{1em}
-\begin{tabular}{lr}
-	\toprule
-	instance & reference point\\ \midrule
-	\# commodities: 2 & $(10^8, 10^8, 10^8)$\\
-	\# commodities: 3 & $(10^8, 10^8, 10^8)$\\
-	\# commodities: 4 & $(10^9, 10^9, 10^9)$\\
-	\bottomrule
-\end{tabular}
-\end{table}
 
 \subsection{Differences Between Instances}
 The basis for our experiments are three instances of the lazio network with 2 (lazio\_2), 3 (lazio\_3), and 4 commodities (lazio\_4\_1) which differ also differ in the number of trucks for the commodities. Whereas the number of trucks for lazio\_3 and lazio\_4\_1 have been chosen randomly, lazio\_2 has the same number of trucks than the lazio\_3 instance for the first two commodities.
@@ -304,7 +291,7 @@ The basis for our experiments are three instances of the lazio network with 2 (l
 
 
 
-\begin{figure}%
+\begin{figure}
 	\centering
 	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_50.eps}%
 	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_100.eps}%
@@ -314,13 +301,15 @@ The basis for our experiments are three instances of the lazio network with 2 (l
 
 \subsection{Random Initialization Versus Cost-Optimal Initialization}
 
-\begin{figure}%
-	\includegraphics[width=\columnwidth]{../experiments/randVsCost/allsolutions.eps}%
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\columnwidth]{../experiments/randVsCost/allsolutions.eps}%
 	\caption{\label{fig:allsolutions} Comparison between the random initialization (circles) and the cost-optimal one (crosses). Shown are the populations of 10 independent HypE runs after 1000 generations for all three objectives (top left) and each combination of two objectives.}
 \end{figure}
 
-\begin{figure}%
-	\includegraphics[width=\columnwidth]{../experiments/randVsCost/onlynondominated.eps}%
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\columnwidth]{../experiments/randVsCost/onlynondominated.eps}%
 	\caption{\label{fig:onlynondominated} Comparison between the random initialization (circles) and the cost-optimal one (crosses). Shown are only the non-dominated solutions in the final populations of 10 independent HypE runs after 1000 generations.}
 \end{figure}
 
@@ -348,9 +337,21 @@ Although these results indicate that smaller population sizes might be always fa
 \subsection{Changing the Environmental Selection}
 With a last experiment, we show the influence of the algorithm's environmental selection scheme on the performance and in particular how this can be used to steer the search towards specific regions of the Pareto front.
 
-Instead of the environmental selection of HypE \citep{bz2011a}, other selection schemes can be easily used with the PISA framework and we show the resutls of two other algorithms exemplary. On the one hand, we employ the famous NSGA-II selection scheme \citep{dapm2002a} and, on the other hand, we use a generalized version of HypE towards a generalized weighted hypervolume indicator \citep{abbz2009b,bbtz2011a}. The boxplots of the resulting hypervolume indicator values after 100,000 function evaluations (population of size 100 after 1000 generations) are shown in Fig.~\ref{fig:algoComparison}. \TODO{What can be seen is that both? algorithms show a reduced performance regarding the standard hypervolume value. However, W-HypE was run in order to show how the search can be steered towards regions of the objective space that have been specified by the user. In our case, we defined the weight of the underlying weighted hypervolume indicator \citep{zbt2007a} as a box with corners XXX such that the weighted hypervolume indicator only influences BLABLABLA}
+Instead of the environmental selection of HypE \citep{bz2011a}, other selection schemes can be easily used with the PISA framework and we show the resutls of two other algorithms exemplary. On the one hand, we employ the famous NSGA-II selection scheme \citep{dapm2002a} and, on the other hand, we use a generalized version of HypE towards a generalized weighted hypervolume indicator \citep{abbz2009b,bbtz2011a}. The boxplots of the resulting hypervolume indicator values after 100,000 function evaluations (population of size 100 after 1000 generations) are shown in Fig.~\ref{fig:algoComparison}. \TODO{What can be seen is that both? algorithms show a reduced performance regarding the standard hypervolume value. For NSGA-II, this is expected as its environmental selection schemes becomes less effective than in bi-objective problems when the number of objectives increases \citep{wbn2007a,bz2011a}. This is not the case for indicator-based algorithms such as HypE which were specifically proposed to circumvent the problems of algorithms optimizing non-compliant quality measures such as NSGA-II.
+
+The reason for the reduced performance in the standard hypervolume indicator for W-Hype, however, is a different one. W-HypE was developed to steer the search towards regions of the objective space that have been specified by the user. To this end, it does not optimize the standard hypervolume indicator but a more generalized version of it, the weighted hypervolume indicator \citep{zbt2007a}. The idea behind W-HypE is that solutions in objective space regions with a higher weight will get a higher fitness due to the \emph{weighted} hypervolume they dominate. In order to be efficient also for a large number of objectives, W-HypE does not calculate the weighted hypervolume indicator values exactly (which is not possible for most of the weight functions) but instead samples them. Here, 10,000 samples are used in each iteration of the algorithm.
+
+To show the principles of W-HypE in the application of our hazmat routing problem, we defined the weight of W-HypE's underlying weighted hypervolume indicator as constant in a box with corners $[7\cdot 10^3, 3\cdot 10^7, 5\cdot 10^5]$ and $[10^4, 4\cdot 10^7, 1.1\cdot 10^6]$ and zero otherwise. Instead of optimizing the standard hypervolume indicator as HypE, W-HypE now optimizes this weighted hypervolume indicator, resulting in better, i.e., dominating solutions in regions in or close to the box. Figure~\ref{fig:whype} shows the resulting non-dominated solutions of both algorithms with population size 25 after 10 independent runs of 4,000 generations each as well as the sampling box.}
+
+This advantage of W-HypE over HypE within the pre-defined box can be observed both in early and late generations, cp.\ Fig.~\ref{fig:whype}.
 
 \TODO{write}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\columnwidth]{../experiments/randVsCost/WHypEVsHypE_ns4_1_OriginalCosts2.eps}%
+	\caption{\label{fig:whype} Comparison between the standard HypE selection ($\circ$) with the one of W-HypE ($\times$) when the weighted hypervolume indicator is only sampled in the gray shaded box $[7\cdot 10^3, 10^4]\times[3\cdot 10^7, 4\cdot 10^7]\times[5\cdot 10^5, 1.1\cdot 10^6]$. Shown are all non-dominated solutions for each algorithm after 10 runs with 4,000 generations and population size 25.}
+\end{figure}
 
 
 \subsection{The Feasibility of the EMO Approach}
