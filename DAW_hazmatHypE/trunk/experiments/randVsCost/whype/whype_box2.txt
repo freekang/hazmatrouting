@@ -1,0 +1,3 @@
+seed 2037115396
+nrOfSamples 10000
+dist uni 1.0 lower 7e3 3e7 0.5e6 upper 1e4 4e7 1.1e6
