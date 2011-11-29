@@ -89,6 +89,8 @@
 \newcommand{\COMMENTD}[1]{{\color{green}Dimo: #1}}
 \newcommand{\COMMENTN}[1]{{\color{green}Nora: #1}}
 
+\renewcommand{\topfraction}{.70}
+\renewcommand{\textfraction}{.20}
 
 \journal{DAM}
 
@@ -303,14 +305,27 @@ The basis for our experiments are three instances of the lazio network with 2 (l
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\columnwidth]{../experiments/randVsCost/allsolutions.eps}%
-	\caption{\label{fig:allsolutions} Comparison between the random initialization (circles) and the cost-optimal one (crosses). Shown are the populations of 10 independent HypE runs after 1000 generations for all three objectives (top left) and each combination of two objectives.}
+	\includegraphics[width=0.75\columnwidth]{../experiments/randVsCost/randVsCost_ns4_1_OriginalCost_2000gens.eps}
+	\vspace{-1em}
+	\caption{\label{fig:allsolutions} Comparison between the random initialization ($\circ$) and the cost-optimal one ($\times$). Shown are the non-dominated solutions in the final populations of 10 independent HypE runs with population size 50 after 2000 generations for all three objectives (top left) and each combination of two objectives on the lazio\_4\_1 instance.}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\columnwidth]{../experiments/randVsCost/onlynondominated.eps}%
-	\caption{\label{fig:onlynondominated} Comparison between the random initialization (circles) and the cost-optimal one (crosses). Shown are only the non-dominated solutions in the final populations of 10 independent HypE runs after 1000 generations.}
+	\includegraphics[width=0.75\columnwidth]{../experiments/randVsCost/randVsCost_ns4_1_New_2000gens.eps}
+	\vspace{-1em}
+	\caption{\label{fig:onlynondominated} Comparison between the random initialization ($\circ$) and the cost-optimal one ($\times$). Shown are the non-dominated solutions in the final populations of 10 independent HypE runs with population size 50 after 2000 generations on the uncorrelated\_4 instance.}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/initBoxPlots_OriginalCosts.eps}
+	\hfill
+	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/initBoxPlots_New.eps}
+	\vspace{-1em}
+	\caption{\label{fig:costVsRandBoxPlots} Comparison between the random initialization and the cost-optimal one.
+	Shown are boxplots of hypervolume values for HypE with population size 50 on the lazio\_4 instance (left) and on the uncorrelated\_4 instance (right) after both 250 and 2000 generations.}
 \end{figure}
 
 
@@ -324,7 +339,8 @@ Although these results indicate that smaller population sizes might be always fa
 
 \begin{figure}%
 	\centering
-	\includegraphics[width=0.8\columnwidth]{../experiments/randVsCost/diffPopsizes}%
+	\includegraphics[width=0.75\columnwidth]{../experiments/randVsCost/diffPopsizes}%
+	\vspace{-1em}
 	\caption{\label{fig:popsizes} Nondominated solutions of 10 independent runs after 100,000 function evaluations for HypE with a population size of 50 ($\times$), 100 ($\circ$), and 200 ($\square$) respectively.}
 \end{figure}
 
@@ -349,7 +365,8 @@ This advantage of W-HypE over HypE within the pre-defined box can be observed bo
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\columnwidth]{../experiments/randVsCost/WHypEVsHypE_ns4_1_OriginalCosts2.eps}%
+	\includegraphics[width=0.75\columnwidth]{../experiments/randVsCost/WHypEVsHypE_ns4_1_OriginalCosts2.eps}
+	\vspace{-1em}
 	\caption{\label{fig:whype} Comparison between the standard HypE selection ($\circ$) with the one of W-HypE ($\times$) when the weighted hypervolume indicator is only sampled in the gray shaded box $[7\cdot 10^3, 10^4]\times[3\cdot 10^7, 4\cdot 10^7]\times[5\cdot 10^5, 1.1\cdot 10^6]$. Shown are all non-dominated solutions for each algorithm after 10 runs with 4,000 generations and population size 25.}
 \end{figure}
 
