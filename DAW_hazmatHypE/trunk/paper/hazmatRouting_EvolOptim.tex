@@ -137,11 +137,11 @@
 
 
 \begin{abstract}
-tbw
+Nowadays, various hazardous materials, or \emph{hazmats}, are transported on our streets, via trains, planes or ships. In paricular when routing them over the street network, where typically several possible routes exist, one would like to minimize both the costs and the total risks. However, sometimes one aims at minimizing an additional type of risk, which in most optimization models is resulting in a non-linear objective: the equity risk, or the \emph{maximum} risk over all regions, streets, etc. In other words, one aims at distributing the overall risks as much as possible while the costs and the total risk should be still minimized simultaneously. In this paper, this three-objective optimization problem is tackled with a novel randomized algorithm, based on a state-of-the-art Evolutionary Multiobjective Optimization algorithm and taylored to the needs of finding Pareto-optimal truck routes in a given network by proposing a variable-length representation and problem-specific operators. Experimental results on realistic instances for the street network of Italy's Lazio region show that the proposed approach efficiently finds a variety of good solutions in reasonable time. The experiments also show the influence of the algorithm's different building blocks and the instances' parameters on the solution quality.
 \end{abstract}
 
 \begin{keyword}
-Evolutionary multiobjective optimization, Transportation of hazardous materials, Risk equity, Shortest Paths. 
+Evolutionary Multiobjective Optimization, Transportation of hazardous materials, Risk equity, Shortest Paths. 
 \end{keyword}
 
 \end{frontmatter}
@@ -328,9 +328,6 @@ The basis for our experiments are 5 instances of the lazio network with 2 (lazio
 	Shown are boxplots of hypervolume values for HypE with population size 50 on the lazio\_4 instance (left) and on the uncorrelated\_4 instance (right) after both 250 and 2000 generations.}
 \end{figure}
 
-
-\subsection{Comparison With An Exact Algorithm for the Two Linear Objectives}
-\TODO{add plots and describe what we compare (efficient cost/risk paths multiplied by the number of trucks); result: EA is better}
 
 \subsection{Changing the Population Size}
 In a second experiment, we show that changing the population size of the algorithm in standard ranges does not change the algorithm outcome drastically. To this end, Fig.~\ref{fig:popsizes} shows the nondominated solutions of 10 independent runs after 100,000 function evaluations for three different versions of HypE where the population size changes from 50 over 100 to 200 on the largest instance lazio\_4\_1 with 4 commodities. From the visual inspection of the resulting solutions, we cannot make a statement about which population size to favour. When comparing the hypervolume values of the resulting populations, however, an effect is visible. Figure~\ref{fig:algoComparison} shows the corresponding box plots of the hypervolume values and one-sided Wilcoxon rank sum tests on the populations' hypervolume indicator values reveil statistical significant differences between two of the three possible algorithm pairs. With a $p$-value of $0.02163$, the null hypothesis of no differences between a population size of 50 and a population size of 100 has to be rejected in favor of stating that the algorithm variant with population size 50 is superior to the one with population size 100. For the comparison between population size 50 and population size 200, the $p$-value equals $0.0144$ with the population size 50 being better whereas the comparison between population size 100 and population size 200 does not reveal a statistical difference (the $p$-values of the one-sided Wilcoxon tests are $0.2179$ and $0.8035$ respectively). 
