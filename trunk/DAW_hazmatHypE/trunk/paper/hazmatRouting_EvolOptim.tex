@@ -238,7 +238,7 @@ As mutation operator, we suggest to shorten or lengthen the path of one or sever
 \end{itemize}
 
 \subsection{Implementation in PISA}
-The proposed algorithm has been implemented within the multiobjective optimization framework PISA \citep{bltz2003a} and is going to be made available via the official PISA web page\footnote{Until the source code is available via the PISA web page \url{http://www.tik.ee.ethz.ch/pisa/}, we made it temporarily available at \url{http://researchers.lille.inria.fr/~brockhof/downloads/hazmatvariator20111110.zip} as supplementary material for the review process.}. More precisely, the implementation of an algorithm/problem combination in PISA is divided into the problem-specific part (called \emph{variator module}) consisting of representation, initialization, and variation operators and the problem-independent part (called the \emph{selector module}). As selection module, any of the state-of-the-art selectors in PISA can be used off-the-shelf. In this study, we choose to use HypE \citep{bz2011a}, NSGA-II \citep{}, and W-HypE \citep{} with a focus on the first one.
+The proposed algorithm has been implemented within the multiobjective optimization framework PISA \citep{bltz2003a} and is going to be made available via the official PISA web page\footnote{Until the source code is available via the PISA web page \url{http://www.tik.ee.ethz.ch/pisa/}, we made it temporarily available at \url{http://researchers.lille.inria.fr/~brockhof/downloads/hazmatvariator20111110.zip} as supplementary material for the review process.}. More precisely, the implementation of an algorithm/problem combination in PISA is divided into the problem-specific part (called \emph{variator module}) consisting of representation, initialization, and variation operators and the problem-independent part (called the \emph{selector module}). As selection module, any of the state-of-the-art selectors in PISA can be used off-the-shelf. In this study, we choose to use HypE \citep{bz2011a}, NSGA-II \citep{dapm2002a}, and W-HypE \citep{} with a focus on the first one.
 
 After the initialization of the population with $\alpha$ individuals, those solutions are evaluated and their objective function values transferred to the selector module which then \TODO{write}
 
@@ -347,6 +347,9 @@ Although these results indicate that smaller population sizes might be always fa
 
 \subsection{Changing the Environmental Selection}
 With a last experiment, we show the influence of the algorithm's environmental selection scheme on the performance and in particular how this can be used to steer the search towards specific regions of the Pareto front.
+
+Instead of the environmental selection of HypE \citep{bz2011a}, other selection schemes can be easily used with the PISA framework and we show the resutls of two other algorithms exemplary. On the one hand, we employ the famous NSGA-II selection scheme \citep{dapm2002a} and, on the other hand, we use a generalized version of HypE towards a generalized weighted hypervolume indicator \citep{abbz2009b,bbtz2011a}. The boxplots of the resulting hypervolume indicator values after 100,000 function evaluations (population of size 100 after 1000 generations) are shown in Fig.~\ref{fig:algoComparison}. \TODO{What can be seen is that both? algorithms show a reduced performance regarding the standard hypervolume value. However, W-HypE was run in order to show how the search can be steered towards regions of the objective space that have been specified by the user. In our case, we defined the weight of the underlying weighted hypervolume indicator \citep{zbt2007a} as a box with corners XXX such that the weighted hypervolume indicator only influences BLABLABLA}
+
 \TODO{write}
 
 
