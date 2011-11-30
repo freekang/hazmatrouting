@@ -287,16 +287,17 @@ Except otherwise stated, we used the following parameter setting. We perform 10 
 \subsection{Differences Between Instances}
 The basis for our experiments are 5 instances of the lazio network with 2 (lazio\_2), 3 (lazio\_3), and 4 commodities (lazio\_4\_1, lazio\_4\_2, and lazio\_4\_3) which differ also in the number of trucks for the commodities. Whereas the number of trucks for lazio\_3 and lazio\_4\_1 have been chosen randomly, lazio\_2 has the same number of trucks than the lazio\_3 instance for the first two commodities. The lazio\_4\_2 instance has only 1 truck more for commodity 4 than lazio\_4\_1 and overall three times the number of trucks for each commodity than the instance lazio\_4\_3.
 
-\TODO{show results and talk about them}
-
-
+Figure~\ref{fig:compareAll} shows the non-dominated solutions of 10 independent HypE runs for each instance. What can be observed are three main statements. First of all, cost and risks of the found non-dominated solutions are highly correlated, as they are for each single arc in the problem formulations; therefore, the problem is not truly three-objective but rather bi-objective. Secondly, the range of the objective function values for the found non-dominated solutions follow the number of trucks in the problem instance, i.e., the more trucks a problem instance has the more costs, total and equity risk can be expected in the solutions found. However and thirdly, this relationship is not linear in the plots of Fig.~\ref{fig:compareAll} as can be seen, for example, between the lazio\_4\_2 and the lazio\_4\_3 instance. Though the number of trucks per commodity differs by a factor of 3 between them, the objective function values of the resulting non-dominated solutions after 1,000 generations are slightly further away. The reason for that is the much smaller search space for the lazio\_4\_3 instance which can be searched more exhaustively by the algorithm with the same number of function evalutions---resulting in a better convergence towards the Pareto front.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_50.eps}%
-	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_100.eps}%
-	\caption{\label{fig:hypervolumeOverTime} Boxplots of hypervolume values over time for numbers of generations in $[250, \ldots, 2000]$ for HypE with population size 50 (left) and population size 100 (right) on the lazio\_4 instance.}
+	\includegraphics[width=0.75\columnwidth]{../experiments/randVsCost/compAll_2000gens.eps}
+	\caption{\label{fig:compareAll} Comparison between the different instances lazio\_2 (squares), lazio\_3 (circles), lazio\_4\_1 (diamonds), lazio\_4\_2 (crosses), and lazio\_4\_3 (stars). Shown are the non-dominated solutions in the final populations of 10 independent HypE runs with population size 50 after 2000 generations.}
 \end{figure}
+
+
+
+
 
 
 \subsection{Random Initialization Versus Cost-Optimal Initialization}
@@ -331,6 +332,14 @@ The basis for our experiments are 5 instances of the lazio network with 2 (lazio
 In a second experiment, we show that changing the population size of the algorithm in standard ranges does not change the algorithm outcome drastically. To this end, Fig.~\ref{fig:popsizes} shows the nondominated solutions of 10 independent runs after 100,000 function evaluations for three different versions of HypE where the population size changes from 50 over 100 to 200 on the largest instance lazio\_4\_1 with 4 commodities. From the visual inspection of the resulting solutions, we cannot make a statement about which population size to favour. When comparing the hypervolume values of the resulting populations, however, an effect is visible. Figure~\ref{fig:algoComparison} shows the corresponding box plots of the hypervolume values and one-sided Wilcoxon rank sum tests on the populations' hypervolume indicator values reveil statistical significant differences between two of the three possible algorithm pairs. With a $p$-value of $0.02163$, the null hypothesis of no differences between a population size of 50 and a population size of 100 has to be rejected in favor of stating that the algorithm variant with population size 50 is superior to the one with population size 100. For the comparison between population size 50 and population size 200, the $p$-value equals $0.0144$ with the population size 50 being better whereas the comparison between population size 100 and population size 200 does not reveal a statistical difference (the $p$-values of the one-sided Wilcoxon tests are $0.2179$ and $0.8035$ respectively). 
 
 Although these results indicate that smaller population sizes might be always favorable, this is not the case as additional experiments with a population size of 25 show (see the box plot in Fig.~\ref{fig:algoComparison}). The Wilcoxon rank sum test comparing population sizes 25 and 50 results in a $p$-value of $0.004465$ whereas the other comparisons are not statistically significantly different. To conclude, among the tested population sizes, 50 seems to be the best choice for budgets around 100,000 function evaluations. Also with longer runs, we recommend to keep the population size of the algorithm around 50 as the HypE implementation in PISA becomes too costly if the population size is much larger. Ten runs with 2000 iterations and population size 200, for example, need already around 20 hours to complete on an Intel Core2 Duo with 2.8GHz.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_50.eps}%
+	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_100.eps}%
+	\caption{\label{fig:hypervolumeOverTime} Boxplots of hypervolume values over time for numbers of generations in $[250, \ldots, 2000]$ for HypE with population size 50 (left) and population size 100 (right) on the lazio\_4 instance.}
+\end{figure}
+
 
 \begin{figure}%
 	\centering
