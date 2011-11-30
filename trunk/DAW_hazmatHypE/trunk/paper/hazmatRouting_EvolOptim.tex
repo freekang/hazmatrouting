@@ -255,7 +255,7 @@ Given the $\mu$ solutions of the old population and the $\lambda$ new ones, the 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In the remainder of this paper, we investigate how the above proposed evolutionary multiobjective optimization algorithm can cope with realistic instances of the multiobjective risk-equity constrained routing problem. The experimental analyses have two main goals. On the one hand, we show that the algorithm is efficient and can find multiple non-dominated solutions on practical examples in reasonable time. On the other hand, we investigate which of the two proposed initialization schemes is favourable and when this is the case. In addition, a few more experiments are conducted to show that the standard parameters of the algorithm behave as with other test problems. To this end, we vary the population size of the algorithm as well as its environmental selection scheme.
 
-As a test case for all the experiments, we chose to use a real-world case study based on the work of \citet{bcg2009a}. The network used here consists of 311 nodes and 441 arcs and represents the main transport roads in Italy's Lazio region which, amongst other cities, includes the capital Rome. We distinguish between instances with a different number of commodities (between 2 and 4) and with different numbers of trucks, see Table~\ref{tab:instances}. While the costs $c_{ij}$ are proportional to the real distance between the two locations $i$ and $j$, the risks $r_{ij}^c$ for each arc $(i,j) \in A$ and commodity $c \in C$ have been computed as a product of the arc's length, the actual population density in the area of the arc and a constant which depends on the commodity, for details see \citep{bcg2009a} and Table~\ref{tab:instances}. Solely one instance is created differently: to show the impact of correlation between the costs and the risks, we created the instance uncorrelated\_4 with the same graph and risks as for the instance lazio\_4\_1 but with randomly permutated costs where each occuring cost value has been divided by a random value between 0 and 5000.
+As a test case for all the experiments, we chose to use a real-world case study based on the work of \citet{bcg2009a}. The network used here consists of 311 nodes and 441 arcs and represents the main transport roads in Italy's Lazio region which, amongst other cities, includes the capital Rome. We distinguish between instances with a different number of commodities (between 2 and 4) and with different numbers of trucks, see Table~\ref{tab:instances}. While the costs $c_{ij}$ are proportional to the real distance between the two locations $i$ and $j$, the risks $r_{ij}^c$ for each arc $(i,j) \in A$ and commodity $c \in C$ have been computed as a product of the arc's length, the actual population density in the area of the arc and a constant which depends on the commodity, for details see \citep{bcg2009a} and Table~\ref{tab:instances}. Solely one instance is created differently: to show the impact of correlation between the costs and the risks, we created the instance uncorrelated\_4 with the same graph and risks as for the instance lazio\_4\_1 but where the costs of each arc are the reciprocal of the risk of the first commodity. Figure~\ref{fig:correlation} shows those differences between the costs and risks for the instances lazio\_4\_1 and uncorrelated\_4.
 
 \begin{table}
 \caption{\label{tab:instances} Parameters of the instances used in the experimental analyses with $|C|$ being the number of different commodities.}\vspace{1em}
@@ -278,6 +278,14 @@ As a test case for all the experiments, we chose to use a real-world case study 
 \end{table}
 
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.48\columnwidth]{figs/correlationLazio41.eps}
+	\hfill
+	\includegraphics[width=0.48\columnwidth]{figs/correlationUncorrelated4.eps}
+	\caption{\label{fig:correlation} Correlation between the costs and the risks of the first commodity for both the lazio\_4\_1 instance (left) and the uncorrelated\_4 instance (right). A single point corresponds to a single arc.}
+\end{figure}
+
 %We concentrated our analysis on a real-world case study \citep{bcg2009a}. We considered the road network of the Lazio region (located in the middle of Italy), and, in particular, its main transport roads. The network is composed of 311 nodes and 441 links. The risks $r_{ij}^c$ for each arc $(i,j) \in A$ and commodity $c \in C$ are evaluated as the societal risk computed as the number of people living inside the exposure zone around link $(i,j)$ (whose size depends on the hazmat type $c$ times the accident probability involving the vehicle), for details see  \citep{bcg2009a}. We considered from 2 to 10 origin-destination pairs on the network, each one associated with a number of commodities ranging from 1 to 3, for an overall number of shipments (commodities) between 2 and 30 (we recall that in our model each commodity is associated with one origin-destination pair). With each one of the latter scenarios we associated 10 instances; each instance has been generated by assigning uniformly at random a demand from 100 to 1000 tons to each shipment.
 
 \subsection{Experimental Settings}
@@ -298,16 +306,22 @@ Figure~\ref{fig:compareAll} shows the non-dominated solutions of 10 independent 
 \end{figure}
 
 
+\subsection{Convergence Towards the Pareto Front}
+Figure~\ref{fig:hypervolumeOverTime} shows the boxplots of the hypervolume values for HypE with population size 50 and 100 for different number of generations. What can be seen is that, in general, the hypervolume indicator is mazimized over time and that for the algorithm with population size 50, the hypervolume value starts to stagnate starting from around generation 1500 with the mean still going up but the variance staying high. The fact that all runs found a similar hypervolume value which is significantly higher than the one of the random population in the beginning (around $9.62\cdot 10^26$ for both algorithms) indicates that the algorithm found solution sets which are close to the Pareto front.
 
 
-
+\begin{figure}
+	\centering
+	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_50.eps}
+	\hfill
+	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_100.eps}
+	\caption{\label{fig:hypervolumeOverTime} Boxplots of hypervolume values over time for numbers of generations in $[250, \ldots, 2000]$ for HypE with population size 50 (left) and population size 100 (right) on the lazio\_4 instance.}
+\end{figure}
 
 \subsection{Random Initialization Versus Cost-Optimal Initialization}
-In order to see the impact of the two different initialization schemes \emph{random} and \emph{cost-optimal}, we performed 10 runs of HypE with both initialization schemes for 2,000 generations and a population size of 50 as above. Figure~\ref{fig:randVsCostOriginal} shows the resulting non-dominated solutions of the final populations. Surprisingly, the cost-optimal initialization could not produce other solutions than the cost-optimal one itself. \TODO{However, what can be seen is that the ...}
+In order to see the impact of the two different initialization schemes \emph{random} and \emph{cost-optimal}, we performed 10 runs of HypE with both initialization schemes for 2,000 generations and a population size of 50 as above. Figure~\ref{fig:randVsCostOriginal} shows the resulting non-dominated solutions of the final populations. Surprisingly, the cost-optimal initialization could not produce other solutions than the cost-optimal one itself. As we will see below, the reason is a high correlation between the risk and costs of each arc, which seemingly result in the fact that no non-dominated solution can be reached from the initial solution by the applied mutation operator. However, the comparison between the both initialization schemes on the lazio\_4\_1 instance shows that also the algorithm employing the random initialization can find solutions which are close to the Pareto front---improving over the hypervolume of the single cost-optimal solution in later generations, see the left-hand plot of Fig.~\ref{fig:costVsRandBoxPlots}. 
 
-
-Boxplots can be found in Fig.~\ref{fig:costVsRandBoxPlots} ...
-
+To show that the cost-optimal initialization is not useless, we run the algorithms again on the instance uncorrelated\_4 where the cost and risk values are fully uncorrelated. In this case, there are more local changes of the truck paths that result in non-dominated solutions and eventually in a larger variaty of solutions found by the algorithm employing the cost-optimal initialization (see Fig.~\ref{fig:randVsCostNew}). Due to the fact that the cost-optimal initialization starts already on the Pareto-front, it also results in higher hypervolume values than for the random initialization variant---both for a low and a high number of generations, see the right-hand side plot of Fig.~\ref{fig:costVsRandBoxPlots}.
 
 
 \begin{figure}
@@ -337,17 +351,9 @@ Boxplots can be found in Fig.~\ref{fig:costVsRandBoxPlots} ...
 
 
 \subsection{Changing the Population Size}
-In a second experiment, we show that changing the population size of the algorithm in standard ranges does not change the algorithm outcome drastically. To this end, Fig.~\ref{fig:popsizes} shows the nondominated solutions of 10 independent runs after 100,000 function evaluations for three different versions of HypE where the population size changes from 50 over 100 to 200 on the largest instance lazio\_4\_1 with 4 commodities. From the visual inspection of the resulting solutions, we cannot make a statement about which population size to favour. When comparing the hypervolume values of the resulting populations, however, an effect is visible. Figure~\ref{fig:algoComparison} shows the corresponding box plots of the hypervolume values and one-sided Wilcoxon rank sum tests on the populations' hypervolume indicator values reveil statistical significant differences between two of the three possible algorithm pairs. With a $p$-value of $0.02163$, the null hypothesis of no differences between a population size of 50 and a population size of 100 has to be rejected in favor of stating that the algorithm variant with population size 50 is superior to the one with population size 100. For the comparison between population size 50 and population size 200, the $p$-value equals $0.0144$ with the population size 50 being better whereas the comparison between population size 100 and population size 200 does not reveal a statistical difference (the $p$-values of the one-sided Wilcoxon tests are $0.2179$ and $0.8035$ respectively). 
+In the next experiment, we aim at showing that changing the population size of the algorithm in standard ranges does not change the algorithm outcome drastically. To this end, Fig.~\ref{fig:popsizes} shows the nondominated solutions of 10 independent runs after 100,000 function evaluations for three different versions of HypE where the population size changes from 50 over 100 to 200 on the largest instance lazio\_4\_1 with 4 commodities. From the visual inspection of the resulting solutions, we cannot make a statement about which population size to favour. When comparing the hypervolume values of the resulting populations, however, an effect is visible. Figure~\ref{fig:algoComparison} shows the corresponding box plots of the hypervolume values and one-sided Wilcoxon rank sum tests on the populations' hypervolume indicator values reveil statistical significant differences between two of the three possible algorithm pairs. With a $p$-value of $0.02163$, the null hypothesis of no differences between a population size of 50 and a population size of 100 has to be rejected in favor of stating that the algorithm variant with population size 50 is superior to the one with population size 100. For the comparison between population size 50 and population size 200, the $p$-value equals $0.0144$ with the population size 50 being better whereas the comparison between population size 100 and population size 200 does not reveal a statistical difference (the $p$-values of the one-sided Wilcoxon tests are $0.2179$ and $0.8035$ respectively). 
 
 Although these results indicate that smaller population sizes might be always favorable, this is not the case as additional experiments with a population size of 25 show (see the box plot in Fig.~\ref{fig:algoComparison}). The Wilcoxon rank sum test comparing population sizes 25 and 50 results in a $p$-value of $0.004465$ whereas the other comparisons are not statistically significantly different. To conclude, among the tested population sizes, 50 seems to be the best choice for budgets around 100,000 function evaluations. Also with longer runs, we recommend to keep the population size of the algorithm around 50 as the HypE implementation in PISA becomes too costly if the population size is much larger. Ten runs with 2000 iterations and population size 200, for example, need already around 20 hours to complete on an Intel Core2 Duo with 2.8GHz.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_50.eps}%
-	\includegraphics[width=0.48\columnwidth]{../experiments/randVsCost/hypervolumes/hypervolumeOverTime_100.eps}%
-	\caption{\label{fig:hypervolumeOverTime} Boxplots of hypervolume values over time for numbers of generations in $[250, \ldots, 2000]$ for HypE with population size 50 (left) and population size 100 (right) on the lazio\_4 instance.}
-\end{figure}
-
 
 \begin{figure}%
 	\centering
