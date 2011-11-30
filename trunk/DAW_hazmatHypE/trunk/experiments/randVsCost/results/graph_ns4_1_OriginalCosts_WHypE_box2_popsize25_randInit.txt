@@ -1,11 +1,11 @@
 start commandLine
-..\hazmatvariator\hazmat_param_graph_ns4_1_OriginalCosts_randInit_WHypE_box2_popsize25.txt ..\PISAvariator3D_25_ ..\hype_win\hype_param_graph_ns4_New.txt ..\PISAselector3D_25_ monParam_OriginalCosts.txt ..\results\graph_ns4_1_OriginalCosts_WHypE_box2_popsize25_randInit 0.1
+..\hazmatvariator\hazmat_param_graph_ns4_1_OriginalCosts_randInit_WHypE_box2_popsize25.txt ..\PISAvariator3D_25_2_ ..\whype\whype_box2.txt ..\PISAselector3D_25_2_ monParam_OriginalCosts_Long.txt ..\results\graph_ns4_1_OriginalCosts_WHypE_box2_popsize25_randInit 0.1
 end commandLine
 
 start monParameter
 seed 23
 numberOfRuns 10
-numberOfGenerations 2000
+numberOfGenerations 4000
 outputType all
 outputSet 250
 debug on
@@ -27,7 +27,7 @@ end varCommonParameter
 start varParameter
 seed 1986133004
 maximum_generations 100000
-output_file_name ../results/graph_ns4_1_OriginalCosts_randInit_WHypEbox2_popsize25_generation2000.txt
+output_file_name ../results/graph_ns4_1_OriginalCosts_randInit_WHypEbox2_popsize25_generation4000.txt
 debug_print true
 recombination_probability 0.1
 mutation_probability 1
@@ -44,10 +44,7 @@ dim 3
 end selCommonParameter
 
 start selParameter
-seed 904623968
-tournament 5
-mating 1
-bound 1000000000
-nrOfSamples -1
-
+seed 2037115396
+nrOfSamples 10000
+dist uni 1.0 lower 7e3 3e7 0.5e6 upper 1e4 4e7 1.1e6
 end selParameter

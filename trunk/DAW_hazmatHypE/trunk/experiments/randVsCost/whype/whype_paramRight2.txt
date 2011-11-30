@@ -1,0 +1,3 @@
+seed 123597412
+nrOfSamples 10000
+dist gau 1.0 mu 8e3 3e7 8e5 dir 2e3 2e7 1e6 sigma_eps 100 sigma_t 1e7
