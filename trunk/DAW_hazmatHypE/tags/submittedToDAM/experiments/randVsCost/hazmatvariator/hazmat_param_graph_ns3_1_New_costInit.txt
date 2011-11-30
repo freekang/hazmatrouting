@@ -1,0 +1,9 @@
+seed 770938812
+maximum_generations 100000
+output_file_name ../results/graph_ns3_1_New_costInit_generation2000.txt
+debug_print true
+recombination_probability 0.1
+mutation_probability 1
+bitflip_probability 0.1
+initialization_type cost
+graph_definition_file ../instances/graph_ns3_1_New.dat

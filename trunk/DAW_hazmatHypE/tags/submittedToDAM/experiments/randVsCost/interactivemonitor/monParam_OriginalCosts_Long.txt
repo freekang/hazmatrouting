@@ -1,0 +1,12 @@
+seed 23
+numberOfRuns 10
+numberOfGenerations 4000
+outputType all
+outputSet 250
+debug on
+interactive 0
+interactiontype gau
+plotPeriod 2
+plotting 0
+gauDirection nadir
+updateVariatorSeed linearlyWithRuns
