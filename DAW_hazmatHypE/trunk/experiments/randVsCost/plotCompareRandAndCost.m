@@ -3,34 +3,47 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%
 generation = 2000;
-numOfCommodities = 2;
-instance = 2;
 %%%%%%%%%%%%%%%%%%%%%%%
 
-filename = ['results/graph_ns' int2str(numOfCommodities) '_' int2str(instance) '_New_costInit.' int2str(generation)];
+% first ns4_1_New:
+%%%%%%%%%%%%%%%%%%
+filename = ['results/graph_ns4_1_New_HypE_popsize50_costInit.' int2str(generation)];
 C = dlmread(filename);
 C_nondom = C(find(paretofront(C(:,1:3))),:);
 figure(77);
-%plot3(C(:,1),C(:,2),C(:,3), 'x');
 plot3(C_nondom(:,1),C_nondom(:,2),C_nondom(:,3), 'o');
 hold all; grid on;
 
-filename = ['results/graph_ns' int2str(numOfCommodities) '_' int2str(instance) '_New_randInit.' int2str(generation)];
+filename = ['results/graph_ns4_1_New_HypE_popsize50_randInit.' int2str(generation)];
 R = dlmread(filename);
 R_nondom = R(find(paretofront(R(:,1:3))),:);
-%figure()
-%plot3(R(:,1),R(:,2),R(:,3), 'x');
-%hold all; grid on;
 plot3(R_nondom(:,1),R_nondom(:,2),R_nondom(:,3), 'o');
 hold off;
 
-
-%mysubplot(C,C_nondom, 'C', 'C_nondom', 'C only', 'filename');
-%mysubplot(R,R_nondom, 'R', 'R_nondom', 'R only', 'filename');
-
-title = ['all solutions after ' int2str(generation) ' generations'];
-mysubplot(C,R, 'shortest path initialization', 'random initialization', title, 'allsolutions.eps');
 title = ['nondominated solutions after ' int2str(generation) ' generations'];
-mysubplot(C_nondom,R_nondom, 'shortest path initialization', 'random initialization', title, 'onlynondominated.eps');
+filename = ['randVsCost_ns4_1_New_' int2str(generation) 'gens.eps'];
+mysubplotRandVsCost(R_nondom, C_nondom, 'random', 'shortest path', title, filename);
+
+hold off;
+
+
+% now ns4_1_OriginalCost:
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+filename = ['results/graph_ns4_1_OriginalCosts_HypE_popsize50_costInit.' int2str(generation)];
+C = dlmread(filename);
+C_nondom = C(find(paretofront(C(:,1:3))),:);
+figure(78);
+plot3(C_nondom(:,1),C_nondom(:,2),C_nondom(:,3), 'o');
+hold all; grid on;
+
+filename = ['results/graph_ns4_1_OriginalCosts_HypE_popsize50_randInit.' int2str(generation)];
+R = dlmread(filename);
+R_nondom = R(find(paretofront(R(:,1:3))),:);
+plot3(R_nondom(:,1),R_nondom(:,2),R_nondom(:,3), 'o');
+hold off;
+
+title = ['nondominated solutions after ' int2str(generation) ' generations'];
+filename = ['randVsCost_ns4_1_OriginalCost_' int2str(generation) 'gens.eps'];
+mysubplotRandVsCost(R_nondom, C_nondom, 'random', 'shortest path', title, filename);
 
 hold off;
