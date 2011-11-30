@@ -1,0 +1,53 @@
+start commandLine
+..\hazmatvariator\hazmat_param_graph_ns3_1_OriginalCosts_randInit.txt ..\PISAvariator3D_50_ ..\hype_win\hype_param_graph_ns3_New.txt ..\PISAselector3D_50_ monParam_OriginalCosts.txt ..\results\graph_ns3_1_OriginalCosts_HypE_popsize50_randInit 0.1
+end commandLine
+
+start monParameter
+seed 23
+numberOfRuns 10
+numberOfGenerations 2000
+outputType all
+outputSet 250
+debug on
+interactive 0
+interactiontype gau
+plotPeriod 2
+plotting 0
+gauDirection nadir
+updateVariatorSeed linearlyWithRuns
+end monParameter
+
+start varCommonParameter
+alpha 50
+mu 50
+lambda 50
+dim 3
+end varCommonParameter
+
+start varParameter
+seed 1986133004
+maximum_generations 100000
+output_file_name ../results/graph_ns3_1_OriginalCosts_randInit_generation2000.txt
+debug_print true
+recombination_probability 0.1
+mutation_probability 1
+bitflip_probability 0.1
+initialization_type random
+graph_definition_file ../instances/graph_ns3_1_OriginalCosts.dat
+end varParameter
+
+start selCommonParameter
+alpha 50
+mu 50
+lambda 50
+dim 3
+end selCommonParameter
+
+start selParameter
+seed 123597412
+tournament 5
+mating 1
+bound 100000000
+nrOfSamples -1
+
+end selParameter

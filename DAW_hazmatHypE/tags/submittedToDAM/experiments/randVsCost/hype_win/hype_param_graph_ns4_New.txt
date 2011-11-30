@@ -1,0 +1,5 @@
+seed 123597412
+tournament 5
+mating 1
+bound 1000000000
+nrOfSamples -1
