@@ -1,6 +1,6 @@
 addpath('../');
 
-hypervolumes = zeros(10, 5);
+hypervolumes = zeros(10, 6);
 
 % HypE popsize 25
 filename = 'HYP_ns4_1_OriginalCosts_HypE_popsize25_randInit.4000';
@@ -17,11 +17,14 @@ hypervolumes(:,4) = -1 * dlmread(filename);
 % NSGA-II
 filename = 'HYP_ns4_1_OriginalCosts_nsga2_randInit.1000';
 hypervolumes(:,5) = -1 * dlmread(filename);
+% W-HypE
+filename = 'HYP_ns4_1_OriginalCosts_whype_box2_popsize25_randInit.4000';
+hypervolumes(:,6) = -1 * dlmread(filename);
 
 
 
 
-boxplot(hypervolumes, 'Labels', {'HypE_25'; 'HypE_50'; 'HypE_100'; 'HypE_200'; 'NSGA-II'});
+boxplot(hypervolumes, 'Labels', {'HypE_25'; 'HypE_50'; 'HypE_100'; 'HypE_200'; 'NSGA-II'; 'W-HypE'});
 
 
 
