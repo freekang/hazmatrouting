@@ -1,0 +1,326 @@
+%% This is file `elsarticle-template-1a-num.tex',
+%%
+%% Copyright 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%%
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%%
+%% $Id: elsarticle-template-1a-num.tex 151 2009-10-08 05:18:25Z rishi $
+%% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1a-num.tex $
+%%
+\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%% \usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% our packages and definitions: %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{url} 
+\usepackage{color}
+% \usepackage{dsfont}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{multirow}
+
+\newcommand{\TODO}[1]{{\color{red}TODO: #1}}
+\newcommand{\TODON}[1]{{\color{blue}TODO: #1}}
+\newcommand{\COMMENTD}[1]{{\color{green}Dimo: #1}}
+\newcommand{\COMMENTN}[1]{{\color{green}Nora: #1}}
+
+\renewcommand{\topfraction}{.70}
+\renewcommand{\textfraction}{.20}
+
+\newcommand{\reviewer}[1]{\begin{flushleft}\noindent{\sloppy {\bf Comment: } #1}\end{flushleft}}
+\newcommand{\answer}[1]{\noindent{\em {\bf Reply: } #1}\\[1em]}
+
+\journal{DAM}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+\title{An Evolutionary Algorithm for the Multiobjective Risk-Equity Constrained Routing Problem\\ Responses to the Reviewers' Comments}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+
+\author{Dimo Brockhoff}
+
+\author{Nora Touati-Moungla}
+
+
+
+\begin{abstract}
+tbd: thank reviewers for careful comments, etc. 
+\end{abstract}
+
+\end{frontmatter}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Reviewer 1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\reviewer{
+It is not very clear what the authors mean for ``minimization of the equity risk'' (see, e.g., abstract,
+and Introduction (three times) ) or ``minimizing the distributed risk'' (see, e.g., Section 2.1). As far I
+can understand, one wishes to maximize risk equity.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+It is not clear why the authors talk about ``risk-equity constrained routing problem'' (see, e.g.,
+Title, Introduction, Sections 2, 3, 3.5, and 4). In their multi-objective model, risk equity does not
+appear as a constraint, but as one of the objectives of the problem.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+There is a lack in reviewing existing approaches:\\
+a) Besides the cited paper of Dell'Olmo et al. (2005), more recently other papers propose
+approaches for finding Pareto-optimal dissimilar paths for hazmat routing. See, e.g.:
+
+M. Caramia and S. Giordani. On the selection of k efficient paths by clustering techniques.
+International Journal on Data Mining, Modelling and Management, 1(3):237.260, 2009.\\
+M. Caramia, S. Giordani, and A. Iovanella. On the selection of k routes in multi-objective
+hazmat route planning. IMA Journal of Management Mathematics, 21(3):239.251, 2010.
+
+b) The model studied by the authors is multi-objective, but it considers hazmat routing from the
+perspective of a single decision maker. Indeed global hazmat route planning involves in general
+at least two stakeholders: the government authority from one side and the carriers from the other
+side. The main concern for the government authority is to control the risk induced by hazmat
+transportation over the population and the environment, while the main concern from the
+carriersÅf point of view is minimizing transportation cost. Since, typically, the government
+authority does not have the right to impose specific routes to hazmat carriers (contrarily to the
+assumption made by single decision maker hazmat routing models like the one proposed by the
+authors), it can only achieve hazmat transportation risk mitigation adopting policies that induce
+hazmat carriers to select low risk routes. This has led researchers to study multi-decision-makers
+models for hazmat routing. In particular, two classes of models are investigated in recent papers:
+``hazmat transportation network design'''' and ``toll setting approaches''. The authors should
+therefore recall also these classes of models for global hazmat route planning and cite the related
+papers, e.g.:
+
+B.Y. Kara and V. Verter. Designing a road network for hazardous materials transportation.
+Transportation Science, 38(2):188--196, 2004.\\
+E. Erkut and O. Alp. Designing a road network for dangerous goods shipments. Computers \&
+Operations Research, 34(5):1389--1405, 2007.\\
+E. Erkut and F. Gzara. Solving the hazmat transport network design problem. Computers \&
+Operations Research, 35(7):2234--2247, 2008.\\
+V. Verter and B.Y. Kara. A path-based approach for the hazardous network design problem.
+Management Science, 54(1):29--40, 2008.\\
+L. Bianco, M. Caramia, and S. Giordani. A bilevel flow model for hazmat transportation
+network design. Transportation Research Part C, 17:175--196, 2009.\\
+P. Marcotte, A. Mercier, G. Savard, and V. Verter. Toll policies for mitigating hazardous
+materials transport risk. Transportation Science, 43(2): 228--243, 2009.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+Model's parameter $r^c_{ij}$ is not defined.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+Please clarify that with o.f. (3) one achieves the maximization of the distribution of the risk, i.e.
+risk equity.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+Note that (3) can be linearized by introducing a new variable (e.g., variable $\gamma$), the constraints $\sum_{c\in C} r^c_{ij}y^c_{ij} \leq \gamma$, for all $(i, j)\in A$, and by replacing (3) with min $\gamma$.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+In Section 3.1, some details explaining the meaning of ``variable length representation'' should be
+added.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+In Section 3.3, it is not clear the meaning of ``length(p)''. As far I can understand it should be
+intended as the number of vertices of path p.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+The authors provide sufficient insights about initialization and variation of the solutions'
+population, but not how the population is updated and the stopping criteria used. Please provide a
+pseudo-code description of the whole (HypE) algorithm, in order to make the paper self-contained.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+Concepts as hypervolume and hypervolume indicator (e.g., see Section 3.5) should be defined in
+order to make the paper self-contained. This will allow to better understand the meaning and the
+values specifying the reference points for the hypervolume indicator (e.g., see Section 4.1). In
+particular, without providing additional details in Section 3.5, it is very difficult for the reader to
+understand the implication of the choices made in Section 4.1.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+Provide some details to clarify the statements at the end of Section 4.1.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+Quantifying risk equity is not clear. Are risk equity values computed according to o.f. (3), i.e., in
+terms of maximum link total risk? Please clarify.
+}
+\answer{\TODO{tbd}}
+
+\reviewer{
+Figure 3 is too small to appreciate the depicted points. Moreover, and again, the definition of
+equity risk is misleading: one wishes to maximize risk equity, while from the figure it seems that it
+is preferable to have small risk equity. Of course, if in the figure ``risk equity'' is replaced with
+``maximum link total risk'' the figure will make sense. The same applies to Figures 5, 6, 8, and 10.
+}
+\answer{\TODO{tbd}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Reviewer 2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\reviewer{
+First of all, the reviewer believes that the paper is in
+general written well.  The research idea is clearly delivered and
+the method and computation results are well described.
+ 
+The paper presents a specific implementation of EMO algorithms,
+namely, HypE, for tackling the multiobjective routing problem, in
+which one of the objectives is the min-max type.
+ 
+A major deficiency of this paper is that the literature review is far
+from sufficiency, either for multiobjective routing problems or for
+hazardous materials transportation problems.  A quite complete
+review of multiobjective shortest path problems is contained in Xie
+and Waller (2012), which provides a list of multiobjective routing
+papers and might give the authors some clues, for example.  An
+example for hazardous materials transportation is Lindner-Dutton et
+al (1991), who presents a multiobjective hazardous materials
+transportation problem, which includes a risk equity objective. Here
+are just two examples the reviewer randomly found. Many other papers
+should be consulted and included appropriately in the literature
+review.  The authors should give a more comprehensive and enhanced
+discussion on the relevant literature in the revised version of the
+paper.
+ 
+Lindner-Dutton, L., Batta, R. and Karwan, M.H. (1991). "Equitable
+sequencing of a given set of hazardous materials shipments."
+Transportation Science, 25(2), 1991.
+ 
+Xie, C. and Waller, S.T. (2012). Parametric search and problem
+decomposition for approximating Pareto-optimal paths. Transportation
+Research Part B. (In press)
+}
+\answer{\TODO{tbd}}
+ 
+\reviewer{ 
+Another concern is about the EMO algorithm's performance.  The
+authors should give a comparative evaluation, with an exact method
+as the benchmark, at least on a small example problem.  Otherwise,
+readers have no idea about how much the Pareto-optimal solution set
+is approximated.
+}
+\answer{tbd}
+
+
+
+% 
+ \bibliographystyle{plainnat}
+ \footnotesize
+ \bibliography{all}
+
+
+
+
+
+
+\end{document}
+
+%%
+%% End of file `elsarticle-template-1a-num.tex'.
